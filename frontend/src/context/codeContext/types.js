@@ -8,3 +8,5 @@ export const CLEAR_CODE_BY_ID = 'CLEAR_CODE_BY_ID';
 
 export const SEARCH_CODE = 'SEARCH_CODE';
 export const CLEAR_SARCH = 'CLEAR_SARCH';
+
+export const SET_LOADING = 'SET_LOADING';

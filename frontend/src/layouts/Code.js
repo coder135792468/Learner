@@ -43,14 +43,14 @@ const Code = ({ code }) => {
 	const { likeCode, addComment } = useContext(CodeContext);
 	const { user: me, getUserData } = useContext(AuthContext);
 
-	const [like, setLike] = useState(likes.length);
+	const [like, setLike] = useState(likes?.length || 0);
 	const [comment, setComment] = useState(comments);
 
 	const [liked, setLiked] = useState(
-		!me?._id ? false : likes.some((ele) => ele.user === me._id)
+		!me?._id ? false : likes?.some((ele) => ele.user === me._id)
 	);
 	const [commented, setCommented] = useState(
-		!me?._id ? false : comment.some((ele) => ele.user === me._id)
+		!me?._id ? false : comment?.some((ele) => ele.user === me._id)
 	);
 
 	const classes = useStyles();
@@ -61,14 +61,16 @@ const Code = ({ code }) => {
 	useEffect(() => {
 		getUserById(user);
 		getUserData();
+		//eslint-disable-next-line
 	}, []);
 	useEffect(() => {
-		setLike(likes.length);
+		setLike(likes?.length);
 		setComment(comments);
 		if (me?._id) {
-			setLiked(likes.some((ele) => ele.user === me._id));
-			setCommented(comment.some((ele) => ele.user === me._id));
+			setLiked(likes?.some((ele) => ele.user === me._id));
+			setCommented(comment?.some((ele) => ele.user === me._id));
 		}
+		//eslint-disable-next-line
 	}, [likes, comments]);
 
 	const likeUserCode = async () => {
@@ -105,7 +107,7 @@ const Code = ({ code }) => {
 					</ListItemIcon>
 					<ListItemText
 						primary={
-							name.length > 10
+							name?.length > 10
 								? name.substring(0, 10) + '...'
 								: name || 'Untitled'
 						}

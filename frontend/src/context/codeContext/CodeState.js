@@ -9,6 +9,7 @@ import {
 	CLEAR_CODE_BY_ID,
 	SEARCH_CODE,
 	CLEAR_SARCH,
+	SET_LOADING,
 } from './types';
 import axios from 'axios';
 
@@ -18,12 +19,14 @@ const CodeState = ({ children }) => {
 		current_code: null,
 		error: null,
 		filter: null,
+		loading: false,
 	};
 
 	const [state, dispatch] = useReducer(CodeReducer, initialState);
 
 	//get all codes
 	const getAllCodes = async () => {
+		setLoading(true);
 		clearError();
 		try {
 			const { data } = await axios.get('/api/code');
@@ -36,11 +39,14 @@ const CodeState = ({ children }) => {
 						? error.response.data.message
 						: error.message,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	//get code by ids
 	const getCodeByID = async (id) => {
+		setLoading(true);
 		dispatch({ type: CLEAR_CODE_BY_ID });
 		clearError();
 
@@ -55,10 +61,13 @@ const CodeState = ({ children }) => {
 						? error.response.data.message
 						: error.message,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	const updateCode = async (token, code, id) => {
+		setLoading(true);
 		clearError();
 		dispatch({ type: CLEAR_CODE_BY_ID });
 
@@ -79,13 +88,15 @@ const CodeState = ({ children }) => {
 						? error.response.data.message
 						: error.message,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	//add a code
 	const addCode = async (token, code) => {
+		setLoading(true);
 		clearError();
-		dispatch({ type: CLEAR_CODE_BY_ID });
 		try {
 			const config = {
 				headers: {
@@ -94,7 +105,9 @@ const CodeState = ({ children }) => {
 				},
 			};
 			const { data } = await axios.post('/api/code', code, config);
-			dispatch({ type: GET_CODE_BY_ID, payload: data });
+			dispatch({ type: GET_CODE_BY_ID, payload: data?.code });
+
+			dispatch({ type: GET_CODE, payload: [...state.codes, data?.code] });
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -103,6 +116,8 @@ const CodeState = ({ children }) => {
 						? error.response.data.message
 						: error.message,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -167,6 +182,10 @@ const CodeState = ({ children }) => {
 	const clearSearch = () => {
 		dispatch({ type: CLEAR_SARCH });
 	};
+
+	const setLoading = (isLoading) => {
+		dispatch({ type: SET_LOADING, payload: isLoading });
+	};
 	return (
 		<CodeContext.Provider
 			value={{
@@ -174,6 +193,7 @@ const CodeState = ({ children }) => {
 				current_code: state.current_code,
 				error: state.error,
 				filter: state.filter,
+				loading: state.loading,
 				getAllCodes,
 				clearError,
 				getCodeByID,

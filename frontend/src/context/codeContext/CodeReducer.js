@@ -6,6 +6,7 @@ import {
 	CLEAR_CODE_BY_ID,
 	SEARCH_CODE,
 	CLEAR_SARCH,
+	SET_LOADING,
 } from './types';
 
 const CodeReducer = (state, { type, payload }) => {
@@ -23,6 +24,8 @@ const CodeReducer = (state, { type, payload }) => {
 					code.name.match(new RegExp(`${payload}`, 'gi'))
 				),
 			};
+		case SET_LOADING:
+			return { ...state, loading: payload };
 		case ERROR:
 			return { ...state, error: payload };
 		case CLEAR_ERROR:

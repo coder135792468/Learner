@@ -15,11 +15,11 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
-
 import { AuthContext, CodeContext } from '../context';
 import { Link } from 'react-router-dom';
 import CodeScreen from './CodeScreen';
 import { SideHeader } from '../components';
+import { Loader } from '../layouts';
 
 const useStyles = makeStyles((theme) => ({
 	main: {
@@ -70,7 +70,7 @@ const HomeScreen = ({ history }) => {
 	const { getUserData, user } = authContext;
 
 	const codeContext = useContext(CodeContext);
-	const { searchCode, clearSearch } = codeContext;
+	const { searchCode, clearSearch, loading } = codeContext;
 
 	useEffect(() => {
 		if (!user?.name) {
@@ -102,6 +102,7 @@ const HomeScreen = ({ history }) => {
 		if (text.trim().length === 0) {
 			clearSearch();
 		}
+		//eslint-disable-next-line
 	}, [text]);
 	const search = ({ target: { value } }) => {
 		setText(value);
@@ -116,6 +117,7 @@ const HomeScreen = ({ history }) => {
 				openMenu={openMenu}
 				user={user}
 			/>
+			{loading && <Loader />}
 			<AppBar position='sticky'>
 				<Toolbar>
 					<IconButton
@@ -195,17 +197,19 @@ const HomeScreen = ({ history }) => {
 				</Toolbar>
 			</AppBar>
 			<CodeScreen />
-			<IconButton
-				onClick={() => history.push('add')}
-				style={{
-					position: 'fixed',
-					bottom: '30px',
-					right: '30px',
-					background: '#4488ff',
-				}}
-			>
-				<AddIcon />
-			</IconButton>
+			{user?.name && (
+				<IconButton
+					onClick={() => history.push('add')}
+					style={{
+						position: 'fixed',
+						bottom: '30px',
+						right: '30px',
+						background: '#4488ff',
+					}}
+				>
+					<AddIcon />
+				</IconButton>
+			)}
 		</Paper>
 	);
 };

@@ -22,19 +22,7 @@ const useStyles = makeStyles((theme) => ({
 			display: 'none',
 		},
 	},
-	// page_con: {
-	// 	width: '100%',
-	// 	height: 'calc(100vh - 80px)',
-	// 	background: '#fff',
-	// 	borderRadius: '0 0 10px 10px',
-	// 	display: 'flex',
-	// 	justifyContent: 'center',
-	// },
-	// pages: {
-	// 	width: '100%',
-	// 	height: '100vh',
-	// 	color: '#000',
-	// },
+
 	item: {
 		padding: '20px 10px',
 	},
@@ -56,7 +44,11 @@ const CourseScreen = ({ history }) => {
 						>
 							<ListItemIcon>
 								<Avatar>
-									<img src={js} style={{ width: '100%', height: '100%' }} />
+									<img
+										alt='Cant Load'
+										src={js}
+										style={{ width: '100%', height: '100%' }}
+									/>
 								</Avatar>
 							</ListItemIcon>
 							<ListItemText

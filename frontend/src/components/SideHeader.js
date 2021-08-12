@@ -8,14 +8,12 @@ import {
 	Typography,
 	Divider,
 } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
-	const history = useHistory();
 	const logout = () => {
 		localStorage.removeItem('userInfo');
 		window.location.href = 'login';

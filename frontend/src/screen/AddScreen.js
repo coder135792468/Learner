@@ -9,7 +9,7 @@ import {
 	Select,
 	InputLabel,
 } from '@material-ui/core';
-import { PageHeader } from '../layouts';
+import { PageHeader, Loader } from '../layouts';
 import { useToasts } from 'react-toast-notifications';
 import { CodeContext, AuthContext } from '../context';
 import { Redirect } from 'react-router-dom';
@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const AddScreen = ({ history }) => {
+const AddScreen = () => {
 	const codeContext = useContext(CodeContext);
-	const { addCode, current_code } = codeContext;
+	const { addCode, current_code, loading } = codeContext;
 
 	const authContext = useContext(AuthContext);
 	const { getUserData, user } = authContext;
@@ -42,7 +42,18 @@ const AddScreen = ({ history }) => {
 
 	const [name, setName] = useState('');
 	const [lang, setLang] = useState('');
+	const [created, setCreated] = useState(false);
 	const classes = useStyles();
+
+	const [id, setID] = useState(null);
+
+	useEffect(() => {
+		if (created) {
+			setID(current_code?._id.toString());
+		}
+
+		//eslint-disable-next-line
+	}, [addCode, created]);
 
 	const createCode = async () => {
 		if (name.trim().length === 0) {
@@ -71,8 +82,7 @@ const AddScreen = ({ history }) => {
 		};
 		if (user?.token) {
 			await addCode(user.token, data);
-			const id = current_code?.code._id.toString();
-			history.push(`/code/${id}`);
+			setCreated(true);
 			setName('');
 			setLang('');
 		}
@@ -82,8 +92,10 @@ const AddScreen = ({ history }) => {
 		if (!user?.name) {
 			getUserData();
 		}
+
+		//eslint-disable-next-line
 	}, []);
-	return (
+	return id === null && !created ? (
 		<>
 			<PageHeader title={'Create Code'} />
 			<Paper className={classes.root}>
@@ -93,7 +105,7 @@ const AddScreen = ({ history }) => {
 					label='Enter Code Name'
 					className={classes.text}
 				/>
-
+				{loading && <Loader />}
 				<FormControl className={classes.text}>
 					<InputLabel id='language'>Select Language</InputLabel>
 					<Select
@@ -118,6 +130,8 @@ const AddScreen = ({ history }) => {
 				</Button>
 			</Paper>
 		</>
+	) : (
+		created && id !== null && <Redirect to={`/code/${id}`} />
 	);
 };
 

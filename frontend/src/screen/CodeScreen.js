@@ -17,6 +17,8 @@ const CodeScreen = () => {
 		if (!codes?.length) {
 			getAllCodes();
 		}
+
+		//eslint-disable-next-line
 	}, []);
 	const classes = useStyles();
 

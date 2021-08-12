@@ -49,17 +49,20 @@ const ProfileScreen = ({ history }) => {
 		if (!user?.name) {
 			getUserData();
 		}
-		if (codes?.length == 0 || codes === null || !codes.length) {
+		if (codes?.length === 0 || codes === null || !codes.length) {
 			getAllCodes();
 		}
 		setMyCodes(codes?.filter((code) => code.user === user?._id));
+		//eslint-disable-next-line
 	}, [codes]);
 	return (
 		<Paper className={classes.root}>
 			<PageHeader title={'Profile'} />
 			<Box>
 				<Avatar className={classes.avatar}>
-					{user?.avatar && <img className={classes.img} src={user.avatar} />}
+					{user?.avatar && (
+						<img alt='Cant load' className={classes.img} src={user.avatar} />
+					)}
 				</Avatar>
 				<Typography className={classes.name} variant='h5'>
 					{user?.name.toUpperCase()}

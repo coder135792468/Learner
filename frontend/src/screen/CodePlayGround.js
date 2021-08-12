@@ -49,6 +49,8 @@ const CodePlayGround = ({ match }) => {
 		if (!user?.name) {
 			getUserData();
 		}
+
+		//eslint-disable-next-line
 	}, []);
 	const saveCode = async () => {
 		// if (current_code !== null) {

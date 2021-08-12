@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
 	Paper,
-	AppBar,
-	Toolbar,
 	makeStyles,
-	IconButton,
 	Typography,
 	List,
 	ListItem,
@@ -14,11 +11,11 @@ import {
 	TextField,
 	Divider,
 } from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { useToasts } from 'react-toast-notifications';
 import FaceIcon from '@material-ui/icons/Face';
 import { AuthContext } from '../context';
 import axios from 'axios';
-import { ToastMsg, PageHeader } from '../layouts';
+import { ToastMsg, PageHeader, Loader } from '../layouts';
 
 const useStyles = makeStyles((theme) => ({
 	main: {
@@ -42,7 +39,9 @@ const useStyles = makeStyles((theme) => ({
 		backgroundSize: 'cover',
 	},
 }));
-const SettingScreen = ({ history }) => {
+const SettingScreen = () => {
+	const { addToast } = useToasts();
+
 	const authContext = useContext(AuthContext);
 	const { getUserData, user, updateUser } = authContext;
 
@@ -112,21 +111,33 @@ const SettingScreen = ({ history }) => {
 			setUploading(false);
 			setFile('');
 			updateProfile();
+			addToast('Now Click on Change Button to Change Picture', {
+				appearance: 'info',
+			});
 		} catch (error) {
 			console.log(error);
+			setUploading(false);
+			addToast('Some Error Occured!!. Try Again Please with diferent image', {
+				appearance: 'error',
+			});
 		}
 	};
 
 	return (
 		<Paper className={classes.main}>
+			{uploading && <Loader />}
 			{error?.length && <ToastMsg msg={error} />}
 			<PageHeader title={'Setting'} />
 			<List>
 				<Typography variant='p'>Change your Avatar</Typography>
 				<ListItem className={classes.item}>
 					<Avatar className={classes.image}>
-						{user?.avatar ? (
-							<img className={classes.avatar} src={user.avatar} />
+						{user?.avatar || avatar ? (
+							<img
+								alt='Cant Load'
+								className={classes.avatar}
+								src={user.avatar ? user.avatar : avatar}
+							/>
 						) : (
 							<FaceIcon />
 						)}

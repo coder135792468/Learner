@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
-		backgroundColor: theme.palette.type == 'dark' ? '#444' : '#efefef',
+		backgroundColor: theme.palette.type === 'dark' ? '#444' : '#efefef',
 		padding: '5px 0',
 		'& *': {
 			margin: 'auto',
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	comment_box: {
 		height: 'calc(100% - 50px)',
-		backgroundColor: theme.palette.type == 'dark' ? '#666' : '#fff',
+		backgroundColor: theme.palette.type === 'dark' ? '#666' : '#fff',
 		overflow: 'auto',
 	},
 	comment_item: {
@@ -90,11 +90,11 @@ const Comments = ({ _id, comment: comments, commented, me, addComment }) => {
 				<Paper className={classes.comment_con}>
 					<Box className={classes.comment_box}>
 						<List>
-							{comment.map((ele) => (
+							{comment?.map((ele) => (
 								<ListItem className={classes.comment_item}>
 									<ListItemIcon>
 										<Avatar style={{ background: '#efefef' }}>
-											{ele?.avatar && <img src={ele.avatar} />}
+											{ele?.avatar && <img alt='Cant Load' src={ele.avatar} />}
 										</Avatar>
 									</ListItemIcon>
 									<ListItemText primary={ele?.name} secondary={ele?.text} />

@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { makeStyles, Paper } from '@material-ui/core';
-import { render } from 'react-dom';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/theme-nord_dark';
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -47,7 +46,6 @@ const Editor = ({ data, setData, value, code, codeOuput }) => {
 			code = jsref.current.editor.getValue();
 		}
 		setData({ ...data, [editor[value]]: code });
-		console.log(data);
 	};
 	useEffect(() => {
 		setData({
@@ -55,6 +53,7 @@ const Editor = ({ data, setData, value, code, codeOuput }) => {
 			css: code?.css && code.css,
 			js: code?.js && code.js,
 		});
+		//eslint-disable-next-line
 	}, [code]);
 
 	const showOuput = (code) => {
@@ -75,6 +74,7 @@ const Editor = ({ data, setData, value, code, codeOuput }) => {
 		if (codeOuput) {
 			setTimeout(() => showOuput(), 100);
 		}
+		//eslint-disable-next-line
 	}, [codeOuput]);
 	return (
 		<Paper className={classes.editor}>
@@ -151,7 +151,13 @@ const Editor = ({ data, setData, value, code, codeOuput }) => {
 					)}
 				</>
 			)}
-			{codeOuput && <iframe ref={output} className={classes.frame}></iframe>}
+			{codeOuput && (
+				<iframe
+					title='CodePlayGroundOutput'
+					ref={output}
+					className={classes.frame}
+				></iframe>
+			)}
 		</Paper>
 	);
 };
