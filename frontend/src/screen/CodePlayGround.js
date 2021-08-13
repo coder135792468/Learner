@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 		right: '20px',
 		bottom: '80px',
 		zIndex: 100,
+		backgroundColor: 'rgba(255,0,2550,0.5)',
 	},
 }));
 
@@ -86,7 +87,11 @@ const CodePlayGround = ({ match }) => {
 				value={value}
 				code={current_code}
 			/>
-			<IconButton onClick={() => setCodeOuput(true)} className={classes.run}>
+			<IconButton
+				color='primary'
+				onClick={() => setCodeOuput(true)}
+				className={classes.run}
+			>
 				<PlayArrowIcon />
 			</IconButton>
 			<BottomNavigation

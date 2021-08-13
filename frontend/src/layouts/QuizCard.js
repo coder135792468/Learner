@@ -13,17 +13,23 @@ import {
 import js from './logo/js.png';
 import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	root: {
 		maxWidth: '700px',
 		width: '80%',
 		margin: '20px auto',
 		padding: '10px 2%',
+		boxShadow: '0 2px 3px rgba(0, 0, 0, 0.1)',
+		borderRadius: '30px',
+		background:
+			theme.palette.type === 'dark'
+				? theme.palette.primary.dark
+				: theme.palette.primary,
 	},
 	logo: {
 		width: '100px',
 		height: '100px',
-		margin: '10px',
+		margin: '10px auto',
 	},
 	actions: {
 		display: 'flex',
@@ -32,7 +38,7 @@ const useStyles = makeStyles({
 	btn: {
 		minWidth: '150px',
 	},
-});
+}));
 const QuizCard = ({ id, totalQuiz, title }) => {
 	const history = useHistory();
 	const classes = useStyles();
@@ -49,7 +55,7 @@ const QuizCard = ({ id, totalQuiz, title }) => {
 					className={classes.logo}
 				/>
 				<CardContent>
-					<Typography gutterBottom variant='h5' component='h2'>
+					<Typography gutterBottom variant='h5' align='center' component='h2'>
 						{title}
 					</Typography>
 				</CardContent>
@@ -59,7 +65,7 @@ const QuizCard = ({ id, totalQuiz, title }) => {
 				<Button
 					onClick={() => history.push(`/quiz/${id}`)}
 					className={classes.btn}
-					color='primary'
+					color='secondary'
 					variant='contained'
 				>
 					View

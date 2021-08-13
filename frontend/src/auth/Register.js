@@ -15,6 +15,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { ValidateEmail } from '../utils/helper';
 import AuthContext from '../context/authContext/AuthContext';
 import { ToastMsg } from '../layouts';
+import loginPic from './images/loginPic.gif';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -25,8 +26,16 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		flexDirection: 'column',
 	},
+	avatar: {
+		width: '100px',
+		margin: '20px',
+		borderRadius: '50%',
+	},
+	heading: {
+		letterSpacing: '5px',
+	},
 }));
-const Register = () => {
+const Register = ({ history }) => {
 	const authContext = useContext(AuthContext);
 	const { registerUser, error, clearError, login } = authContext;
 
@@ -54,6 +63,10 @@ const Register = () => {
 	return !login ? (
 		<Paper className={classes.paper}>
 			{error !== null && <ToastMsg msg={error} />}
+			<Typography className={classes.heading} variant='h4'>
+				Register
+			</Typography>
+			<img className={classes.avatar} alt='Login' src={loginPic} />
 
 			<FormControl>
 				<InputLabel htmlFor='my-input'>Enter Name</InputLabel>
@@ -74,6 +87,7 @@ const Register = () => {
 				<TextField
 					label='Enter Password'
 					value={password}
+					type='password'
 					onChange={({ target: { value } }) => setPassword(value)}
 					required
 				/>
@@ -93,6 +107,14 @@ const Register = () => {
 					Login
 				</Link>
 			</Typography>
+			<Button
+				color='secondary'
+				variant='contained'
+				onClick={() => history.push('/')}
+				style={{ marginTop: '10px' }}
+			>
+				Back to Home
+			</Button>
 		</Paper>
 	) : (
 		<Redirect to='/' />

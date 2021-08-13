@@ -3,4 +3,17 @@ import Code from './Code';
 import QuizCard from './QuizCard';
 import PageHeader from './PageHeader';
 import Loader from './Loader';
-export { ToastMsg, Code, QuizCard, PageHeader, Loader };
+import Challenge from './Challenge';
+import ChallengeEditor from './ChallengeEditor';
+import ChallengeOutput from './ChallengeOutput';
+
+export {
+	ToastMsg,
+	Code,
+	QuizCard,
+	PageHeader,
+	Loader,
+	Challenge,
+	ChallengeEditor,
+	ChallengeOutput,
+};

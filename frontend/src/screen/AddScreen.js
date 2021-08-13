@@ -13,6 +13,8 @@ import { PageHeader, Loader } from '../layouts';
 import { useToasts } from 'react-toast-notifications';
 import { CodeContext, AuthContext } from '../context';
 import { Redirect } from 'react-router-dom';
+import addPic from './images/addPic.gif';
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		width: '100vw',
@@ -28,6 +30,13 @@ const useStyles = makeStyles((theme) => ({
 		width: '80%',
 		maxWidth: '500px',
 		margin: '20px auto',
+	},
+	avatar: {
+		width: '300px',
+		borderRadius: '20px',
+		[theme.breakpoints.up('sm')]: {
+			width: '200px',
+		},
 	},
 }));
 
@@ -99,6 +108,12 @@ const AddScreen = () => {
 		<>
 			<PageHeader title={'Create Code'} />
 			<Paper className={classes.root}>
+				<img
+					alt='Add Code'
+					draggable={false}
+					className={classes.avatar}
+					src={addPic}
+				/>
 				<TextField
 					value={name}
 					onChange={(e) => setName(e.target.value)}

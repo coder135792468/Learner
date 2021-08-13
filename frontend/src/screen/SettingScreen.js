@@ -28,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
 		width: '100px',
 		height: '100px',
 	},
+	file: {
+		margin: '10px auto',
+		outline: 'none',
+		border: 'none',
+	},
 	item: {
 		marginBottom: '10px',
 		padding: '5px 10px',
@@ -37,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		height: '100%',
 		backgroundSize: 'cover',
+	},
+	text: {
+		margin: '10px',
 	},
 }));
 const SettingScreen = () => {
@@ -129,7 +137,9 @@ const SettingScreen = () => {
 			{error?.length && <ToastMsg msg={error} />}
 			<PageHeader title={'Setting'} />
 			<List>
-				<Typography variant='p'>Change your Avatar</Typography>
+				<Typography className={classes.text} variant='h6'>
+					Change your Avatar
+				</Typography>
 				<ListItem className={classes.item}>
 					<Avatar className={classes.image}>
 						{user?.avatar || avatar ? (
@@ -142,7 +152,11 @@ const SettingScreen = () => {
 							<FaceIcon />
 						)}
 					</Avatar>
-					<input type='file' onChange={(e) => setFile(e.target.files[0])} />
+					<input
+						className={classes.file}
+						type='file'
+						onChange={(e) => setFile(e.target.files[0])}
+					/>
 					<Box mx='auto'>
 						<Button
 							onClick={fileHandler}
@@ -164,7 +178,9 @@ const SettingScreen = () => {
 					</Button>
 				</ListItem>
 				<Divider />
-				<Typography variant='p'>Change your information</Typography>
+				<Typography className={classes.text} variant='h6'>
+					Change your information
+				</Typography>
 
 				<ListItem className={classes.item}>
 					<TextField
@@ -202,7 +218,9 @@ const SettingScreen = () => {
 					</Box>
 				</ListItem>
 				<Divider />
-				<Typography variant='p'>Change your password</Typography>
+				<Typography className={classes.text} variant='p'>
+					Change your password
+				</Typography>
 				<ListItem className={classes.item}>
 					<TextField
 						value={password}

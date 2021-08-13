@@ -8,7 +8,7 @@ import CourseScreen from './CourseScreen';
 import CoursePage from './CoursePage';
 import AddScreen from './AddScreen';
 import ProfileScreen from './ProfileScreen';
-
+import CodeCoachScreen from './CodeCoachScreen';
 export {
 	HomeScreen,
 	SettingScreen,
@@ -20,4 +20,5 @@ export {
 	CoursePage,
 	AddScreen,
 	ProfileScreen,
+	CodeCoachScreen,
 };

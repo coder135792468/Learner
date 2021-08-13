@@ -11,3 +11,10 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
+.swiper-button-next:after,
+.swiper-button-prev:after {
+	position: fixed;
+	bottom: 30px;
+	transform: scale(0.5);
+	font-weight: bold;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -19,39 +19,56 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: '0 0 10px 10px',
 		display: 'flex',
 		justifyContent: 'center',
+		overflow: 'auto',
+		'&::-webkit-scrollbar': {
+			display: 'none',
+		},
 	},
 	pages: {
 		width: '100%',
 		height: '100vh',
 		color: '#000',
 		overflow: 'auto',
+		whiteSpace: 'pre-wrap',
 		'&::-webkit-scrollbar': {
 			display: 'none',
 		},
 	},
 	header: {
 		textAlign: 'center',
+		whiteSpace: 'pre-wrap',
 	},
 	content: {
 		padding: '30px',
 		background: '#efefef',
 		borderRadius: '50px',
+		whiteSpace: 'pre-wrap',
 	},
 	footer: {
 		fontSize: '12px',
 		background: 'rgb(220, 250, 0)',
-		margin: '20px 0 40px 0',
 		padding: '10px 20px',
 		fontWeight: 'bold',
+		whiteSpace: 'pre-wrap',
+		margin: '40px 0',
 	},
 	code: {
 		position: 'relative',
 		background: '#223',
 		color: '#fff',
-		borderRadius: '20px',
+		borderRadius: '10px',
 		margin: '20px',
 		wordWrap: 'break-word',
 		padding: '10px',
+		overflow: 'auto',
+		'&::-webkit-scrollbar': {
+			width: '.5rem',
+		},
+
+		'&::-webkit-scrollbar-thumb': {
+			backgroundColor: 'darkgrey',
+			borderRadius: '50px',
+		},
 	},
 	tag: {
 		position: 'absolute',
@@ -65,11 +82,19 @@ const useStyles = makeStyles((theme) => ({
 
 const CourseData = ({ pages, setIndex }) => {
 	const classes = useStyles();
+	const infoCon = useRef(null);
+	useEffect(() => {
+		infoCon.current.scrollTop = 0;
+	}, []);
 	return (
 		<Swiper
 			spaceBetween={50}
+			pagination={{
+				dynamicBullets: true,
+			}}
 			navigation={pages.length > 1 ? true : false}
 			className={classes.page_con}
+			ref={infoCon}
 			onSlideChange={(e) => setIndex(e.activeIndex + 1)}
 		>
 			{pages.map((page) => (
