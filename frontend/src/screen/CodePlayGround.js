@@ -105,6 +105,7 @@ const CodePlayGround = ({ match, history }) => {
 						: 'Loading...'
 				}
 				btn_data={{
+					play: true,
 					show: current_code?.user === user?._id ? true : false,
 					onClick: saveCodeData,
 					id,

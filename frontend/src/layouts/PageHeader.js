@@ -8,7 +8,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useToasts } from 'react-toast-notifications';
 
-const LINK = `http://localhost:3000/deploy`;
+const LINK = `https://learner-v1.herokuapp.com/deploy`;
 
 const PageHeader = ({
 	btn_data,
@@ -47,19 +47,22 @@ const PageHeader = ({
 						{optional.total} / {optional.index}
 					</strong>
 				)}
-				{btn_data?.show && (
+				{btn_data?.play && (
 					<>
-						<IconButton
-							onClick={() => btn_data.onClick('save')}
-							style={{ marginLeft: 'auto' }}
-						>
-							<SaveIcon />
-						</IconButton>
+						{btn_data.show && (
+							<IconButton
+								onClick={() => btn_data.onClick('save')}
+								style={{ marginLeft: 'auto' }}
+							>
+								<SaveIcon />
+							</IconButton>
+						)}
 						<IconButton
 							aria-controls='menu-appbar'
 							aria-haspopup='true'
 							onClick={(e) => setAnchorEl(e.currentTarget)}
 							color='inherit'
+							style={{ marginLeft: !btn_data.show && 'auto' }}
 						>
 							<MoreIcon />
 						</IconButton>
@@ -78,12 +81,16 @@ const PageHeader = ({
 							open={open}
 							onClose={handleClose}
 						>
-							<MenuItem onClick={() => handleClose('rename')}>
-								Rename Code
-							</MenuItem>
-							<MenuItem onClick={() => handleClose('delete')}>
-								Delete Code
-							</MenuItem>
+							{btn_data.show && (
+								<MenuItem onClick={() => handleClose('rename')}>
+									Rename Code
+								</MenuItem>
+							)}
+							{btn_data.show && (
+								<MenuItem onClick={() => handleClose('delete')}>
+									Delete Code
+								</MenuItem>
+							)}
 
 							<MenuItem onClick={() => handleClose('deploy')}>
 								Go to Deployed Page
