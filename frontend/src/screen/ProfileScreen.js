@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {
 	Paper,
 	makeStyles,
@@ -10,6 +10,7 @@ import {
 
 import { PageHeader, Code, Loader, PaginationButton } from '../layouts';
 import { AuthContext, CodeContext } from '../context';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -46,16 +47,12 @@ const ProfileScreen = ({ history, match }) => {
 	const classes = useStyles();
 
 	useEffect(() => {
-		if (!user?.name) {
-			getUserData();
-		}
 		if (user?._id) {
 			getMyCode(user.token, pageNumber);
 		}
-
 		//eslint-disable-next-line
-	}, [pageNumber, user]);
-	return (
+	}, [pageNumber]);
+	return user?._id ? (
 		<Paper className={classes.root}>
 			{loading && <Loader />}
 			<PageHeader title={'Profile'} push='/' />
@@ -93,6 +90,8 @@ const ProfileScreen = ({ history, match }) => {
 				/>
 			)}
 		</Paper>
+	) : (
+		<Redirect to='/' />
 	);
 };
 

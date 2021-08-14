@@ -39,20 +39,26 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 	const optionLists = () => (
 		<>
 			<List className={classes.sideBarList}>
-				{['Profile', 'Code', 'Course', 'Quiz', 'Challenges'].map(
-					(text, index) => (
-						<ListItem
-							button
-							key={text}
-							onClick={() => closeDrawer(text.toLowerCase())}
-						>
-							<ListItemIcon>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-							</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItem>
-					)
+				{user?._id && (
+					<ListItem button onClick={() => closeDrawer('profile')}>
+						<ListItemIcon>
+							<InboxIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Profile'} />
+					</ListItem>
 				)}
+				{['Code', 'Course', 'Quiz', 'Challenges'].map((text, index) => (
+					<ListItem
+						button
+						key={text}
+						onClick={() => closeDrawer(text.toLowerCase())}
+					>
+						<ListItemIcon>
+							{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+						</ListItemIcon>
+						<ListItemText primary={text} />
+					</ListItem>
+				))}
 			</List>
 			<Divider />
 			{user?._id && (

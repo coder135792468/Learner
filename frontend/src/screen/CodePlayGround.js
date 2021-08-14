@@ -153,7 +153,7 @@ const CodePlayGround = ({ match, history }) => {
 						onChange={(e) => setName(e.target.value)}
 						margin='dense'
 						id='name'
-						label='Email Address'
+						label='Enter Code Name'
 						type='email'
 						fullWidth
 					/>
