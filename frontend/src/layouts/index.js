@@ -6,6 +6,7 @@ import Loader from './Loader';
 import Challenge from './Challenge';
 import ChallengeEditor from './ChallengeEditor';
 import ChallengeOutput from './ChallengeOutput';
+import PaginationButton from './PaginationButton';
 
 export {
 	ToastMsg,
@@ -16,4 +17,5 @@ export {
 	Challenge,
 	ChallengeEditor,
 	ChallengeOutput,
+	PaginationButton,
 };

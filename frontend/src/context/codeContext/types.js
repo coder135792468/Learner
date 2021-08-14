@@ -5,6 +5,7 @@ export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 export const GET_CODE_BY_ID = 'GET_CODE_BY_ID';
 export const CLEAR_CODE_BY_ID = 'CLEAR_CODE_BY_ID';
+export const GET_MY_CODE = 'GET_MY_CODE';
 
 export const SEARCH_CODE = 'SEARCH_CODE';
 export const CLEAR_SARCH = 'CLEAR_SARCH';

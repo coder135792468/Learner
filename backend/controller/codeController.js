@@ -6,8 +6,33 @@ import asyncHandler from 'express-async-handler';
 //@acess public
 const getAllCodes = asyncHandler(async (req, res) => {
 	try {
-		const codes = await Code.find({});
-		res.json(codes);
+		const pageSize = 5;
+		const page = Number(req.query.pageNumber) || 1;
+
+		const count = await Code.countDocuments({});
+		const codes = await Code.find({})
+			.limit(pageSize)
+			.skip(pageSize * (page - 1));
+
+		res.json({ codes, page, pages: Math.ceil(count / pageSize) });
+	} catch (error) {
+		console.log(error);
+		res.status(500);
+		throw new Error('Server Error');
+	}
+});
+
+const getCodes = asyncHandler(async (req, res) => {
+	try {
+		const pageSize = 4;
+		const page = Number(req.query.pageNumber) || 1;
+
+		const count = await Code.countDocuments({ user: req.user._id });
+		const codes = await Code.find({ user: req.user._id })
+			.limit(pageSize)
+			.skip(pageSize * (page - 1));
+
+		res.json({ codes, page, pages: Math.ceil(count / pageSize) });
 	} catch (error) {
 		console.log(error);
 		res.status(500);
@@ -229,6 +254,7 @@ const deleteComment = asyncHandler(async (req, res) => {
 
 export {
 	getAllCodes,
+	getCodes,
 	getCodeById,
 	addCode,
 	deleteCode,

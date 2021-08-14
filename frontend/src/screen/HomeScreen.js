@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
 		width: '100vw',
 		height: '100vh',
 		overflow: 'auto',
+		'&::-webkit-scrollbar': {
+			display: 'none',
+		},
 	},
 	menuButton: {
 		marginRight: theme.spacing(2),
@@ -65,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: '50%',
 	},
 }));
-const HomeScreen = ({ history }) => {
+const HomeScreen = ({ history, match }) => {
 	const authContext = useContext(AuthContext);
 	const { getUserData, user } = authContext;
 
@@ -196,7 +199,9 @@ const HomeScreen = ({ history }) => {
 					)}
 				</Toolbar>
 			</AppBar>
-			<CodeScreen />
+			<CodeScreen
+				pageNumber={match.params.pageNumber ? match.params.pageNumber : 1}
+			/>
 			{user?.name && (
 				<IconButton
 					onClick={() => history.push('add')}

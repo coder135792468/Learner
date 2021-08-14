@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Paper, makeStyles } from '@material-ui/core';
-import { Code } from '../layouts';
+import { Code, PaginationButton } from '../layouts';
 import { CodeContext } from '../context';
 
 const useStyles = makeStyles((theme) => ({
@@ -8,18 +8,20 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 		width: '100%',
 		maxHeight: '100%',
+		'& ::webkit-scrollbar': {
+			display: 'none',
+		},
 	},
 }));
-const CodeScreen = () => {
+const CodeScreen = ({ pageNumber }) => {
 	const codeContext = useContext(CodeContext);
-	const { getAllCodes, codes, filter } = codeContext;
+	const { getAllCodes, codes, filter, totalPages } = codeContext;
+
 	useEffect(() => {
-		if (!codes?.length) {
-			getAllCodes();
-		}
+		getAllCodes(pageNumber);
 
 		//eslint-disable-next-line
-	}, []);
+	}, [pageNumber]);
 	const classes = useStyles();
 
 	const getData = () =>
@@ -29,6 +31,9 @@ const CodeScreen = () => {
 			{getData()?.map((code) => (
 				<Code code={code} key={code._id} />
 			))}
+			{totalPages > 1 && (
+				<PaginationButton page={pageNumber} pageCount={totalPages} />
+			)}
 		</Paper>
 	);
 };

@@ -37,9 +37,15 @@ const App = () => {
 						<Route exact path='/login' component={Login} />
 						<Route exact path='/register' component={Register} />
 						<Route exact path='/add' component={AddScreen} />
+						<Route
+							exact
+							path='/profile/page/:pageNumber'
+							component={ProfileScreen}
+						/>
 						<Route exact path='/profile' component={ProfileScreen} />
 						<Route exact path='/deploy/:id' component={DeployScreen} />
 						<Route exact path='/code/:id' component={CodePlayGround} />
+						<Route exact path='/page/:pageNumber' component={HomeScreen} />
 						<Route exact path='/' component={HomeScreen} />
 					</Switch>
 				</Router>

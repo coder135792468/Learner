@@ -7,14 +7,21 @@ import {
 	SEARCH_CODE,
 	CLEAR_SARCH,
 	SET_LOADING,
+	GET_MY_CODE,
 } from './types';
 
 const CodeReducer = (state, { type, payload }) => {
 	switch (type) {
 		case GET_CODE:
-			return { ...state, codes: payload };
+			return { ...state, codes: payload.codes, totalPages: payload.pages };
 		case GET_CODE_BY_ID:
 			return { ...state, current_code: payload };
+		case GET_MY_CODE:
+			return {
+				...state,
+				myCodes: payload.codes,
+				totalCodePages: payload.pages,
+			};
 		case CLEAR_CODE_BY_ID:
 			return { ...state, current_code: null };
 		case SEARCH_CODE:

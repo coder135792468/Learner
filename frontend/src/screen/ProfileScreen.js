@@ -8,7 +8,7 @@ import {
 	Button,
 } from '@material-ui/core';
 
-import { PageHeader, Code } from '../layouts';
+import { PageHeader, Code, Loader, PaginationButton } from '../layouts';
 import { AuthContext, CodeContext } from '../context';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,28 +36,29 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ProfileScreen = ({ history }) => {
+const ProfileScreen = ({ history, match }) => {
+	const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1;
 	const authContext = useContext(AuthContext);
 	const { getUserData, user } = authContext;
 
 	const codeContext = useContext(CodeContext);
-	const { getAllCodes, codes } = codeContext;
-	const [myCodes, setMyCodes] = useState([]);
+	const { getMyCode, myCodes, loading, totalCodePages } = codeContext;
 	const classes = useStyles();
 
 	useEffect(() => {
 		if (!user?.name) {
 			getUserData();
 		}
-		if (codes?.length === 0 || codes === null || !codes.length) {
-			getAllCodes();
+		if (user?._id) {
+			getMyCode(user.token, pageNumber);
 		}
-		setMyCodes(codes?.filter((code) => code.user === user?._id));
+
 		//eslint-disable-next-line
-	}, [codes]);
+	}, [pageNumber, user]);
 	return (
 		<Paper className={classes.root}>
-			<PageHeader title={'Profile'} />
+			{loading && <Loader />}
+			<PageHeader title={'Profile'} push='/' />
 			<Box>
 				<Avatar className={classes.avatar}>
 					{user?.avatar && (
@@ -84,6 +85,13 @@ const ProfileScreen = ({ history }) => {
 					</Button>
 				)}
 			</Box>
+			{totalCodePages > 1 && (
+				<PaginationButton
+					page={pageNumber}
+					pageCount={totalCodePages}
+					profile={true}
+				/>
+			)}
 		</Paper>
 	);
 };

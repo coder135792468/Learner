@@ -8,11 +8,13 @@ import {
 	likeCode,
 	addComment,
 	deleteComment,
+	getCodes,
 } from '../controller/codeController.js';
 import { protect } from '../middlerwares/auth.js';
 const router = express.Router();
 
 router.route('/').post(protect, addCode).get(getAllCodes);
+router.route('/profile').get(protect, getCodes);
 router
 	.route('/:id')
 	.get(getCodeById)

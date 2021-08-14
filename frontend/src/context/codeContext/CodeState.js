@@ -10,6 +10,7 @@ import {
 	SEARCH_CODE,
 	CLEAR_SARCH,
 	SET_LOADING,
+	GET_MY_CODE,
 } from './types';
 import axios from 'axios';
 
@@ -20,16 +21,19 @@ const CodeState = ({ children }) => {
 		error: null,
 		filter: null,
 		loading: false,
+		totalPages: 1,
+		myCodes: null,
+		totalCodePages: 1,
 	};
 
 	const [state, dispatch] = useReducer(CodeReducer, initialState);
 
 	//get all codes
-	const getAllCodes = async () => {
+	const getAllCodes = async (pageNumber = '') => {
 		setLoading(true);
 		clearError();
 		try {
-			const { data } = await axios.get('/api/code');
+			const { data } = await axios.get(`/api/code?pageNumber=${pageNumber}`);
 			dispatch({ type: GET_CODE, payload: data });
 		} catch (error) {
 			dispatch({
@@ -202,6 +206,36 @@ const CodeState = ({ children }) => {
 		}
 	};
 
+	//get my Codes
+	const getMyCode = async (token, pageNumber = '') => {
+		setLoading(true);
+		clearError();
+		dispatch({ type: CLEAR_CODE_BY_ID });
+
+		try {
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
+			const { data } = await axios.get(
+				`/api/code/profile?pageNumber=${pageNumber}`,
+				config
+			);
+			dispatch({ type: GET_MY_CODE, payload: data });
+		} catch (error) {
+			dispatch({
+				type: ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	//search code for
 	const searchCode = (text) => {
 		clearSearch();
@@ -229,6 +263,9 @@ const CodeState = ({ children }) => {
 				error: state.error,
 				filter: state.filter,
 				loading: state.loading,
+				totalPages: state.totalPages,
+				myCodes: state.myCodes,
+				totalCodePages: state.totalCodePages,
 				getAllCodes,
 				clearError,
 				getCodeByID,
@@ -239,6 +276,7 @@ const CodeState = ({ children }) => {
 				likeCode,
 				addComment,
 				deleteCode,
+				getMyCode,
 			}}
 		>
 			{children}
