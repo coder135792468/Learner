@@ -32,10 +32,14 @@ const useStyles = makeStyles((theme) => ({
 		margin: '20px auto',
 	},
 	avatar: {
-		width: '300px',
+		width: '100px',
+		backgroundColor: 'grey',
 		borderRadius: '20px',
 		[theme.breakpoints.up('sm')]: {
 			width: '200px',
+		},
+		[theme.breakpoints.up('vs')]: {
+			width: '80px',
 		},
 	},
 }));

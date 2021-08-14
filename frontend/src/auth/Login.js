@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 	avatar: {
 		width: '100px',
 		margin: '20px',
+		backgroundColor: 'grey',
 
 		borderRadius: '50%',
 	},

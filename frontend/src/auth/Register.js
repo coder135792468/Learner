@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 		width: '100px',
 		margin: '20px',
 		borderRadius: '50%',
+		backgroundColor: 'grey',
 	},
 	heading: {
 		letterSpacing: '5px',

@@ -11,6 +11,7 @@ import {
 	AddScreen,
 	ProfileScreen,
 	CodeCoachScreen,
+	DeployScreen,
 } from './screen';
 import { Login, Register } from './auth';
 import { CodeCoach } from './components';
@@ -37,6 +38,7 @@ const App = () => {
 						<Route exact path='/register' component={Register} />
 						<Route exact path='/add' component={AddScreen} />
 						<Route exact path='/profile' component={ProfileScreen} />
+						<Route exact path='/deploy/:id' component={DeployScreen} />
 						<Route exact path='/code/:id' component={CodePlayGround} />
 						<Route exact path='/' component={HomeScreen} />
 					</Switch>

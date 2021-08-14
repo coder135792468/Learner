@@ -9,6 +9,7 @@ import CoursePage from './CoursePage';
 import AddScreen from './AddScreen';
 import ProfileScreen from './ProfileScreen';
 import CodeCoachScreen from './CodeCoachScreen';
+import DeployScreen from './DeployScreen';
 export {
 	HomeScreen,
 	SettingScreen,
@@ -21,4 +22,5 @@ export {
 	AddScreen,
 	ProfileScreen,
 	CodeCoachScreen,
+	DeployScreen,
 };

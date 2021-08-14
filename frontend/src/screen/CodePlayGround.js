@@ -5,6 +5,13 @@ import {
 	BottomNavigationAction,
 	BottomNavigation,
 	IconButton,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	TextField,
+	Button,
+	Typography,
 } from '@material-ui/core';
 import { PageHeader } from '../layouts';
 import CodeIcon from '@material-ui/icons/Code';
@@ -22,6 +29,17 @@ const useStyles = makeStyles((theme) => ({
 			display: 'none',
 		},
 	},
+	center: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'column',
+		'& *': {
+			padding: '4px 10px',
+			textAlign: 'center',
+			margin: '5px 0',
+		},
+	},
 	run: {
 		position: 'fixed',
 		right: '20px',
@@ -31,9 +49,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const CodePlayGround = ({ match }) => {
+const CodePlayGround = ({ match, history }) => {
 	const codeContext = useContext(CodeContext);
-	const { current_code, getCodeByID, updateCode } = codeContext;
+	const { error, current_code, getCodeByID, updateCode, deleteCode } =
+		codeContext;
 
 	const authContxt = useContext(AuthContext);
 	const { getUserData, user } = authContxt;
@@ -45,6 +64,8 @@ const CodePlayGround = ({ match }) => {
 	const [value, setValue] = useState(0);
 	const id = match.params.id;
 
+	const [open, setOpen] = useState(false);
+	const [name, setName] = useState('');
 	useEffect(() => {
 		getCodeByID(id);
 		if (!user?.name) {
@@ -53,18 +74,27 @@ const CodePlayGround = ({ match }) => {
 
 		//eslint-disable-next-line
 	}, []);
-	const saveCode = async () => {
-		// if (current_code !== null) {
-		const sendData = {
-			html: data.html,
-			css: data.css,
-			js: data.js,
-			name: current_code.name,
-		};
-		updateCode(user.token, sendData, current_code._id);
-		// }
+	const saveCodeData = async (text, name = current_code.name) => {
+		if (text === 'save') {
+			const sendData = {
+				html: data.html,
+				css: data.css,
+				js: data.js,
+				name,
+			};
+			updateCode(user.token, sendData, current_code._id);
+		} else if (text === 'rename') {
+			setOpen(true);
+		} else if (text === 'delete') {
+			deleteCode(user.token, current_code._id);
+			history.push('/');
+		}
 	};
-	return (
+	const renameCode = () => {
+		saveCodeData('save', name);
+		setOpen(false);
+	};
+	return !error ? (
 		<Paper className={classes.root}>
 			<PageHeader
 				title={
@@ -76,7 +106,8 @@ const CodePlayGround = ({ match }) => {
 				}
 				btn_data={{
 					show: current_code?.user === user?._id ? true : false,
-					onClick: saveCode,
+					onClick: saveCodeData,
+					id,
 				}}
 				push='/'
 			/>
@@ -106,6 +137,46 @@ const CodePlayGround = ({ match }) => {
 				<BottomNavigationAction label='Css' icon={<CodeIcon />} />
 				<BottomNavigationAction label='Js' icon={<CodeIcon />} />
 			</BottomNavigation>
+
+			<Dialog
+				open={open}
+				onClose={(e) => setOpen(false)}
+				aria-labelledby='form-dialog-title'
+			>
+				<DialogTitle id='form-dialog-title'>Change Code Name</DialogTitle>
+
+				<DialogContent>
+					<TextField
+						autoFocus
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+						margin='dense'
+						id='name'
+						label='Email Address'
+						type='email'
+						fullWidth
+					/>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={() => setOpen(false)} color='primary'>
+						Cancel
+					</Button>
+					<Button onClick={renameCode} color='primary'>
+						Rename
+					</Button>
+				</DialogActions>
+			</Dialog>
+		</Paper>
+	) : (
+		<Paper className={`${classes.root} ${classes.center}`}>
+			<Typography variant='h6'>Looks Like Some Error Come,Try Again</Typography>
+			<Button
+				onClick={() => history.push('/')}
+				color='primary'
+				variant='contained'
+			>
+				Back to Home
+			</Button>
 		</Paper>
 	);
 };

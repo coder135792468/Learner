@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 		width: '90%',
 	},
 	codeItem: {
-		background: theme.palette.primary.dark,
+		background: theme.palette.type === 'dark' ? '#333' : '#efefef',
 		margin: '20px 30px',
 		borderRadius: 20,
 		padding: 20,

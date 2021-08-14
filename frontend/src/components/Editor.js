@@ -87,7 +87,7 @@ const Editor = ({ data, setData, value, code, codeOuput }) => {
 							theme='nord_dark'
 							style={{ width: '100vw', height: 'calc(90vh - 50px)' }}
 							className={classes.frame}
-							fontSize={18}
+							fontSize={17}
 							wrapEnabled={false}
 							value={data.html}
 							ref={htmlref}
@@ -110,7 +110,7 @@ const Editor = ({ data, setData, value, code, codeOuput }) => {
 							theme='nord_dark'
 							style={{ width: '100vw', height: 'calc(90vh - 50px)' }}
 							className={classes.frame}
-							fontSize={18}
+							fontSize={17}
 							wrapEnabled={false}
 							ref={cssref}
 							value={data.css}
@@ -133,7 +133,7 @@ const Editor = ({ data, setData, value, code, codeOuput }) => {
 							theme='nord_dark'
 							style={{ width: '100vw', height: 'calc(90vh - 50px)' }}
 							className={classes.frame}
-							fontSize={18}
+							fontSize={17}
 							wrapEnabled={false}
 							ref={jsref}
 							value={data.js}

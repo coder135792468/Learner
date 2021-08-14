@@ -21,10 +21,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: '10px 2%',
 		boxShadow: '0 2px 3px rgba(0, 0, 0, 0.1)',
 		borderRadius: '30px',
-		background:
-			theme.palette.type === 'dark'
-				? theme.palette.primary.dark
-				: theme.palette.primary,
+		background: theme.palette.type === 'dark' ? '#444' : '#efefef',
 	},
 	logo: {
 		width: '100px',

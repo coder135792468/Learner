@@ -80,6 +80,41 @@ const CodeState = ({ children }) => {
 			};
 			const { data } = await axios.put(`/api/code/${id}`, code, config);
 			dispatch({ type: GET_CODE_BY_ID, payload: data });
+			dispatch({
+				type: GET_CODE,
+				payload: state.codes.map((ele) => (ele._id === data._id ? data : ele)),
+			});
+		} catch (error) {
+			dispatch({
+				type: ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	//delete a code
+	const deleteCode = async (token, id) => {
+		setLoading(true);
+		clearError();
+		dispatch({ type: CLEAR_CODE_BY_ID });
+
+		try {
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+			};
+			await axios.delete(`/api/code/${id}`, config);
+			dispatch({
+				type: GET_CODE,
+				payload: state.codes.filter((ele) => ele._id !== id),
+			});
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -203,6 +238,7 @@ const CodeState = ({ children }) => {
 				clearSearch,
 				likeCode,
 				addComment,
+				deleteCode,
 			}}
 		>
 			{children}
