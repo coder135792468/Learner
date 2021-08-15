@@ -80,7 +80,6 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 					</ListItemIcon>
 					<ListItemText primary={'Challenge'} />
 				</ListItem>
-
 				<ListItem>
 					<ListItemIcon>
 						<Switch
