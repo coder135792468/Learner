@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
 		margin: '10px',
 	},
 }));
+const API_KEY = '50eaa2fcc52f4e9603f728c3eccebe23';
+const endpoints = `https://api.imgbb.com/1/upload?key=${API_KEY}`;
+
 const SettingScreen = () => {
 	const { addToast } = useToasts();
 
@@ -113,9 +116,9 @@ const SettingScreen = () => {
 				},
 			};
 
-			const { data } = await axios.post('/api/upload', formData, config);
+			const { data } = await axios.post(endpoints, formData, config);
 
-			setAvatar(data);
+			setAvatar(data.data.display_url);
 			setUploading(false);
 			setFile('');
 			updateProfile();

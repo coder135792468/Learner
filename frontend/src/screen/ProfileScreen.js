@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const ProfileScreen = ({ history, match }) => {
 	const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1;
 	const authContext = useContext(AuthContext);
-	const { getUserData, user } = authContext;
+	const { user } = authContext;
 
 	const codeContext = useContext(CodeContext);
 	const { getMyCode, myCodes, loading, totalCodePages } = codeContext;

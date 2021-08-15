@@ -9,16 +9,19 @@ import {
 	Divider,
 	makeStyles,
 } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SettingsIcon from '@material-ui/icons/Settings';
+import CodeIcon from '@material-ui/icons/Code';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
 const useStyles = makeStyles((theme) => ({
 	sideBarList: {
-		padding: '0 20px',
+		padding: '0 10px',
 		[theme.breakpoints.up('xs')]: {
-			minWidth: '200px',
+			minWidth: '150px',
 		},
 		[theme.breakpoints.up('md')]: {
 			minWidth: '300px',
@@ -42,23 +45,36 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 				{user?._id && (
 					<ListItem button onClick={() => closeDrawer('profile')}>
 						<ListItemIcon>
-							<InboxIcon />
+							<PersonOutlineIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Profile'} />
 					</ListItem>
 				)}
-				{['Code', 'Course', 'Quiz', 'Challenges'].map((text, index) => (
-					<ListItem
-						button
-						key={text}
-						onClick={() => closeDrawer(text.toLowerCase())}
-					>
-						<ListItemIcon>
-							{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-						</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
-				))}
+				<ListItem button onClick={() => closeDrawer('/')}>
+					<ListItemIcon>
+						<CodeIcon />
+					</ListItemIcon>
+					<ListItemText primary={'Code Playground'} />
+				</ListItem>
+				<ListItem button onClick={() => closeDrawer('course')}>
+					<ListItemIcon>
+						<LibraryBooksIcon />
+					</ListItemIcon>
+					<ListItemText primary={'Course'} />
+				</ListItem>
+				<ListItem button onClick={() => closeDrawer('quiz')}>
+					<ListItemIcon>
+						<LiveHelpIcon />
+					</ListItemIcon>
+					<ListItemText primary={'Quiz'} />
+				</ListItem>
+
+				<ListItem button onClick={() => closeDrawer('challenges')}>
+					<ListItemIcon>
+						<SportsKabaddiIcon />
+					</ListItemIcon>
+					<ListItemText primary={'Challenge'} />
+				</ListItem>
 			</List>
 			<Divider />
 			{user?._id && (
