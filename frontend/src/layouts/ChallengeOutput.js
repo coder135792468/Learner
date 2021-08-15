@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: '#444',
 		margin: '10px 0',
 		flexDirection: 'column',
+		color: 'white',
 	},
 	output: {
 		backgroundColor: 'whitesmoke',
@@ -61,7 +62,7 @@ const ChallengeOutput = ({ code, test_cases, setSolved }) => {
 		<Paper className={classes.root}>
 			{test_cases.map((ele, i) => (
 				<Box p={3} className={classes.item} key={i + 1}>
-					<h3>Test Case : {i + 1}</h3>
+					<h3 style={{ color: 'white' }}>Test Case : {i + 1}</h3>
 					<p className={classes.output}>
 						<strong>Exprected Output : </strong> {ele.expected}
 					</p>
@@ -71,7 +72,6 @@ const ChallengeOutput = ({ code, test_cases, setSolved }) => {
 					</p>
 					<Chip
 						color='primary'
-						variant='contained'
 						label={results[i].solved ? 'Solved' : 'Not Solved'}
 					/>
 				</Box>

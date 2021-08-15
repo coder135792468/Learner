@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: '40px',
 		minWidth: '200px',
 		backgroundColor: '#444',
+		color: 'white',
 	},
 	btn: {
 		maxWidth: '300px',

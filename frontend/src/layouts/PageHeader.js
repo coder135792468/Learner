@@ -39,7 +39,7 @@ const PageHeader = ({
 						push ? history.push(push) : history.goBack();
 					}}
 				>
-					<ArrowBackIos />
+					<ArrowBackIos style={{ color: 'white' }} />
 				</IconButton>
 				<p>{title}</p>
 				{optional && (
@@ -54,7 +54,7 @@ const PageHeader = ({
 								onClick={() => btn_data.onClick('save')}
 								style={{ marginLeft: 'auto' }}
 							>
-								<SaveIcon />
+								<SaveIcon style={{ color: 'white' }} />
 							</IconButton>
 						)}
 						<IconButton
