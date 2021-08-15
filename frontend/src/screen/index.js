@@ -10,6 +10,8 @@ import AddScreen from './AddScreen';
 import ProfileScreen from './ProfileScreen';
 import CodeCoachScreen from './CodeCoachScreen';
 import DeployScreen from './DeployScreen';
+import LiveScreen from './LiveScreen';
+
 export {
 	HomeScreen,
 	SettingScreen,
@@ -23,4 +25,5 @@ export {
 	ProfileScreen,
 	CodeCoachScreen,
 	DeployScreen,
+	LiveScreen,
 };

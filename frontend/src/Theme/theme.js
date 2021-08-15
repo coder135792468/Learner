@@ -1,5 +1,7 @@
 import { createTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
+import { useContext } from 'react';
+import { ThemeContext } from '../context';
 const darkTheme = createTheme({
 	palette: {
 		type: 'dark',
@@ -20,7 +22,20 @@ const darkTheme = createTheme({
 	},
 });
 
-const DarkTheme = ({ children, theme }) => {
-	return <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>;
+const lightTheme = createTheme({
+	palette: {
+		typography: {
+			fontFamily: '"Poppins", sans-serif',
+		},
+	},
+});
+
+const DarkTheme = ({ children }) => {
+	const { darkTheme: theme } = useContext(ThemeContext);
+	return (
+		<ThemeProvider theme={theme ? darkTheme : lightTheme}>
+			{children}
+		</ThemeProvider>
+	);
 };
 export default DarkTheme;

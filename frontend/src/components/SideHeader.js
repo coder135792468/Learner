@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
 	Drawer,
 	List,
@@ -8,6 +8,7 @@ import {
 	Typography,
 	Divider,
 	makeStyles,
+	Switch,
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -16,6 +17,9 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import LiveTvIcon from '@material-ui/icons/LiveTv';
+
+import { ThemeContext } from '../context';
 
 const useStyles = makeStyles((theme) => ({
 	sideBarList: {
@@ -34,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 	const classes = useStyles();
 
+	const { darkTheme, setTheme } = useContext(ThemeContext);
 	const logout = () => {
 		localStorage.removeItem('userInfo');
 		window.location.href = 'login';
@@ -74,6 +79,18 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 						<SportsKabaddiIcon />
 					</ListItemIcon>
 					<ListItemText primary={'Challenge'} />
+				</ListItem>
+
+				<ListItem>
+					<ListItemIcon>
+						<Switch
+							checked={darkTheme}
+							onChange={setTheme}
+							name='checkedA'
+							inputProps={{ 'aria-label': 'secondary checkbox' }}
+						/>
+					</ListItemIcon>
+					<ListItemText primary={'Dark Mode'} />
 				</ListItem>
 			</List>
 			<Divider />
