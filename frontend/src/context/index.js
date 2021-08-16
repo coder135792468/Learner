@@ -7,6 +7,9 @@ import CodeState from './codeContext/CodeState';
 import ThemeContext from './themeContext/ThemeContext';
 import ThemeState from './themeContext/ThemeState';
 
+import ChallengeContext from './challengeContext/ChallengeContext';
+import ChallengeState from './challengeContext/ChallengeState';
+
 export {
 	AuthContext,
 	AuthState,
@@ -14,4 +17,6 @@ export {
 	CodeContext,
 	ThemeContext,
 	ThemeState,
+	ChallengeContext,
+	ChallengeState,
 };

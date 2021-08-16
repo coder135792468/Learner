@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, MenuItem, Menu } from '@material-ui/core';
+import {
+	AppBar,
+	Toolbar,
+	IconButton,
+	MenuItem,
+	Menu,
+	Button,
+} from '@material-ui/core';
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router-dom';
 import SaveIcon from '@material-ui/icons/Save';
@@ -16,6 +23,8 @@ const PageHeader = ({
 	push,
 	position = 'sticky',
 	optional,
+	live,
+	list,
 }) => {
 	const { addToast } = useToasts();
 	const history = useHistory();
@@ -46,6 +55,22 @@ const PageHeader = ({
 					<strong style={{ marginLeft: 'auto' }}>
 						{optional.total} / {optional.index}
 					</strong>
+				)}
+				{live?.live && (
+					<span style={{ marginLeft: '10px' }}>
+						<b>Time: </b>
+						{parseInt((live.time / 60) % 60)}:{parseInt(live.time % 60)}
+					</span>
+				)}
+				{list && (
+					<Button
+						onClick={list.onClick}
+						color='secondary'
+						variant='contained'
+						style={{ marginLeft: 'auto', fontSize: '.6rem' }}
+					>
+						{list.text}
+					</Button>
 				)}
 				{btn_data?.play && (
 					<>

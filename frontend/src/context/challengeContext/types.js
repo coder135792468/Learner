@@ -1,0 +1,8 @@
+export const GET_CHALLENGE = 'GET_CHALLENGE';
+export const ADD_CHALLENGE = 'ADD_CHALLENGS';
+export const UPDATE_CHALLENGE = 'UPDATE_CHALLENGES';
+export const SET_LOADING = 'SET_LOADING';
+export const ERROR = 'ERROR';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
+export const GET_ALL_CHALLENGES = 'GET_ALL_CHALLENGES';
+export const CLEAR_CHALLENGES = 'CLEAR_CHALLENGES';

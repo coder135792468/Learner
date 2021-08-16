@@ -5,7 +5,7 @@ import { useReducer } from 'react';
 
 const ThemeState = ({ children }) => {
 	const initialState = {
-		darkTheme: true,
+		darkTheme: false,
 	};
 	const [state, dispatch] = useReducer(ThemeReducer, initialState);
 

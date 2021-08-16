@@ -5,6 +5,7 @@ import path from 'path';
 import connectDB from './utils/db.js';
 import userRouter from './routes/userRoute.js';
 import codeRouter from './routes/codeRoute.js';
+import challengeRoute from './routes/challengeRoute.js';
 import UploadRoute from './routes/UploadRoute.js';
 // import cors from 'cors';
 import { notFound, errorHandler } from './middlerwares/errors.js';
@@ -19,6 +20,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/api/challenges/', challengeRoute);
 app.use('/api/upload', UploadRoute);
 app.use('/api/user/', userRouter);
 app.use('/api/code/', codeRouter);

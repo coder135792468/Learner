@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const ValidateEmail = (mail) => /\S+@\S+\.\S+/.test(mail);
 
 const randomCompliment = () => {
@@ -17,4 +19,9 @@ const randomCompliment = () => {
 	return randomWord;
 };
 
-export { ValidateEmail, randomCompliment };
+const userByID = async (id) => {
+	const { data } = await axios.get(`/api/user/${id}`);
+	return data;
+};
+
+export { ValidateEmail, randomCompliment, userByID };

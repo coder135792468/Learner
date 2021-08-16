@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 import AuthContext from './AuthContext';
 import AuthReducer from './AuthReducer';
 import axios from 'axios';
-import { LOGIN, ERROR, CLEAR_ERROR, GET_ALL_USER } from './types';
+import { LOGIN, ERROR, CLEAR_ERROR, GET_ALL_USER, SET_LOADING } from './types';
 
 const AuthState = ({ children }) => {
 	const initialState = {
@@ -11,6 +11,7 @@ const AuthState = ({ children }) => {
 		user: null,
 		error: null,
 		users: null,
+		allusers: null,
 	};
 
 	const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -110,10 +111,23 @@ const AuthState = ({ children }) => {
 	};
 
 	const getAllUsers = async () => {
-		try {
-			const { data } = await axios.get('/api/user');
+		setLoading(true);
 
-			dispatch({ type: GET_ALL_USER, payload: data });
+		try {
+			if (!state?.user.token) {
+				return;
+			}
+			const config = {
+				headers: {
+					Authorization: 'Bearer ' + state?.user.token,
+				},
+			};
+			const { data } = await axios.get('/api/user/allUsers', config);
+
+			dispatch({
+				type: GET_ALL_USER,
+				payload: data.filter((ele) => ele._id !== state.user._id),
+			});
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -122,9 +136,13 @@ const AuthState = ({ children }) => {
 						? error.response.data.message
 						: error.message,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
-
+	const setLoading = (isLoading) => {
+		dispatch({ type: SET_LOADING, payload: isLoading });
+	};
 	//clear errors
 	const clearError = () => {
 		dispatch({ type: CLEAR_ERROR });
@@ -137,6 +155,7 @@ const AuthState = ({ children }) => {
 				user: state.user,
 				users: state.users,
 				error: state.error,
+				allusers: state.allusers,
 				loginUser,
 				registerUser,
 				getUserData,

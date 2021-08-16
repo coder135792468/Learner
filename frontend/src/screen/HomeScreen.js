@@ -67,6 +67,10 @@ const useStyles = makeStyles((theme) => ({
 		height: '30px',
 		borderRadius: '50%',
 	},
+	link: {
+		textDecoration: 'none',
+		color: theme.palette.type === 'dark' ? '#fff' : '#000',
+	},
 }));
 const HomeScreen = ({ history, match }) => {
 	const authContext = useContext(AuthContext);
@@ -89,18 +93,7 @@ const HomeScreen = ({ history, match }) => {
 	const open = Boolean(anchorEl);
 
 	const [openMenu, setOpenMenu] = useState(false);
-	const handleMenu = (event) => {
-		setAnchorEl(event.currentTarget);
-	};
 
-	const handleClose = (page) => {
-		setAnchorEl(null);
-		history.push(page);
-	};
-	const closeDrawer = (txt) => {
-		setOpenMenu(false);
-		history.push(txt === 'code' ? '/' : txt);
-	};
 	useEffect(() => {
 		if (text.trim().length === 0) {
 			clearSearch();
@@ -114,12 +107,7 @@ const HomeScreen = ({ history, match }) => {
 
 	return (
 		<Paper className={classes.main}>
-			<SideHeader
-				closeDrawer={closeDrawer}
-				setOpenMenu={setOpenMenu}
-				openMenu={openMenu}
-				user={user}
-			/>
+			<SideHeader setOpenMenu={setOpenMenu} openMenu={openMenu} user={user} />
 			{loading && <Loader />}
 			<AppBar position='sticky'>
 				<Toolbar>
@@ -156,7 +144,7 @@ const HomeScreen = ({ history, match }) => {
 								aria-label='account of current user'
 								aria-controls='menu-appbar'
 								aria-haspopup='true'
-								onClick={handleMenu}
+								onClick={(e) => setAnchorEl(e.currentTarget)}
 								color='inherit'
 							>
 								{user?.avatar ? (
@@ -182,14 +170,14 @@ const HomeScreen = ({ history, match }) => {
 									horizontal: 'right',
 								}}
 								open={open}
-								onClose={handleClose}
+								onClose={() => setAnchorEl(null)}
 							>
-								<MenuItem onClick={() => handleClose('profile')}>
-									Profile
-								</MenuItem>
-								<MenuItem onClick={() => handleClose('setting')}>
-									Profile Settings
-								</MenuItem>
+								<Link to='/profile' className={classes.link}>
+									<MenuItem>Profile</MenuItem>
+								</Link>
+								<Link to='setting' className={classes.link}>
+									<MenuItem>Profile Settings</MenuItem>
+								</Link>
 							</Menu>
 						</>
 					) : (

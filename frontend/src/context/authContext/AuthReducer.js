@@ -5,7 +5,7 @@ const AuthReducer = (state, { payload, type }) => {
 		case LOGIN:
 			return { ...state, user: payload, login: true };
 		case GET_ALL_USER:
-			return { ...state, users: payload };
+			return { ...state, allusers: payload };
 		case ERROR:
 			return { ...state, error: payload };
 		case CLEAR_ERROR:

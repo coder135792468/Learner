@@ -1,19 +1,164 @@
-import React from 'react';
-import { Paper, makeStyles } from '@material-ui/core';
-import { PageHeader } from '../layouts';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+	Paper,
+	makeStyles,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Box,
+	Avatar,
+	Button,
+} from '@material-ui/core';
+import { PageHeader, Loader, LivePlayUsers, ShowChallenges } from '../layouts';
+import { AuthContext, ChallengeContext } from '../context';
+
+import { code_coach } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		width: '100vw',
 		height: '100vh',
+		overflow: 'auto',
+	},
+	item: {
+		backgroundColor: theme.palette.type === 'dark' ? '#555' : '#efefef',
+		margin: '14px auto',
+		maxWidth: '500px',
+		padding: '20px',
+		borderRadius: '50px',
+		display: 'grid',
+		gridTemplateColumns: '1fr 2fr',
+	},
+	avatar: {
+		width: '50px',
+		height: '50px',
+		color: 'white',
+	},
+	btn: {
+		minWidth: '100px',
+		margin: '10px 5vw',
+		float: 'right',
+	},
+	pic: {
+		width: '100%',
+		height: '100%',
 	},
 }));
-const LiveScreen = () => {
+const LiveScreen = ({ history }) => {
+	const { getAllUsers, allusers, getUserData, user, loading } =
+		useContext(AuthContext);
 	const classes = useStyles();
+
+	const { getAllChallenges, all_challenges } = useContext(ChallengeContext);
+
+	const [readyPage, setReadyPage] = useState(false);
+	const [player, setPlayer] = useState(null);
+
+	const [index, setIndex] = useState(
+		Math.floor(Math.random() * code_coach.length)
+	);
+
+	const [hasChallenge, setHasChallenge] = useState(false);
+
+	useEffect(() => {
+		if (!allusers?.length) {
+			getUserData();
+			if (user?.token) {
+				getAllUsers();
+				if (!all_challenges?.length) {
+					getAllChallenges(user.token);
+				}
+			}
+		}
+
+		//eslint-disable-next-line
+	}, [user?.token]);
+	const readyTostart = (data) => {
+		setPlayer(data);
+		console.log(data);
+		setReadyPage(true);
+	};
+
+	const startGame = () => {
+		setIndex(Math.floor(Math.random() * code_coach.length));
+		history.push(`/challenges/${index}?live=true&receiver=${player.id}`);
+	};
+	const viewallChallenges = async () => {
+		//get all challenges
+
+		setHasChallenge(!hasChallenge);
+	};
 
 	return (
 		<Paper className={classes.root}>
-			<PageHeader title={'Live Challenges'} />
+			{loading && <Loader />}
+			<PageHeader
+				title={'Community Challenges'}
+				list={
+					!readyPage && {
+						text: !hasChallenge ? 'Challenges' : 'Play',
+						onClick: viewallChallenges,
+					}
+				}
+			/>
+			{!readyPage && (
+				<List>
+					{!hasChallenge &&
+						allusers?.map(({ name, avatar, _id }) => (
+							<LivePlayUsers
+								key={_id}
+								onClick={readyTostart}
+								name={name}
+								avatar={avatar}
+								id={_id}
+							/>
+						))}
+					{hasChallenge &&
+						all_challenges?.map((challenge) => (
+							<ShowChallenges user={user} challenge={challenge} />
+						))}
+				</List>
+			)}
+
+			{readyPage && (
+				<Box ml='auto'>
+					<ListItem className={classes.item}>
+						<ListItemIcon>
+							<Avatar className={classes.avatar}>
+								<img
+									alt={'couldnt load'}
+									className={classes.pic}
+									src={user.avatar}
+								/>
+							</Avatar>
+						</ListItemIcon>
+						<ListItemText primary={<h4>{player.name}</h4>} />
+					</ListItem>
+					<p align='center'>V/s</p>
+					<ListItem className={classes.item}>
+						<ListItemIcon>
+							<Avatar className={classes.avatar}>
+								<img
+									alt={'couldnt load'}
+									className={classes.pic}
+									src={player.avatar}
+								/>
+							</Avatar>
+						</ListItemIcon>
+						<ListItemText primary={<h4> {user.name}</h4>} />
+					</ListItem>
+
+					<Button
+						onClick={startGame}
+						className={classes.btn}
+						color='primary'
+						variant='contained'
+					>
+						Start
+					</Button>
+				</Box>
+			)}
 		</Paper>
 	);
 };

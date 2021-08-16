@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: '20px',
 	},
 }));
-const ChallengeOutput = ({ code, test_cases, setSolved }) => {
+const ChallengeOutput = ({ code, test_cases, setSolved, setCompleted }) => {
 	const { addToast } = useToasts();
 
 	const classes = useStyles();
@@ -53,6 +53,7 @@ const ChallengeOutput = ({ code, test_cases, setSolved }) => {
 		setTimeout(() => {
 			if (results.every((ele) => ele.solved === true)) {
 				addToast(randomCompliment(), { appearance: 'success' });
+				setCompleted(true);
 			}
 		}, 500);
 

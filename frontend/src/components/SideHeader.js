@@ -21,6 +21,8 @@ import LiveTvIcon from '@material-ui/icons/LiveTv';
 
 import { ThemeContext } from '../context';
 
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
 	sideBarList: {
 		padding: '0 10px',
@@ -33,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
 		[theme.breakpoints.up('sm')]: {
 			minWidth: '300px',
 		},
+	},
+	link: {
+		textDecoration: 'none',
+		color: theme.palette.type === 'dark' ? '#fff' : '#000',
 	},
 }));
 const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
@@ -48,38 +54,55 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 		<>
 			<List className={classes.sideBarList}>
 				{user?._id && (
-					<ListItem button onClick={() => closeDrawer('profile')}>
-						<ListItemIcon>
-							<PersonOutlineIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Profile'} />
-					</ListItem>
+					<Link to='/profile' className={classes.link}>
+						<ListItem button>
+							<ListItemIcon>
+								<PersonOutlineIcon />
+							</ListItemIcon>
+							<ListItemText primary={'Profile'} />
+						</ListItem>
+					</Link>
 				)}
-				<ListItem button onClick={() => closeDrawer('/')}>
-					<ListItemIcon>
-						<CodeIcon />
-					</ListItemIcon>
-					<ListItemText primary={'Code Playground'} />
-				</ListItem>
-				<ListItem button onClick={() => closeDrawer('course')}>
-					<ListItemIcon>
-						<LibraryBooksIcon />
-					</ListItemIcon>
-					<ListItemText primary={'Course'} />
-				</ListItem>
-				<ListItem button onClick={() => closeDrawer('quiz')}>
-					<ListItemIcon>
-						<LiveHelpIcon />
-					</ListItemIcon>
-					<ListItemText primary={'Quiz'} />
-				</ListItem>
-
-				<ListItem button onClick={() => closeDrawer('challenges')}>
-					<ListItemIcon>
-						<SportsKabaddiIcon />
-					</ListItemIcon>
-					<ListItemText primary={'Challenge'} />
-				</ListItem>
+				<Link to='/' className={classes.link}>
+					<ListItem button>
+						<ListItemIcon>
+							<CodeIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Code Playground'} />
+					</ListItem>
+				</Link>
+				<Link to='/course' className={classes.link}>
+					<ListItem button>
+						<ListItemIcon>
+							<LibraryBooksIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Course'} />
+					</ListItem>
+				</Link>
+				<Link to='/quiz' className={classes.link}>
+					<ListItem button>
+						<ListItemIcon>
+							<LiveHelpIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Quiz'} />
+					</ListItem>
+				</Link>
+				<Link to='/challenges' className={classes.link}>
+					<ListItem button>
+						<ListItemIcon>
+							<SportsKabaddiIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Challenge'} />
+					</ListItem>
+				</Link>
+				<Link to='/live' className={classes.link}>
+					<ListItem button>
+						<ListItemIcon>
+							<LiveTvIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Community Challenge'} />
+					</ListItem>
+				</Link>
 				<ListItem>
 					<ListItemIcon>
 						<Switch
@@ -95,12 +118,15 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 			<Divider />
 			{user?._id && (
 				<List style={{ padding: '10px 20px' }}>
-					<ListItem button onClick={() => closeDrawer('setting')}>
-						<ListItemIcon>
-							<SettingsIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Settings'} />
-					</ListItem>
+					<Link to='/setting' className={classes.link}>
+						<ListItem button>
+							<ListItemIcon>
+								<SettingsIcon />
+							</ListItemIcon>
+							<ListItemText primary={'Settings'} />
+						</ListItem>
+					</Link>
+
 					<ListItem button onClick={logout}>
 						<ListItemIcon>
 							<NotificationsIcon />

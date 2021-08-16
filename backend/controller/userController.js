@@ -77,7 +77,7 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route GET /api/user/
 //@acess public
 const getAllUsers = asyncHandler(async (req, res) => {
-	const users = await User.find({}).select('-password');
+	const users = await User.find({}).select('-password -email');
 	res.json(users);
 });
 
@@ -86,7 +86,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 //@acess public
 const getUserById = asyncHandler(async (req, res) => {
 	try {
-		const user = await User.findById(req.params.id).select('-password');
+		const user = await User.findById(req.params.id).select('-password -email');
 		if (user) {
 			res.json(user);
 		} else {
