@@ -84,6 +84,11 @@ const LiveScreen = ({ history }) => {
 	}, [user?.token]);
 
 	useEffect(() => {
+		io.on('add', () => {
+			if (user?.token) {
+				getAllChallenges(user?.token, false);
+			}
+		});
 		io.on('update', async (id) => {
 			if (user?.token) {
 				await getChallengeById(id, user?.token, false);
@@ -93,7 +98,7 @@ const LiveScreen = ({ history }) => {
 			filterChallenge(id);
 		});
 		//eslint-disable-next-line
-	}, []);
+	}, [io]);
 
 	const readyTostart = (data) => {
 		setPlayer(data);
@@ -103,7 +108,7 @@ const LiveScreen = ({ history }) => {
 	const startGame = () => {
 		setIndex(Math.floor(Math.random() * code_coach.length));
 		const sendIndex = index === 0 ? 1 : index;
-		history.push(`/challenges/${1}?live=true&receiver=${player.id}`);
+		history.push(`/challenges/${sendIndex}?live=true&receiver=${player.id}`);
 	};
 	const viewallChallenges = async () => {
 		//get all challenges

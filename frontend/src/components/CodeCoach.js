@@ -51,10 +51,7 @@ const CodeCoach = ({ match, location, history }) => {
 	const [completed, setCompleted] = useState(false);
 
 	const [openDialog, setOpenDialog] = useState(false);
-	const [data, setData] = useState(null);
-	useEffect(() => {
-		setData(data);
-	}, [challenge]);
+
 	useEffect(() => {
 		setCode(code);
 	}, [code]);
@@ -98,6 +95,7 @@ const CodeCoach = ({ match, location, history }) => {
 			};
 			if (user.token) {
 				await addChallenge(challengeData, user.token);
+				io.emit('add', user.name);
 			} else {
 				history.push('/');
 			}

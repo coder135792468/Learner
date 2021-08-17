@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Paper, makeStyles } from '@material-ui/core';
-import { Code, PaginationButton } from '../layouts';
-import { CodeContext } from '../context';
+import { Code, PaginationButton, ToastMsg } from '../layouts';
+import { CodeContext, SocketContext } from '../context';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -15,21 +15,35 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 }));
+
 const CodeScreen = ({ pageNumber }) => {
 	const codeContext = useContext(CodeContext);
-	const { getAllCodes, codes, filter, totalPages } = codeContext;
+	const io = useContext(SocketContext);
 
+	const { getAllCodes, codes, filter, totalPages } = codeContext;
+	const [msg, setMsg] = useState('');
 	useEffect(() => {
 		getAllCodes(pageNumber);
 
 		//eslint-disable-next-line
 	}, [pageNumber]);
+
+	useEffect(() => {
+		io.on('add', (name) => {
+			setMsg(`${name} challenged you`);
+
+			setTimeout(() => {
+				setMsg('');
+			}, 2000);
+		});
+	}, [io]);
 	const classes = useStyles();
 
 	const getData = () =>
 		filter?.length !== 0 && filter !== null ? filter : codes;
 	return (
 		<Paper className={classes.root}>
+			{msg.length > 4 && <ToastMsg msg={msg} />}
 			{getData()?.map((code) => (
 				<Code code={code} key={code._id} />
 			))}

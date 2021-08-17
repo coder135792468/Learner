@@ -5,6 +5,9 @@ const socketManager = (socket) => {
 	socket.on('delete', (id) => {
 		socket.broadcast.emit('delete', id);
 	});
+	socket.on('add', (name) => {
+		socket.broadcast.emit('add', name);
+	});
 };
 
 export default socketManager;
