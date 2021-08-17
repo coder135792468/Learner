@@ -202,10 +202,10 @@ const code_coach = [
     }`,
 		testCases: [
 			{ run: "rverse('ballon')", expected: 'nollab', hidden: false },
-			{ run: "rverse('coder')", expected: 'redor', hidden: false },
+			{ run: "rverse('coder')", expected: 'redoc', hidden: false },
 			{ run: "rverse('sololearn')", expected: 'nraelolos', hidden: true },
-			{ run: "rverse('got')", expected: 'log', hidden: true },
-			{ run: "rverse('eatttt')", expected: 'ttttae', hidden: true },
+			{ run: "rverse('got')", expected: 'tog', hidden: true },
+			{ run: "rverse('eat')", expected: 'tae', hidden: true },
 		],
 	},
 

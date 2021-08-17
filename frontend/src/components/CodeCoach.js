@@ -55,8 +55,9 @@ const CodeCoach = ({ match, location, history }) => {
 	}, [code]);
 
 	useEffect(() => {
+		let interval;
 		if (parseInt((time / 60) % 60) < 20 && live && !openDialog) {
-			setTimeout(() => {
+			interval = setInterval(() => {
 				setTime(time + 1);
 			}, 1000);
 		} else {
@@ -65,6 +66,7 @@ const CodeCoach = ({ match, location, history }) => {
 		if (completed) {
 			setOpenDialog(true);
 		}
+		return () => clearInterval(interval);
 		//eslint-disable-next-line
 	}, [time, setCompleted]);
 
@@ -90,6 +92,9 @@ const CodeCoach = ({ match, location, history }) => {
 			} else {
 				history.push('/');
 			}
+			addToast('You need to refresh once  challenge Completed', {
+				appearance: 'success',
+			});
 		} else {
 			const challengeData = {
 				end: true,
@@ -97,7 +102,9 @@ const CodeCoach = ({ match, location, history }) => {
 			};
 			await updateChallenge(challengeData, challenge._id, user.token);
 
-			addToast('Look in live section for result', { appearance: 'success' });
+			addToast('Look in Community Challenge section ', {
+				appearance: 'success',
+			});
 		}
 		history.push('/');
 	};
@@ -143,7 +150,12 @@ const CodeCoach = ({ match, location, history }) => {
 			</div>
 			<div hidden={value !== 1}>
 				{value === 1 && (
-					<ChallengeEditor setCode={setCode} setValue={setValue} code={code} />
+					<ChallengeEditor
+						live={live}
+						setCode={setCode}
+						setValue={setValue}
+						code={code}
+					/>
 				)}
 			</div>
 			<div hidden={value !== 2}>

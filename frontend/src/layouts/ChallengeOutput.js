@@ -65,7 +65,13 @@ const ChallengeOutput = ({ code, test_cases, setSolved, setCompleted }) => {
 				<Box p={3} className={classes.item} key={i + 1}>
 					<h3 style={{ color: 'white' }}>Test Case : {i + 1}</h3>
 					<p className={classes.output}>
-						<strong>Exprected Output : </strong> {ele.expected}
+						{!ele.hidden ? (
+							<span>
+								<strong>Exprected Output : </strong> {ele.expected}
+							</span>
+						) : (
+							<strong> This Test Case is hidden</strong>
+						)}
 					</p>
 					<p className={classes.output}>
 						<strong>Your Output : </strong>

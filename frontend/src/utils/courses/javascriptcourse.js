@@ -72,7 +72,7 @@ var js_intro_course = [
     Single line comments use double slashes.`,
 				info: `It's a good idea to make a comment about the logic of large functions to make your code more readable for others`,
 				code: `//This is single Line Comment
-        <br>/*This is Multiple Line comment*/`,
+        /*This is Multiple Line comment*/`,
 			},
 		],
 	},
@@ -111,8 +111,9 @@ var js_intro_course = [
 				// eslint-disable-next-line
 
 				info: `If you begin a string with a single quote, then you should also end it with a single quote. The same rule applies to double quotes. Otherwise, JavaScript will become confused.`,
-				code: `var name = "Hello "+"Roni"<br>
-         document.write(name); //Hello Roni`,
+				code: ` var name = 'Hello'+'Roni';
+                document.write(name);
+                //Output: Hello Roni`,
 			},
 		],
 	},
@@ -133,7 +134,7 @@ var js_intro_course = [
 				code: `
             var x = 10 / 5;
              //2
-             <br>
+             
             var y = 10 * 3;
             //30
             `,
@@ -159,10 +160,10 @@ var js_intro_course = [
 				info: `As in school mathematics, you can change the order of the arithmetic operations by using parentheses.
     Example: var x = (100 + 50) * 3;`,
 				code: `
-            var x = 10;<br>
+            var x = 10;
             x++;//11
-             <br>
-            var y = 10;<br>
+             
+            var y = 10;
             y--;//9
             `,
 			},
@@ -176,7 +177,7 @@ var js_intro_course = [
 				heading: 'Assignment Operators',
 				data: `Assignment operators assign values to JavaScript variables. `,
 				info: `You can use multiple assignment operators in one line, such as x -= y += 9.`,
-				code: `var x = 1;<br>
+				code: `var x = 1;
           x+=2;//x = 3
           `,
 			},
@@ -191,7 +192,7 @@ var js_intro_course = [
     The equal to (==) operator checks whether the operands' values are equal. `,
 
 				info: `You can check all types of data; comparison operators always return true or false.`,
-				code: `var x = 10;<br>
+				code: `var x = 10;
           x==2;//false
           `,
 			},
@@ -223,13 +224,13 @@ var js_intro_course = [
 				info: `It allows you to connect as much conditions as you want`,
 				code: `
             /*Logical Operators*/
-            <br>
+            
        document.write((4 > 2) && (10 < 15));
-       <br>//true
-       <br>
-      /*Conditional Operators*/<br>
+       //true
+       
+      /*Conditional Operators*/
        document.write(4>2?"True":"False");
-       <br>//True     
+       //True     
             
             `,
 			},
@@ -244,7 +245,7 @@ var js_intro_course = [
     Concatenation can be used to build strings by joining together multiple strings, or by joining strings with other types: 
      `,
 				info: `Numbers in quotes are treated as strings: "42" is not the number 42, it is a string that includes two characters, 4 and 2.`,
-				code: `var msg = "Hello "+"World";<br>
+				code: `var msg = "Hello "+"World";
          document.write(msg) //Hello World
           `,
 			},
@@ -261,9 +262,9 @@ var js_intro_course = [
     Use if to specify a block of code that will be executed if a specified condition is true.`,
 				info: `You can skip curly braces if your code under the condition contains only one command.`,
 				code: `
-         if(condition){<br>
-              statements <br>    
-         }<br>
+         if(condition){
+              statements     
+         }
           `,
 			},
 		],
@@ -280,14 +281,14 @@ var js_intro_course = [
     `,
 				info: `Learning the fundamentals of a language will enable you to create the program you desire, whether client-side or server-side.`,
 				code: `
-          var course = 1<br>
-    if (course == 1) {<br>
-        document.write("HTML Tutorial");<br>
-    } else if (course == 2) {<br>
+          var course = 1
+    if (course == 1) {
+        document.write("HTML Tutorial");
+    } else if (course == 2) {
         document.write("CSS Tutorial");
-    <br>} else {<br>
-        document.write("JavaScript Tutorial");<br>
-    }<br>
+    } else {
+        document.write("JavaScript Tutorial");
+    }
     //Output : HTML Tutorial
           `,
 			},
@@ -302,14 +303,14 @@ var js_intro_course = [
     Let's take the value of the course variable in our previous example. `,
 				info: `The final else statement "ends" the else if statement and should be always written after the if and else if statements.`,
 				code: `      
-          var course = 3;<br>
-    if (course == 1) {<br>
-        document.write("HTML Tutorial");<br>
-    } else if (course == 2) {<br>
-        document.write("CSS Tutorial");<br>
-    } else {<br>
-        document.write("JavaScript Tutorial");<br>
-    }<br>
+          var course = 3;
+    if (course == 1) {
+        document.write("HTML Tutorial");
+    } else if (course == 2) {
+        document.write("CSS Tutorial");
+    } else {
+        document.write("JavaScript Tutorial");
+    }
           //Output : JavaScript Tutorial
           
           `,
@@ -327,16 +328,16 @@ var js_intro_course = [
           `,
 				info: `You can achieve the same result with multiple if...else statements, but the switch statement is more effective in such situations.`,
 				code: `
-     switch (expression) { <br>
-      case n1: <br>
-         statements<br>
-         break;<br>
-      case n2: <br>
-         statements<br>
-         break;<br>
-      default: <br>
-         statements<br>
-    }<br>
+     switch (expression) { 
+      case n1: 
+         statements
+         break;
+      case n2: 
+         statements
+         break;
+      default: 
+         statements
+    }
           
           `,
 			},
@@ -351,23 +352,23 @@ var js_intro_course = [
 				data: `The default keyword specifies the code to run if there is no case match.`,
 				info: `The default block can be omitted, if there is no need to handle the case when no match is found.`,
 				code: `
-          var color ="yellow";<br>
-    switch(color) {<br>
-        case "blue": <br>
-            document.write("This is blue.");<br>
-            break;<br>
-        case "red": <br>    
-            document.write("This is red.");<br>
-            break;<br>
-        case "green": <br>
-            document.write("This is green."); <br>   
-            break;<br>
-        case "orange": <br> 
-            document.write("This is orange.");<br>    
-            break;<br>
-        default: <br>
-            document.write("Color not found.");<br>
-    }  <br>
+          var color ="yellow";
+    switch(color) {
+        case "blue": 
+            document.write("This is blue.");
+            break;
+        case "red":     
+            document.write("This is red.");
+            break;
+        case "green": 
+            document.write("This is green.");    
+            break;
+        case "orange":  
+            document.write("This is orange.");    
+            break;
+        default: 
+            document.write("Color not found.");
+    }  
     //Output : Color not found.
             
             
@@ -390,9 +391,9 @@ var js_intro_course = [
     `,
 				info: `As you can see, the classic for loop has three components, or statements.`,
 				code: `
-          for (statement 1; statement 2; statement 3) {<br>
-       code block to be executed<br>
-    }<br>
+          for (statement 1; statement 2; statement 3) {
+       code block to be executed
+    }
           
           `,
 			},
@@ -406,10 +407,10 @@ var js_intro_course = [
             `,
 				info: `ES6 introduces other for loop types; you can learn about them in the ES6 course later.`,
 				code: `
-     //First Example Goes from here<br>
-       for (var i=1; i<=5; i++) {<br>
-        document.write(i + " ");<br>
-    }   <br>
+     //First Example Goes from here
+       for (var i=1; i<=5; i++) {
+        document.write(i + " ");
+    }   
     //OutPut : 1 2 3 4 5  
             
             `,
@@ -422,11 +423,11 @@ var js_intro_course = [
     Statement 3 is also optional, and it can be omitted if you increment your values inside the loop. `,
 				info: `If you omit statement 2, you must provide a break inside the loop. Otherwise, the loop will never end.`,
 				code: `
-     var i = 0;<br>
-    for (; i < 10; ) {<br>
-        document.write(i);<br>
-        i++;<br>
-    }<br>
+     var i = 0;
+    for (; i < 10; ) {
+        document.write(i);
+        i++;
+    }
             `,
 			},
 		],
@@ -441,9 +442,9 @@ var js_intro_course = [
     `,
 				info: `The condition can be any conditional statement that returns true or false.`,
 				code: `
-          while(condition){<br>
-              code block<br>
-          }<br>
+          while(condition){
+              code block
+          }
           `,
 			},
 			{
@@ -452,11 +453,11 @@ var js_intro_course = [
     This will output the values from 0 to 10. `,
 				info: `Be careful writing conditions. If a condition is always true, the loop will run forever.`,
 				code: `
-    var i=0;<br>
-    while (i<=10) {<br>
-        document.write(i + " ");<br>
-        i++;<br>
-    }<br>
+    var i=0;
+    while (i<=10) {
+        document.write(i + " ");
+        i++;
+    }
             `,
 			},
 			{
@@ -477,19 +478,19 @@ var js_intro_course = [
     `,
 				info: `The loop will always be executed at least once, even if the condition is false, because the code block is executed before the condition is tested.`,
 				code: `
-         //Syntax <br>
-         do {<br>
-       code block<br>
-    }<br>
-    while (condition);<br><br>
+         //Syntax 
+         do {
+       code block
+    }
+    while (condition);
          
-         //Example<br> 
-    var i=20;<br>
-    do {  <br>
-        document.write(i + " ");<br>
-        i++;  <br>
-    }<br>
-    while (i<=25); <br>     
+         //Example 
+    var i=20;
+    do {  
+        document.write(i + " ");
+        i++;  
+    }
+    while (i<=25);      
           `,
 			},
 		],
@@ -503,12 +504,12 @@ var js_intro_course = [
 				data: `The break statement "jumps out" of a loop and continues executing the code after the loop.`,
 				info: `You can use the return keyword to return some value immediately from the loop inside of a function. This will also break the loop.`,
 				code: `
-          for (i = 0; i <= 10; i++) {<br>
-        if (i == 5) {<br>
-            break; <br>
-        }<br>
-        document.write(i + " ");<br>
-    }<br>
+          for (i = 0; i <= 10; i++) {
+        if (i == 5) {
+            break; 
+        }
+        document.write(i + " ");
+    }
           `,
 			},
 			{
@@ -516,12 +517,12 @@ var js_intro_course = [
 				data: `The continue statement breaks only one iteration in the loop, and continues with the next iteration.`,
 				info: `The value 5 is not printed, because continue skips that iteration of the loop.`,
 				code: `
-     for (i = 0; i <= 10; i++) {<br>
-        if (i == 5) {<br>
-            continue;<br>
-        }<br>
-        document.write(i + " ");<br>
-    }<br>
+     for (i = 0; i <= 10; i++) {
+        if (i == 5) {
+            continue;
+        }
+        document.write(i + " ");
+    }
             `,
 			},
 		],
@@ -544,9 +545,9 @@ var js_intro_course = [
     The code to be executed by the function is placed inside curly brackets {}.`,
 				info: `Function names can contain letters, digits, underscores, and dollar signs (same rules as variables).`,
 				code: `
-            function name() {   <br> 
-      //code to be executed<br>
-    }<br>
+            function name() {    
+      //code to be executed
+    }
             `,
 			},
 			{
@@ -556,9 +557,9 @@ var js_intro_course = [
     `,
 				info: `Always remember to end the statement with a semicolon after calling the function.You can also call a function using this syntax: myFunction.call(). The difference is that when calling in this way, you're passing the 'this' keyword to a function. You'll learn about it later.`,
 				code: `
-         function myName() {   <br> 
-      //code to be executed<br>
-    }<br>
+         function myName() {    
+      //code to be executed
+    }
        myName();//Function is called 
             `,
 			},
@@ -575,10 +576,10 @@ var js_intro_course = [
     `,
 				info: `As with variables, parameters should be given names, which are separated by commas within the parentheses.`,
 				code: `
-          //Syntax <br>
-         functionName(param1,param2,param3){<br>
-             //some code<br>
-         }<br>
+          //Syntax 
+         functionName(param1,param2,param3){
+             //some code
+         }
           `,
 			},
 			{
@@ -587,10 +588,10 @@ var js_intro_course = [
     `,
 				info: `Function arguments are the real values passed to (and received by) the function.`,
 				code: `
-            function sayHello(name) {<br>
-        alert("Hi, " + name);<br>
-    }<br><br>
-    sayHello("David");<br>
+            function sayHello(name) {
+        alert("Hi, " + name);
+    }
+    sayHello("David");
             `,
 			},
 			{
@@ -598,12 +599,12 @@ var js_intro_course = [
 				data: `You can define a single function, and pass different parameter values (arguments) to it.`,
 				info: `This will execute the function's code each time for the provided argument.`,
 				code: `
-    function sayHello(name) {<br>
-        alert("Hi, " + name);<br>
-    }<br>
-    sayHello("David");<br>
-    sayHello("Sarah");<br>
-    sayHello("John");<br> 
+    function sayHello(name) {
+        alert("Hi, " + name);
+    }
+    sayHello("David");
+    sayHello("Sarah");
+    sayHello("John"); 
             `,
 			},
 		],
@@ -617,9 +618,9 @@ var js_intro_course = [
 				data: `You can define multiple parameters for a function by comma-separating them. `,
 				info: `The example above defines the function mult to take two parameters.`,
 				code: `
-         function mult(x,y){<br>
-          //some code<br>   
-         } <br>
+         function mult(x,y){
+          //some code   
+         } 
           `,
 			},
 			{
@@ -627,9 +628,9 @@ var js_intro_course = [
 				data: `The parameters are used within the function's definition.`,
 				info: `Function parameters are the names listed in the function definition`,
 				code: `
-            function sayHello(name, age) {<br>
-      document.write( name + " is " + age + " years old.");<br>
-    }<br>
+            function sayHello(name, age) {
+      document.write( name + " is " + age + " years old.");
+    }
             `,
 			},
 			{
@@ -637,11 +638,11 @@ var js_intro_course = [
 				data: `When calling the function, provide the arguments in the same order in which you defined them.`,
 				info: `If you pass more arguments than are defined, they will be assigned to an array called arguments. They can be used like this: arguments[0], arguments[1], etc.`,
 				code: `
-            function sayHello(name, age) {<br>
-        document.write( name + " is " + age + " years old.");<br>
-    }<br>
-    <br>
-    sayHello("John", 20)<br>
+            function sayHello(name, age) {
+        document.write( name + " is " + age + " years old.");
+    }
+    
+    sayHello("John", 20)
             `,
 			},
 			{
@@ -669,11 +670,11 @@ var js_intro_course = [
     For example, let's calculate the product of two numbers, and return the result.`,
 				info: `If you do not return anything from a function, it will return undefined.`,
 				code: `
-         function myFunction(a, b) {<br>
-        return a * b;<br>
-    }<br>
-    var x = myFunction(5, 6);<br> 
-    document.write(x);<br>
+         function myFunction(a, b) {
+        return a * b;
+    }
+    var x = myFunction(5, 6); 
+    document.write(x);
          `,
 			},
 			{
@@ -681,11 +682,11 @@ var js_intro_course = [
 				data: `Another Example :-`,
 				info: `The document.write command outputs the value returned by the function, which is the sum of the two parameters.`,
 				code: `
-         function addNumbers(a, b) {<br>
-        var c = a+b;<br>
-        return c;<br>
-    }<br>
-    document.write( addNumbers(40, 2) );<br>
+         function addNumbers(a, b) {
+        var c = a+b;
+        return c;
+    }
+    document.write( addNumbers(40, 2) );
          `,
 			},
 		],
@@ -716,7 +717,7 @@ var js_intro_course = [
     - The second is a default string to display in the text box (optional).`,
 				info: `When a prompt box pops up, the user will have to click either "OK" or "Cancel" to proceed after entering an input value. Do not overuse this method, because it prevents the user from accessing other parts of the page until the box is closed`,
 				code: `
-       var name = prompt("Enter your name");<br>
+       var name = prompt("Enter your name");
        alert(name);
             `,
 			},
@@ -727,13 +728,13 @@ var js_intro_course = [
     If the user clicks OK, the box returns true. If the user clicks Cancel, the box returns false.`,
 				info: `Do not overuse this method, because it also prevents the user from accessing other parts of the page until the box is closed.`,
 				code: `
-           var result = confirm("Do you really want to leave this page?");<br>
-    if (result == true) {<br>
-        alert("Thanks for visiting");<br>
-    }<br>
-    else {<br>
-        alert("Thanks for staying with us");<br>
-    }<br> 
+           var result = confirm("Do you really want to leave this page?");
+    if (result == true) {
+        alert("Thanks for visiting");
+    }
+    else {
+        alert("Thanks for staying with us");
+    } 
             `,
 			},
 		],
@@ -748,10 +749,10 @@ var js_intro_course = [
     Think of an object as a list of values that are written as name:value pairs, with the names and the values separated by colons.`,
 				info: `JavaScript objects are containers for named values.`,
 				code: `
-         var person = {<br>
-     name: "John", age: 31, <br>
-     favColor: "green", height: 183<br>
-    }; <br>
+         var person = {
+     name: "John", age: 31, 
+     favColor: "green", height: 183
+    }; 
           `,
 			},
 			{
@@ -761,21 +762,21 @@ var js_intro_course = [
      JavaScript's built-in length property is used to count the number of characters in a property or string.`,
 				info: `Objects are one of the core concepts in JavaScript.`,
 				code: `
-           objectName.propertyName<br>
-    //or<br>
-    objectName['propertyName']<br><br><br>
-    //First <br>
-    var person = {<br>
-        name: "John", age: 31,<br> 
-        favColor: "green", height: 183<br>
-    };<br>
-    var x = person.age;<br>
-    var y = person['age'];<br>
-    document.write(x);<br>
-    document.write(y);<br><br><br>
-    //Second<br>
-    var course = {name: "JS", lessons: 41};<br>
-    document.write(course.name.length);<br>
+           objectName.propertyName
+    //or
+    objectName['propertyName']
+    //First 
+    var person = {
+        name: "John", age: 31, 
+        favColor: "green", height: 183
+    };
+    var x = person.age;
+    var y = person['age'];
+    document.write(x);
+    document.write(y);
+    //Second
+    var course = {name: "JS", lessons: 41};
+    document.write(course.name.length);
            `,
 			},
 			{
@@ -786,10 +787,10 @@ var js_intro_course = [
     `,
 				info: `Methods are functions that are stored as object properties.`,
 				code: `
-           //Syntax<br>
-    objectName.methodName()<br><br>
-    //Code<br>
-    document.write("This is some text");<br>
+           //Syntax
+    objectName.methodName()
+    //Code
+    document.write("This is some text");
            `,
 			},
 		],
@@ -810,16 +811,16 @@ var js_intro_course = [
     Note that this is not a variable. It is a keyword, and its value cannot be changed.`,
 				code: `
          //Initilize Syntax
-        var person = {<br>
-    name: "John", age: 42, favColor: "green"<br>
-    };<br>
-    <br>
-    //Constructor <br>
-    function person(name, age, color) {<br>
-      this.name = name;<br>
-      this.age = age;<br>
-      this.favColor = color;<br>
-    }<br>
+        var person = {
+    name: "John", age: 42, favColor: "green"
+    };
+    
+    //Constructor 
+    function person(name, age, color) {
+      this.name = name;
+      this.age = age;
+      this.favColor = color;
+    }
          `,
 			},
 			{
@@ -827,17 +828,17 @@ var js_intro_course = [
 				data: `Once you have an object constructor, you can use the new keyword to create new objects of the same type.`,
 				info: `p1 and p2 are now objects of the person type. Their properties are assigned to the corresponding values.`,
 				code: `
-    function person(name, age, color) {<br>
-        this.name = name;<br>
-        this.age = age;<br>
-        this.favColor = color;<br>
-    }<br>
-    <br>
-    var p1 = new person("John", 42, "green");<br>
-    var p2 = new person("Amy", 21, "red");<br>
-    <br>
-    document.write(p1.age); <br>
-    document.write(p2.name);<br>
+    function person(name, age, color) {
+        this.name = name;
+        this.age = age;
+        this.favColor = color;
+    }
+    
+    var p1 = new person("John", 42, "green");
+    var p2 = new person("Amy", 21, "red");
+    
+    document.write(p1.age); 
+    document.write(p2.name);
            `,
 			},
 			{
@@ -849,14 +850,14 @@ var js_intro_course = [
 
 				info: `Understanding the creating of Objects in essential`,
 				code: `
-           function person (name, age) {<br>
-        this.name = name;<br>
-        this.age = age;<br>
-    }<br>
-    var John = new person("John", 25);<br>
-    var James = new person("James", 21);<br>
-    <br>
-    document.write(John.age);<br>
+           function person (name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    var John = new person("John", 25);
+    var James = new person("James", 21);
+    
+    document.write(John.age);
            `,
 			},
 		],
@@ -870,8 +871,8 @@ var js_intro_course = [
 				data: `Use the object literal or initializer syntax to create single objects.`,
 				info: `Objects consist of properties, which are used to describe an object. Values of object properties can either contain primitive data types or other objects.`,
 				code: `
-          var John = {name: "John", age: 25};<br>
-    var James = {name: "James", age: 21};<br>
+          var John = {name: "John", age: 25};
+    var James = {name: "James", age: 21};
           `,
 			},
 			{
@@ -881,16 +882,16 @@ var js_intro_course = [
            `,
 				info: `Don't forget about the second accessing syntax: John['age'].`,
 				code: `
-          var John = {<br>
-        name: "John",<br>
-        age: 25<br>
-    };<br>
-    var James = {<br>
-        name: "James",<br>
+          var John = {
+        name: "John",
+        age: 25
+    };
+    var James = {
+        name: "James",
         age: 21
-    };<br>
-    <br>
-    document.write(John.age);<br> 
+    };
+    
+    document.write(John.age); 
            `,
 			},
 		],
@@ -911,23 +912,23 @@ var js_intro_course = [
     `,
 				info: `The changeName method changes the object's name property to its argument.`,
 				code: `
-          //Syntax<br>
-    methodName = function() { code lines }<br>
-    <br>
-    <br>
-    //Example<br>
-    function person(name, age) {<br>
-        this.name = name; <br> 
-        this.age = age;<br>
-        this.changeName = function (name) {<br>
-            this.name = name;<br>
-        }<br>
-    }<br>
-    <br>
-    var p = new person("David", 21);<br>
-    p.changeName("John");<br>
-    <br>
-    document.write(p.name);<br>      
+          //Syntax
+    methodName = function() { code lines }
+    
+    
+    //Example
+    function person(name, age) {
+        this.name = name;  
+        this.age = age;
+        this.changeName = function (name) {
+            this.name = name;
+        }
+    }
+    
+    var p = new person("David", 21);
+    p.changeName("John");
+    
+    document.write(p.name);      
           `,
 			},
 			{
@@ -938,14 +939,14 @@ var js_intro_course = [
     `,
 				info: `Note that it's not necessary to write the function's parentheses when assigning it to an object.`,
 				code: `
-       function person(name, age) {<br>
-      this.name= name; <br> 
-      this.age = age;<br>
-      this.yearOfBirth = bornYear;<br>
-    }<br>
-    function bornYear() {<br>
-      return 2016 - this.age;<br>
-    }    <br>
+       function person(name, age) {
+      this.name= name;  
+      this.age = age;
+      this.yearOfBirth = bornYear;
+    }
+    function bornYear() {
+      return 2016 - this.age;
+    }    
            `,
 			},
 			{
@@ -953,18 +954,18 @@ var js_intro_course = [
 				data: `Call method as usual`,
 				info: `Call the method by the property name you specified in the constructor function, rather than the function name.`,
 				code: `
-        function person(name, age) {<br>
-        this.name= name;<br>
-        this.age = age;<br>
-        this.yearOfBirth = bornYear;<br>
-    }<br>
-    function bornYear() {<br>
-        return 2016 - this.age;<br>
-    }<br>
-    <br>
-    var p = new person("A", 22);<br>
-    <br>
-    document.write(p.yearOfBirth());<br>         
+        function person(name, age) {
+        this.name= name;
+        this.age = age;
+        this.yearOfBirth = bornYear;
+    }
+    function bornYear() {
+        return 2016 - this.age;
+    }
+    
+    var p = new person("A", 22);
+    
+    document.write(p.yearOfBirth());         
            `,
 			},
 		],
@@ -989,10 +990,10 @@ var js_intro_course = [
 				data: `You refer to an array element by referring to the index number written in square brackets.
     This statement accesses the value of the first element in courses and changes the value of the second element. `,
 				info: `[0] is the first element in an array. [1] is the second. Array indexes start with 0.`,
-				code: `var courses = new Array("HTML", "CSS", "JS"); <br>
-    var course = courses[0]; // HTML<br>
+				code: `var courses = new Array("HTML", "CSS", "JS"); 
+    var course = courses[0]; // HTML
     courses[1] = "C++"; //Changes the second element
-    <br>
+    
     `,
 			},
 			{
@@ -1000,8 +1001,8 @@ var js_intro_course = [
 				data: `Attempting to access an index outside of the array, returns the value undefined.`,
 				info: `Our courses array has just 3 elements, so the 10th index, which is the 11th element, does not exist (is undefined).`,
 				code: `
-         var courses = new Array("HTML", "CSS", "JS");<br>
-    document.write(courses[10]);<br>
+         var courses = new Array("HTML", "CSS", "JS");
+    document.write(courses[10]);
          `,
 			},
 		],
@@ -1016,11 +1017,11 @@ var js_intro_course = [
 				info: `An array is a special type of object.
     An array uses numbers to access its elements, and an object uses names to access its members.`,
 				code: `
-    var courses = new Array(3);<br>
-    courses[0] = "HTML";<br>
-    courses[1] = "CSS";<br>
-    courses[2] = "JS";<br><br>
-    document.write(courses[2]);<br> 
+    var courses = new Array(3);
+    courses[0] = "HTML";
+    courses[1] = "CSS";
+    courses[2] = "JS";
+    document.write(courses[2]); 
           `,
 			},
 			{
@@ -1033,15 +1034,15 @@ var js_intro_course = [
 				info: `You can access and modify the elements of the array using the index number, as you did before.
     The array literal syntax is the recommended way to declare arrays.`,
 				code: `
-    var courses = new Array();<br>
-    courses[0] = "HTML";<br>
-    courses[1] = "CSS";<br>
-    courses[2] = "JS";<br>
-    courses[3] = "C++";<br>
-    document.write(courses[2]);<br>        
-    <br>//Array literal<br>
-    var courses = ["HTML", "CSS", "JS"];<br> 
-    document.write(courses[2]);<br>
+    var courses = new Array();
+    courses[0] = "HTML";
+    courses[1] = "CSS";
+    courses[2] = "JS";
+    courses[3] = "C++";
+    document.write(courses[2]);        
+    //Array literal
+    var courses = ["HTML", "CSS", "JS"]; 
+    document.write(courses[2]);
             `,
 			},
 		],
@@ -1057,8 +1058,8 @@ var js_intro_course = [
 				info: `The length property is always one more than the highest array index.
     If the array is empty, the length property returns 0.`,
 				code: `
-          var courses = ["HTML", "CSS", "JS"];<br>
-    document.write(courses.length);<br>
+          var courses = ["HTML", "CSS", "JS"];
+    document.write(courses.length);
           `,
 			},
 			{
@@ -1069,10 +1070,10 @@ var js_intro_course = [
 				info: `
     The concat operation does not affect the c1 and c2 arrays - it returns the resulting concatenation as a new array.`,
 				code: `
-            var c1 = ["HTML", "CSS"];<br>
-    var c2 = ["JS", "C++"];<br>
-    var courses = c1.concat(c2);<br>
-    document.write(courses[2]);<br>
+            var c1 = ["HTML", "CSS"];
+    var c2 = ["JS", "C++"];
+    var courses = c1.concat(c2);
+    document.write(courses[2]);
             `,
 			},
 		],
@@ -1090,10 +1091,10 @@ var js_intro_course = [
     `,
 				info: `As the person array is treated as an object, the standard array methods and properties will produce incorrect results. For example, person.length will return 0.`,
 				code: `
-          var person = []; //empty array<br>
-    person["name"] = "John";<br>
-    person["age"] = 46;<br>
-    document.write(person["age"]);<br>
+          var person = []; //empty array
+    person["name"] = "John";
+    person["age"] = 46;
+    document.write(person["age"]);
           `,
 			},
 			{
@@ -1116,8 +1117,8 @@ var js_intro_course = [
 				data: `The Math object allows you to perform mathematical tasks, and includes several properties. `,
 				info: `Math has no constructor. There's no need to create a Math object first.`,
 				code: `
-        document.write(Math.PI);<br>
-    //Outputs 3.141592653589793 <br> 
+        document.write(Math.PI);
+    //Outputs 3.141592653589793  
           `,
 			},
 			{
@@ -1128,9 +1129,9 @@ var js_intro_course = [
     `,
 				info: `To get a random number between 1-10, use Math.random(), which gives you a number between 0-1. Then multiply the number by 10, and then take Math.ceil() from it:  Math.ceil(Math.random() * 10).`,
 				code: `
-           var number = Math.sqrt(4);<br> 
-    document.write(number);<br>
-    //Outputs 2 <br>
+           var number = Math.sqrt(4); 
+    document.write(number);
+    //Outputs 2 
             `,
 			},
 			{
@@ -1138,9 +1139,9 @@ var js_intro_course = [
 				data: `Let's create a program that will ask the user to input a number and alert its square root.`,
 				info: `Math is a handy object. You can save a lot of time using Math, instead of writing your own functions every time.`,
 				code: `
-            var n = prompt("Enter a number", "");<br>
-    var answer = Math.sqrt(n);<br>
-    alert("The square root of " + n + " is " + answer);<br>
+            var n = prompt("Enter a number", "");
+    var answer = Math.sqrt(n);
+    alert("The square root of " + n + " is " + answer);
             `,
 			},
 		],
@@ -1157,10 +1158,10 @@ var js_intro_course = [
     `,
 				info: `Write the name of the function without parentheses when passing it into the setInterval method. `,
 				code: `
-          function myAlert() {<br>
-        alert("Hi");<br>
-    }<br>
-    setInterval(myAlert, 3000);<br>
+          function myAlert() {
+        alert("Hi");
+    }
+    setInterval(myAlert, 3000);
     `,
 			},
 			{
@@ -1173,21 +1174,21 @@ var js_intro_course = [
 				info: `JavaScript counts months from 0 to 11. January is 0, and December is 11.
     Date objects are static, rather than dynamic. The computer time is ticking, but date objects don't change, once created.`,
 				code: `
-        //Syntax <br>
-         var d = new Date();<br>
-    //d stores the current date and time<br>
-    new Date(milliseconds)<br>
-    new Date(dateString)<br>
-    new Date(year, month, day, hours, minutes, seconds, milliseconds)<br>
-    <br>
-    //Example <br>
+        //Syntax 
+         var d = new Date();
+    //d stores the current date and time
+    new Date(milliseconds)
+    new Date(dateString)
+    new Date(year, month, day, hours, minutes, seconds, milliseconds)
+    
+    //Example 
     var d1 = new Date(86400000); 
-    <br>
-    //Fri Jan 02 2015 10:42:00<br>
+    
+    //Fri Jan 02 2015 10:42:00
     var d2 = new Date("January 2, 2015 10:42:00");
-    <br>
-    //Sat Jun 11 1988 11:42:00<br>
-    var d3 = new Date(88,5,11,11,42,0,0);<br>
+    
+    //Sat Jun 11 1988 11:42:00
+    var d3 = new Date(88,5,11,11,42,0,0);
          `,
 			},
 			{
@@ -1200,14 +1201,14 @@ var js_intro_course = [
 				info: `The innerHTML property sets or returns the HTML content of an element.
     In our case, we are changing the HTML content of our document's body. This overwrites the content every second, instead of printing it repeatedly to the screen.`,
 				code: `
-         function printTime() {<br>
-        var d = new Date();<br>
-        var hours = d.getHours();<br>
-        var mins = d.getMinutes();<br>
-        var secs = d.getSeconds();<br>
-        document.body.innerHTML = hours+":"+mins+":"+secs;<br>
-    }<br>
-    setInterval(printTime, 1000);<br>
+         function printTime() {
+        var d = new Date();
+        var hours = d.getHours();
+        var mins = d.getMinutes();
+        var secs = d.getSeconds();
+        document.body.innerHTML = hours+":"+mins+":"+secs;
+    }
+    setInterval(printTime, 1000);
          
          `,
 			},
@@ -1246,18 +1247,18 @@ var js_intro_course = [
     `,
 				info: `The example above assumes that the HTML contains an element with id="demo", for example <div id="demo"></div>.`,
 				code: `
-        //Syntax<br>
-     //finds element by id<br>
-    document.getElementById(id)<br><br> 
-    //finds elements by class name<br>
-    document.getElementsByClassName(name) <br>
-    <br>
-    //finds elements by tag name<br>
-    document.getElementsByTagName(name) <br>  
-    <br>
-    //Example<br> 
-    var elem = document.getElementById("demo");<br>
-    elem.innerHTML = "Hello World!";<br>
+        //Syntax
+     //finds element by id
+    document.getElementById(id) 
+    //finds elements by class name
+    document.getElementsByClassName(name) 
+    
+    //finds elements by tag name
+    document.getElementsByTagName(name)   
+    
+    //Example 
+    var elem = document.getElementById("demo");
+    elem.innerHTML = "Hello World!";
           `,
 			},
 			{
@@ -1268,16 +1269,16 @@ var js_intro_course = [
     The following example gets all paragraph elements of the page and changes their content `,
 				info: `We used the length property of the array to loop through all the selected elements in the above example.`,
 				code: `
-     var arr =  document.getElementsByClassName("demo");<br>
-    //accessing the second element<br>
-    arr[1].innerHTML = "Hi";<br>
-         <br> 
+     var arr =  document.getElementsByClassName("demo");
+    //accessing the second element
+    arr[1].innerHTML = "Hi";
+          
     /*accessing all the p tags
-    ( consider there are three p tags)*/<br>
-    var arr = document.getElementsByTagName("p");<br>
-    for (var x = 0; x < arr.length; x++) {<br>
-      arr[x].innerHTML = "Hi there";<br>
-    }<br>
+    ( consider there are three p tags)*/
+    var arr = document.getElementsByTagName("p");
+    for (var x = 0; x < arr.length; x++) {
+      arr[x].innerHTML = "Hi there";
+    }
            
            `,
 			},
@@ -1298,11 +1299,11 @@ var js_intro_course = [
            `,
 				info: `The code above changes the text of both paragraphs to "new text".`,
 				code: `
-       var a = document.getElementById("demo");<br>
-         var arr = a.childNodes;<br>
-         for(var x=0;x<arr.length;x++) {<br>
-           arr[x].innerHTML = "new text";<br>
-         } <br>    
+       var a = document.getElementById("demo");
+         var arr = a.childNodes;
+         for(var x=0;x<arr.length;x++) {
+           arr[x].innerHTML = "new text";
+         }     
            `,
 			},
 		],
@@ -1319,7 +1320,7 @@ var js_intro_course = [
 				info: `Practically all attributes of an element can be changed using JavaScript. `,
 				code: `
         var el = document.getElementById("myimg");
-    el.src = "apple.png";<br>
+    el.src = "apple.png";
           `,
 			},
 			{
@@ -1330,9 +1331,9 @@ var js_intro_course = [
 				info: `All CSS properties can be set and modified using JavaScript. Just remember, that you cannot use dashes (-) in the property names: these are replaced with camelCase versions, where the compound words begin with a capital letter. 
     For example: the background-color property should be referred to as backgroundColor.`,
 				code: `
-    var x = document.getElementById("demo");<br>
-      x.style.color = "6600FF";<br>
-      x.style.width = "100px";<br>
+    var x = document.getElementById("demo");
+      x.style.color = "6600FF";
+      x.style.width = "100px";
            
            `,
 			},
@@ -1353,15 +1354,15 @@ var js_intro_course = [
     `,
 				info: `This creates a new paragraph and adds it to the existing div element on the page. `,
 				code: `
-      //creating a new paragraph<br>
-      var p = document.createElement("p");<br>
-      var node = document.createTextNode("Some new text");<br>
-      //adding the text to the paragraph<br>
-      p.appendChild(node);<br>
-    <br>
-    <br>  
-      //adding the paragraph to the body<br>
-      document.body.appendChild(p);<br>
+      //creating a new paragraph
+      var p = document.createElement("p");
+      var node = document.createTextNode("Some new text");
+      //adding the text to the paragraph
+      p.appendChild(node);
+    
+      
+      //adding the paragraph to the body
+      document.body.appendChild(p);
           `,
 			},
 			{
@@ -1371,10 +1372,10 @@ var js_intro_course = [
     var child = document.getElementById("p1");
     child.parentNode.removeChild(child);`,
 				code: `
-    //This rempves the id= p1 from class= demo<br>
-    var parent = document.getElementById("demo");<br>
-    var child = document.getElementById("p1");<br>
-    parent.removeChild(child);        <br>
+    //This rempves the id= p1 from class= demo
+    var parent = document.getElementById("demo");
+    var child = document.getElementById("p1");
+    parent.removeChild(child);        
             `,
 			},
 			{
@@ -1382,13 +1383,13 @@ var js_intro_course = [
 				data: `To replace an HTML element, the element.replaceChild(newNode, oldNode) method is used.`,
 				info: `The code above creates a new paragraph element that replaces the existing p1 paragraph.`,
 				code: `
-     var p = document.createElement("p");<br>
-    var node = document.createTextNode("This is new");<br>
-    p.appendChild(node);<br>
-    <br>
-    var parent = document.getElementById("demo");<br>
-    var child = document.getElementById("p1");<br>
-    parent.replaceChild(p, child);<br>
+     var p = document.createElement("p");
+    var node = document.createTextNode("This is new");
+    p.appendChild(node);
+    
+    var parent = document.getElementById("demo");
+    var child = document.getElementById("p1");
+    parent.replaceChild(p, child);
     `,
 			},
 		],
@@ -1431,16 +1432,16 @@ var js_intro_course = [
             `,
 				info: `The move() function increments the left property of the box element by one each time it is called.`,
 				code: `
-    // starting position<br>
-    var pos = 0; <br>
-    //our box element<br>
-    var box = document.getElementById("box");<br>
-    <br>
-    function move() {<br>
-      pos += 1;<br>
-      box.style.left = pos+"px"; //px = pixels<br>
-    }<br>
-    setInterval(move,100);<br>
+    // starting position
+    var pos = 0; 
+    //our box element
+    var box = document.getElementById("box");
+    
+    function move() {
+      pos += 1;
+      box.style.left = pos+"px"; //px = pixels
+    }
+    setInterval(move,100);
             `,
 			},
 			{
@@ -1452,23 +1453,23 @@ var js_intro_course = [
     `,
 				info: `Congratulations, you have just created your first JavaScript animation!`,
 				code: `
-           //calling the function in window.onload to make sure the HTML is loaded<br>
-    window.onload = function() {<br>
-         var pos = 0; <br>
-        //our box element<br>
-        var box = document.getElementById('box');<br>
-        var t = setInterval(move, 10);<br>
-      <br>
-        function move() {<br>
-            if(pos >= 150) {<br>
-                clearInterval(t);<br>
-            }<br>
-            else {<br>
-                pos += 1;<br>
-                box.style.left = pos+'px';<br>
-            }<br>
-        }<br>
-    };<br> 
+           //calling the function in window.onload to make sure the HTML is loaded
+    window.onload = function() {
+         var pos = 0; 
+        //our box element
+        var box = document.getElementById('box');
+        var t = setInterval(move, 10);
+      
+        function move() {
+            if(pos >= 150) {
+                clearInterval(t);
+            }
+            else {
+                pos += 1;
+                box.style.left = pos+'px';
+            }
+        }
+    }; 
             `,
 			},
 		],
@@ -1495,17 +1496,17 @@ var js_intro_course = [
     `,
 				info: `You can attach events to almost all HTML elements.`,
 				code: `
-    function show(){<br>
-        alert("hello");<br> 
-    } <br>  
-        <br>  /*Event handler*/<br>
-    //calling the function in window.onload to make sure the HTML is loaded<br>
-    window.onload = function() {<br>
-        var x = document.getElementById('demo');<br>
-        x.onclick = function () {<br>
-            document.body.innerHTML = Date();<br>
-        }<br>
-    };<br>      
+    function show(){
+        alert("hello"); 
+    }   
+          /*Event handler*/
+    //calling the function in window.onload to make sure the HTML is loaded
+    window.onload = function() {
+        var x = document.getElementById('demo');
+        x.onclick = function () {
+            document.body.innerHTML = Date();
+        }
+    };      
           `,
 			},
 			{
@@ -1517,11 +1518,11 @@ var js_intro_course = [
           `,
 				info: `It’s important to understand events, because they are an essential part of dynamic web pages.`,
 				code: `
-    function change() {<br>
-     var x = document.getElementById("name");<br>
-     x.value= x.value.toUpperCase();<br>
+    function change() {
+     var x = document.getElementById("name");
+     x.value= x.value.toUpperCase();
     }
-    <br>      
+          
           `,
 			},
 			{
@@ -1549,11 +1550,11 @@ var js_intro_course = [
     `,
 				info: `This is particularly useful when you have the same event handled for multiple elements in the DOM hierarchy.`,
 				code: `
-    //Capturing propagation<br>
-    elem1.addEventListener("click", myFunction, true); <br>
-    <br>
-    //Bubbling propagation<br>
-    elem2.addEventListener("click", myFunction, false);<br>        
+    //Capturing propagation
+    elem1.addEventListener("click", myFunction, true); 
+    
+    //Bubbling propagation
+    elem2.addEventListener("click", myFunction, false);        
             `,
 			},
 		],
@@ -1577,11 +1578,11 @@ var js_intro_course = [
     `,
 				info: `We are going to use three sample images that we have uploaded to our server. You can use any number of images.`,
 				code: `
-    var images = [<br>
-       "http://www.sololearn.com/uploads/slider/1.jpg", <br>
-       "http://www.sololearn.com/uploads/slider/2.jpg", <br>
-       "http://www.sololearn.com/uploads/slider/3.jpg"<br>
-    ];  <br>      
+    var images = [
+       "http://www.sololearn.com/uploads/slider/1.jpg", 
+       "http://www.sololearn.com/uploads/slider/2.jpg", 
+       "http://www.sololearn.com/uploads/slider/3.jpg"
+    ];        
             `,
 			},
 			{
@@ -1592,19 +1593,19 @@ var js_intro_course = [
     `,
 				info: `Now we have functionality Image Slider`,
 				code: `
-     var images = [<br>
-       "http://www.sololearn.com/uploads/slider/1.jpg", <br>
-       "http://www.sololearn.com/uploads/slider/2.jpg", <br>
-       "http://www.sololearn.com/uploads/slider/3.jpg"<br>
-    ];  <br>       
-         var num = 0;<br>
-    function next() {<br>
-        var slider = document.getElementById('slider');<br>
-        num++;<br>
-        if(num >= images.length) {<br>
-            num = 0;<br>
-        }<br>
-        slider.src = images[num];<br>
+     var images = [
+       "http://www.sololearn.com/uploads/slider/1.jpg", 
+       "http://www.sololearn.com/uploads/slider/2.jpg", 
+       "http://www.sololearn.com/uploads/slider/3.jpg"
+    ];         
+         var num = 0;
+    function next() {
+        var slider = document.getElementById('slider');
+        num++;
+        if(num >= images.length) {
+            num = 0;
+        }
+        slider.src = images[num];
     }
     function prev() {
         var slider = document.getElementById('slider');
@@ -1636,18 +1637,18 @@ var js_intro_course = [
     `,
 				info: `The form will not get submitted if its onsubmit event returns false. `,
 				code: `
-    // You need to add validate() func in the form tag for form validation <br><br>
-      function validate() {<br>
-        var n1 = document.getElementById('num1');<br>
-        var n2 = document.getElementById('num2');<br>
-        if(n1.value != '' && n2.value != '') {<br>
-            if(n1.value == n2.value) {<br>
-                return true;<br>
-            }<br>
-        }<br>
-        alert("The values should be equal and not blank");<br>
-        return false;<br>
-    }<br>   
+    // You need to add validate() func in the form tag for form validation 
+      function validate() {
+        var n1 = document.getElementById('num1');
+        var n2 = document.getElementById('num2');
+        if(n1.value != '' && n2.value != '') {
+            if(n1.value == n2.value) {
+                return true;
+            }
+        }
+        alert("The values should be equal and not blank");
+        return false;
+    }   
          `,
 			},
 		],
@@ -1678,26 +1679,26 @@ var js_intro_course = [
     To demonstrate the difference in scope between var and let, consider this example:`,
 				info: `let is not subject to Variable Hoisting, which means that let declarations do not move to the top of the current execution context.`,
 				code: `
-       function varTest() {<br>
-        var x = 1;<br>
-        if (true) {<br>
-            var x = 2;  // same variable<br>
-            console.log(x);  // 2<br>
-        }<br>
-        console.log(x);  // 2<br>
-    }<br>
-    <br>
-    function letTest() {<br>
-        let x = 1;<br>
-        if (true) {<br>
-            let x = 2;  // different variable<br>
-            console.log(x);  // 2<br>
-        }<br>
-        console.log(x);  // 1<br>
-    }<br>
-    <br>
-    varTest();<br>
-    letTest();<br>     
+       function varTest() {
+        var x = 1;
+        if (true) {
+            var x = 2;  // same variable
+            console.log(x);  // 2
+        }
+        console.log(x);  // 2
+    }
+    
+    function letTest() {
+        let x = 1;
+        if (true) {
+            let x = 2;  // different variable
+            console.log(x);  // 2
+        }
+        console.log(x);  // 1
+    }
+    
+    varTest();
+    letTest();     
           `,
 			},
 			{
@@ -1706,8 +1707,8 @@ var js_intro_course = [
     For example, the following generates an exception:`,
 				info: `const is not subject to Variable Hoisting too, which means that const declarations do not move to the top of the current execution context.
     Also note that ES6 code will run only in browsers that support it. Older devices and browsers that do not support ES6 will return a syntax error.`,
-				code: `const a = "Hello";<br>
-          a = "Bye" <br>`,
+				code: `const a = "Hello";
+          a = "Bye" `,
 			},
 		],
 	},
@@ -1729,13 +1730,13 @@ var js_intro_course = [
     Note that ES6 code will run only in browsers that support it. Older devices and browsers that do not support ES6 will return a syntax error.     
       `,
 				code: `
-    let obj = {a: 1, b: 2, c: 3};<br>
-    for (let v in obj) {<br>
-        console.log(v);<br>
-    }<br> <br><br><br>
-    for (let ch of "Hello") {<br>
-        console.log(ch);<br>
-    }<br> 
+    let obj = {a: 1, b: 2, c: 3};
+    for (let v in obj) {
+        console.log(v);
+    } 
+    for (let ch of "Hello") {
+        console.log(ch);
+    } 
         `,
 			},
 			{
@@ -1747,16 +1748,16 @@ var js_intro_course = [
     `,
 				info: `The code is shorter and looks pretty nice, doesn't it? :)`,
 				code: `
-            //First Example<br>
-          var add=()=>{<br>
-     console.log(2+3);<br>
-    } <br><br>
-    //Second Example<br> 
-    var arr = [2, 3, 7, 8];<br>
-    <br>
-    arr.forEach(function(el) {<br>
-        console.log(el * 2);<br>
-    });<br>
+            //First Example
+          var add=()=>{
+     console.log(2+3);
+    } 
+    //Second Example 
+    var arr = [2, 3, 7, 8];
+    
+    arr.forEach(function(el) {
+        console.log(el * 2);
+    });
             `,
 			},
 			{
@@ -1764,16 +1765,16 @@ var js_intro_course = [
 				data: `In ES6, we can put the default values right in the signature of the functions.`,
 				info: `Default value expressions are evaluated at function call time from left to right. This also means that default expressions can use the values of previously-filled parameters.`,
 				code: `       
-    <br>/*<br>
-    function test(a, b = 3, c = 42) {<br>
-      return a + b + c;<br>
-    }<br>
-    console.log(test(5));<br>
-    */<br>
-    <br>
-    // Full ES6 equivalent<br>
-    const test = (a, b = 3, c = 42) => a + b + c;<br>
-    console.log(test(5));<br> 
+    /*
+    function test(a, b = 3, c = 42) {
+      return a + b + c;
+    }
+    console.log(test(5));
+    */
+    
+    // Full ES6 equivalent
+    const test = (a, b = 3, c = 42) => a + b + c;
+    console.log(test(5)); 
             
             `,
 			},
@@ -1793,26 +1794,26 @@ var js_intro_course = [
     When creating an object by using duplicate property names, the last property will overwrite the prior ones of the same name.
     `,
 				info: `Duplicate property names generated a SyntaxError in ES5 when using strict mode. However, ES6 removed this limitation.`,
-				code: `//First Example <br>
-    let tree = {<br>
-        height: 10,<br>
-        color: 'green',<br>
-        grow() { <br>
-            this.height += 2;<br>
-        }<br>
-    };<br>
-    <br>
-    tree.grow();<br>
-    console.log(tree.height); // 12<br><br>
-    let height = 5;<br>
-    let health = 100;<br>
-    <br>
-    let athlete = {<br>
-        height, // height: height,<br>
-        health // health: health<br>
-    };<br>
-    <br>
-    console.log(athlete.height); // 5<br>`,
+				code: `//First Example 
+    let tree = {
+        height: 10,
+        color: 'green',
+        grow() { 
+            this.height += 2;
+        }
+    };
+    
+    tree.grow();
+    console.log(tree.height); // 12
+    let height = 5;
+    let health = 100;
+    
+    let athlete = {
+        height, // height: height,
+        health // health: health
+    };
+    
+    console.log(athlete.height); // 5`,
 			},
 			{
 				heading: `Computed Properties Names`,
@@ -1830,23 +1831,23 @@ var js_intro_course = [
     `,
 				info: `Try changing the order of second and third parameters to see what happens to the result.`,
 				code: `
-        let person = {<br>
-        name: 'Jack',<br>
-        age: 18,<br>
-        sex: 'male'<br>
-    };<br>
-    let student = {<br>
-        name: 'Bob',<br>
-        age: 20,<br>
-        xp: '2'<br>
-    };<br>
-    <br>
-    let newStudent = Object.assign({}, person, student);<br>
-    <br>
-    console.log(newStudent.name); // Bob<br>
-    console.log(newStudent.age); // 20<br>
-    console.log(newStudent.sex); // male<br>
-    console.log(newStudent.xp); // 2<br>
+        let person = {
+        name: 'Jack',
+        age: 18,
+        sex: 'male'
+    };
+    let student = {
+        name: 'Bob',
+        age: 20,
+        xp: '2'
+    };
+    
+    let newStudent = Object.assign({}, person, student);
+    
+    console.log(newStudent.name); // Bob
+    console.log(newStudent.age); // 20
+    console.log(newStudent.sex); // male
+    console.log(newStudent.xp); // 2
         `,
 			},
 		],
@@ -1862,11 +1863,11 @@ var js_intro_course = [
     The following example demonstrates how to unpack the elements of an array into distinct variables: `,
 				info: `Try it Yourself on Any CodePlayGround / Editor`,
 				code: `
-         let arr = ['1', '2', '3'];<br><br>
-    let [one, two, three] = arr;<br>
-    console.log(one); // 1<br>
-    console.log(two); // 2<br>
-    console.log(three); // 3<br>
+         let arr = ['1', '2', '3'];
+    let [one, two, three] = arr;
+    console.log(one); // 1
+    console.log(two); // 2
+    console.log(three); // 3
     `,
 			},
 			{
@@ -1879,18 +1880,18 @@ var js_intro_course = [
      `,
 				info: `We can assign without declaration, but there are some syntax requirements`,
 				code: `
-        <br>//First Example<br>
-    var o = {h: 42, s: true};<br>
-    var {h: foo, s: bar} = o;<br>
-    <br>
-    //console.log(h); // Error<br>
-    console.log(foo); // 42<br>
-    <br>
-    //Second Example<br>
-    var obj = {id: 42, name: "Jack"};<br>
-    let {id = 10, age = 20} = obj;<br>
-    console.log(id); // 42<br>
-    console.log(age); // 20<br>    
+        //First Example
+    var o = {h: 42, s: true};
+    var {h: foo, s: bar} = o;
+    
+    //console.log(h); // Error
+    console.log(foo); // 42
+    
+    //Second Example
+    var obj = {id: 42, name: "Jack"};
+    let {id = 10, age = 20} = obj;
+    console.log(id); // 42
+    console.log(age); // 20    
             `,
 			},
 		],
@@ -1910,32 +1911,32 @@ var js_intro_course = [
 				info: `Only the last parameter of a function may be marked as a rest parameter. If there are no extra arguments, the rest parameter will simply be an empty array; the rest parameter will never be undefined.`,
 				code: `
          
-    function containsAll(arr) {<br>
-        for (let k = 1; k < arguments.length; k++) {<br>
-            let num = arguments[k];<br>
-            if (arr.indexOf(num) === -1) {<br>
-                return false;<br>
-            }<br>
-        }<br>
-        return true;<br>
-    }<br>
-    let x = [2, 4, 6, 7];<br>
-    console.log(containsAll(x, 2, 4, 7));<br>
-    console.log(containsAll(x, 6, 4, 9));<br>
-    <br><br><br>
-    <br><br>
-    function containsAll(arr, ...nums) {<br>
-        for (let num of nums) {<br>
-            if (arr.indexOf(num) === -1) {<br>
-                return false;<br>
-            }<br>
-        }<br>
-        return true;<br>
-    }<br>
-    <br>
-    let x = [2, 4, 6, 7];<br>
-    console.log(containsAll(x, 2, 4, 7));<br>
-    console.log(containsAll(x, 6, 4, 9));<br>   
+    function containsAll(arr) {
+        for (let k = 1; k < arguments.length; k++) {
+            let num = arguments[k];
+            if (arr.indexOf(num) === -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    let x = [2, 4, 6, 7];
+    console.log(containsAll(x, 2, 4, 7));
+    console.log(containsAll(x, 6, 4, 9));
+    
+    
+    function containsAll(arr, ...nums) {
+        for (let num of nums) {
+            if (arr.indexOf(num) === -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    let x = [2, 4, 6, 7];
+    console.log(containsAll(x, 2, 4, 7));
+    console.log(containsAll(x, 6, 4, 9));   
             `,
 			},
 			{
@@ -1951,20 +1952,20 @@ var js_intro_course = [
     `,
 				info: `Shallow cloning or merging objects is possible with another operator called Object.assign().`,
 				code: `
-           //Spread In Array Literal<br>
-    var arr = ["One", "Two", "Five"];<br>
-    <br>
-    arr.splice(2, 0, "Three");<br>
-    arr.splice(3, 0, "Four");<br>
-    console.log(arr);<br>
-    let newArr = ['Three', 'Four'];<br> 
-    let arr = ['One', 'Two', ...newArr, 'Five'];<br>
-    console.log(arr);<br><br><br><br><br>
-    //Spread In Object Literal<br>
-    const obj1 = { foo: 'bar', x: 42 };<br>
-    const obj2 = { foo: 'baz', y: 5 };<br>
-    const clonedObj = { ...obj1 }; // { foo: "bar", x: 42 }<br>
-    const mergedObj = { ...obj1, ...obj2 }; // { foo: "baz", x: 42, y: 5 }<br>  
+           //Spread In Array Literal
+    var arr = ["One", "Two", "Five"];
+    
+    arr.splice(2, 0, "Three");
+    arr.splice(3, 0, "Four");
+    console.log(arr);
+    let newArr = ['Three', 'Four']; 
+    let arr = ['One', 'Two', ...newArr, 'Five'];
+    console.log(arr);
+    //Spread In Object Literal
+    const obj1 = { foo: 'bar', x: 42 };
+    const obj2 = { foo: 'baz', y: 5 };
+    const clonedObj = { ...obj1 }; // { foo: "bar", x: 42 }
+    const mergedObj = { ...obj1, ...obj2 }; // { foo: "baz", x: 42, y: 5 }  
             `,
 			},
 		],
@@ -1978,16 +1979,16 @@ var js_intro_course = [
     A class uses the keyword class and contains a constructor method for initializing.`,
 				info: `Class Declarations are not hoisted while Function Declarations are. If you try to access your class before declaring it, ReferenceError will be returned`,
 				code: `
-     class Rectangle {<br>
-        constructor(height, width) {<br>
-            this.height = height;<br>
-            this.width = width;<br>
-      }<br>
-    }<br>
-    <br>
-    const square = new Rectangle(5, 5);<br>
-    const poster = new Rectangle(2, 3); <br>
-    console.log(square.height);<br> 
+     class Rectangle {
+        constructor(height, width) {
+            this.height = height;
+            this.width = width;
+      }
+    }
+    
+    const square = new Rectangle(5, 5);
+    const poster = new Rectangle(2, 3); 
+    console.log(square.height); 
            `,
 			},
 			{
@@ -1996,24 +1997,24 @@ var js_intro_course = [
 				info: `In the code above, area is a getter, calcArea is a method.
     `,
 				code: `
-    class Rectangle {<br>
-      constructor(height, width) {<br>
-        this.height = height;<br>
-        this.width = width;<br>
-      }<br>
-      <br>
-      get area() {<br>
-        return this.calcArea();<br>
-      }<br>
-    <br>
-      calcArea() {<br>
-        return this.height * this.width;<br>
-      }<br>
-    }<br>
-    <br>
-    const square = new Rectangle(5, 5);<br>
-    <br>
-    console.log(square.area); // 25<br> 
+    class Rectangle {
+      constructor(height, width) {
+        this.height = height;
+        this.width = width;
+      }
+      
+      get area() {
+        return this.calcArea();
+      }
+    
+      calcArea() {
+        return this.height * this.width;
+      }
+    }
+    
+    const square = new Rectangle(5, 5);
+    
+    console.log(square.area); // 25 
           `,
 			},
 			{
@@ -2022,24 +2023,24 @@ var js_intro_course = [
     `,
 				info: `As you can see, the static distance method is called directly using the class name, without an object.`,
 				code: `
-     class Point {<br>
-      constructor(x, y) {<br>
-        this.x = x;<br>
-        this.y = y;<br>
-      }<br>
-    <br>
-      static distance(a, b) {<br>
-        const dx = a.x - b.x;<br>
-        const dy = a.y - b.y;<br>
-    <br>
-        return Math.hypot(dx, dy);<br>
-      }<br>
-    }<br>
-    <br>
-    const p1 = new Point(7, 2);<br>
-    const p2 = new Point(3, 8);<br>
-    <br>
-    console.log(Point.distance(p1, p2));<br>     
+     class Point {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+      }
+    
+      static distance(a, b) {
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+    
+        return Math.hypot(dx, dy);
+      }
+    }
+    
+    const p1 = new Point(7, 2);
+    const p2 = new Point(3, 8);
+    
+    console.log(Point.distance(p1, p2));     
           `,
 			},
 			{
@@ -2048,22 +2049,22 @@ var js_intro_course = [
 				info: `If there is a constructor present in the subclass, it needs to first call super() before using this. Also, the super keyword is used to call parent's methods.
     `,
 				code: `
-    class Animal {<br>
-      constructor(name) {<br>
-        this.name = name;<br>
-      }<br>
-      speak() {<br>
+    class Animal {
+      constructor(name) {
+        this.name = name;
+      }
+      speak() {
         console.log(this.name + ' makes a noise.');
-      }<br>
-    }<br>
-    <br>
+      }
+    }
+    
     class Dog extends Animal {
-      speak() {<br>
-        console.log(this.name + ' barks.');<br>
-      }<br>
-    }<br>
-    let dog = new Dog('Rex');<br>
-    dog.speak(); // Rex barks.<br> 
+      speak() {
+        console.log(this.name + ' barks.');
+      }
+    }
+    let dog = new Dog('Rex');
+    dog.speak(); // Rex barks. 
           `,
 			},
 		],
@@ -2093,14 +2094,14 @@ var js_intro_course = [
     `,
 				info: `Map supports different data types i.e. 1 and "1" are two different keys/values.`,
 				code: `
-    let map = new Map();<br>
+    let map = new Map();
     map.set('k1', 'v1').set('k2', 'v2');
-    <br>
-    console.log(map.get('k1')); // v1<br>
+    
+    console.log(map.get('k1')); // v1
     console.log(map.has('k2')); // true
-    <br>
-    for (let kv of map.entries())<br>
-        console.log(kv[0] + " : " + kv[1]);<br> 
+    
+    for (let kv of map.entries())
+        console.log(kv[0] + " : " + kv[1]); 
           `,
 			},
 			{
@@ -2120,14 +2121,14 @@ var js_intro_course = [
     NaN and undefined can also be stored in Set.
     `,
 				code: `
-    <br>
-    let set = new Set();<br>
+    
+    let set = new Set();
     set.add(5).add(9).add(59).add(9);
-    <br>
-    console.log(set.has(9));<br>
-    <br>
-    for (let v of set.values())<br>
-        console.log(v);<br>   
+    
+    console.log(set.has(9));
+    
+    for (let v of set.values())
+        console.log(v);   
             
             `,
 			},
@@ -2145,37 +2146,37 @@ var js_intro_course = [
     `,
 				info: `Tap Try It Yourself to play around with the codes and see ES6 Promises in action.`,
 				code: `
-            setTimeout(function() {<br>
-        console.log("Work 1");<br>
-        setTimeout(function() {<br>
-            console.log("Work 2");<br>
-        }, 1000);<br>
-    }, 1000);<br>
-    console.log("End");<br><br>
-    <br>
-    function asyncFunc(work) {<br>
-        return new Promise(function(resolve, reject) {<br>
-            if (work === "")<br>
-                reject(Error("Nothing"));<br>
-            setTimeout(function() {<br>
-                resolve(work);<br>
-            }, 1000);<br>
-        });<br>
-    }<br>
-    <br>
-    asyncFunc("Work 1") // Task 1<br>
-    .then(function(result) {<br>
-        console.log(result);<br>
-        return asyncFunc("Work 2"); // Task 2<br>
-    }, function(error) {<br>
-        console.log(error);<br>
-    })<br>
-    .then(function(result) {<br>
-        console.log(result);<br>
-    }, function(error) {<br>
-        console.log(error);<br>
-    });<br>
-    console.log("End");<br>
+            setTimeout(function() {
+        console.log("Work 1");
+        setTimeout(function() {
+            console.log("Work 2");
+        }, 1000);
+    }, 1000);
+    console.log("End");
+    
+    function asyncFunc(work) {
+        return new Promise(function(resolve, reject) {
+            if (work === "")
+                reject(Error("Nothing"));
+            setTimeout(function() {
+                resolve(work);
+            }, 1000);
+        });
+    }
+    
+    asyncFunc("Work 1") // Task 1
+    .then(function(result) {
+        console.log(result);
+        return asyncFunc("Work 2"); // Task 2
+    }, function(error) {
+        console.log(error);
+    })
+    .then(function(result) {
+        console.log(result);
+    }, function(error) {
+        console.log(error);
+    });
+    console.log("End");
             `,
 			},
 			{
@@ -2187,13 +2188,13 @@ var js_intro_course = [
     `,
 				info: `Tap Try It Yourself and follow the instructions in the comments to see the results.`,
 				code: `
-          <br>
-    let myIterableObj = { <br>
-      [Symbol.iterator] : function* () {<br>
-        yield 1; yield 2; yield 3;<br>
-      }<br>
-    };<br>
-    console.log([...myIterableObj]); // [ 1, 2, 3 ]<br>  
+          
+    let myIterableObj = { 
+      [Symbol.iterator] : function* () {
+        yield 1; yield 2; yield 3;
+      }
+    };
+    console.log([...myIterableObj]); // [ 1, 2, 3 ]  
             `,
 			},
 			{
@@ -2218,16 +2219,16 @@ var js_intro_course = [
     `,
 				info: `It is always a good practice to refactor your code with the new syntax to learn new things and make your code more understandable.`,
 				code: `
-          //Array Find<br>
-    [4, 5, 1, 8, 2, 0].find(x => x > 3);<br><br>
-    //Repeating String<br>
-    console.log("foo".repeat(3));<br><br>
-    //Searching Strings<br>
-    console.log("SoloLearn".startsWith("Solo", 0)); // true<br>
-    console.log("SoloLearn".endsWith("Solo", 4)); // true<br>
-    console.log("SoloLearn".includes("loLe")); // true<br>
-    console.log("SoloLearn".includes("olo", 1)); // true<br>
-    console.log("SoloLearn".includes("olo", 2)); // false<br><br>  
+          //Array Find
+    [4, 5, 1, 8, 2, 0].find(x => x > 3);
+    //Repeating String
+    console.log("foo".repeat(3));
+    //Searching Strings
+    console.log("SoloLearn".startsWith("Solo", 0)); // true
+    console.log("SoloLearn".endsWith("Solo", 4)); // true
+    console.log("SoloLearn".includes("loLe")); // true
+    console.log("SoloLearn".includes("olo", 1)); // true
+    console.log("SoloLearn".includes("olo", 2)); // false  
             `,
 			},
 		],

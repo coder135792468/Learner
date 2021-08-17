@@ -14,6 +14,7 @@ import { PageHeader, Loader, LivePlayUsers, ShowChallenges } from '../layouts';
 import { AuthContext, ChallengeContext } from '../context';
 
 import { code_coach } from '../utils';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -76,13 +77,14 @@ const LiveScreen = ({ history }) => {
 	}, [user?.token]);
 	const readyTostart = (data) => {
 		setPlayer(data);
-		console.log(data);
 		setReadyPage(true);
 	};
 
 	const startGame = () => {
 		setIndex(Math.floor(Math.random() * code_coach.length));
-		history.push(`/challenges/${index}?live=true&receiver=${player.id}`);
+		history.push(
+			`/challenges/${index === 0 ? 1 : index}?live=true&receiver=${player.id}`
+		);
 	};
 	const viewallChallenges = async () => {
 		//get all challenges
@@ -90,7 +92,7 @@ const LiveScreen = ({ history }) => {
 		setHasChallenge(!hasChallenge);
 	};
 
-	return (
+	return user ? (
 		<Paper className={classes.root}>
 			{loading && <Loader />}
 			<PageHeader
@@ -160,6 +162,8 @@ const LiveScreen = ({ history }) => {
 				</Box>
 			)}
 		</Paper>
+	) : (
+		<Redirect to='/' />
 	);
 };
 

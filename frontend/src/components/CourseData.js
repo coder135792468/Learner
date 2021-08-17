@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core';
 
+import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
+import docco from 'react-syntax-highlighter/dist/esm/styles/hljs/docco';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -10,7 +14,7 @@ import 'swiper/components/navigation/navigation.min.css';
 
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 SwiperCore.use([Pagination, Navigation]);
-
+SyntaxHighlighter.registerLanguage('javascript', js);
 const useStyles = makeStyles((theme) => ({
 	page_con: {
 		width: '100%',
@@ -62,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: '10px',
 		overflow: 'auto',
 		'&::-webkit-scrollbar': {
-			width: '.5rem',
+			width: '20px',
 		},
 
 		'&::-webkit-scrollbar-thumb': {
@@ -83,9 +87,13 @@ const useStyles = makeStyles((theme) => ({
 const CourseData = ({ pages, setIndex }) => {
 	const classes = useStyles();
 	const infoCon = useRef(null);
+	const codeCon = useRef(null);
+
 	useEffect(() => {
 		infoCon.current.scrollTop = 0;
+		// codeCon.current.initHighlightingOnLoad();
 	}, []);
+
 	return (
 		<Swiper
 			spaceBetween={50}
@@ -102,12 +110,20 @@ const CourseData = ({ pages, setIndex }) => {
 					<h4 className={classes.header}>{page.heading}</h4>
 					<main className={classes.content}>{page.data}</main>
 					{page?.code && (
-						<code>
-							<pre className={classes.code}>
-								<span className={classes.tag}>JS</span>
-								{page.code}
-							</pre>
-						</code>
+						<pre className={classes.code}>
+							<span className={classes.tag}>JS</span>
+							<code ref={codeCon}>
+								<SyntaxHighlighter
+									className={classes.code}
+									showLineNumbers={true}
+									wrapLongLines={true}
+									language='javascript'
+									style={docco}
+								>
+									{page.code}
+								</SyntaxHighlighter>
+							</code>
+						</pre>
 					)}
 					<footer className={classes.footer}>{page.info}</footer>
 				</SwiperSlide>

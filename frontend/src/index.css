@@ -18,3 +18,7 @@ code {
 	transform: scale(0.5);
 	font-weight: bold;
 }
+.swiper-container .swiper-pagination {
+	position: fixed;
+	margin-bottom: 20px;
+}

@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1,
+		marginRight: '5px',
 	},
 	search: {
 		position: 'relative',
@@ -182,7 +183,9 @@ const HomeScreen = ({ history, match }) => {
 						</>
 					) : (
 						<Link to='/login' style={{ textDecoration: 'none' }}>
-							<Button>Login</Button>
+							<Button variant='contained' color='secondary'>
+								Login
+							</Button>
 						</Link>
 					)}
 				</Toolbar>

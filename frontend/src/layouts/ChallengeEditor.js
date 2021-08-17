@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Paper, IconButton } from '@material-ui/core';
 import AceEditor from 'react-ace';
 
@@ -18,33 +18,39 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ChallengeEditor = ({ code, setValue, setCode }) => {
+const ChallengeEditor = ({ code, setValue, setCode, live }) => {
 	const classes = useStyles();
 	const jsref = useRef(null);
+	const [options, setOption] = useState({ showLineNumbers: true });
 	const onChange = () => {
 		setCode(jsref.current.editor.getValue());
 	};
+	useEffect(() => {
+		setOption(
+			!live
+				? {
+						enableBasicAutocompletion: true,
+						enableLiveAutocompletion: true,
+						enableSnippets: true,
+						showLineNumbers: true,
+				  }
+				: { showLineNumbers: true }
+		);
+	}, [live]);
 	return (
 		<Paper>
 			<AceEditor
-				placeholder='HTML goes here'
+				placeholder='js goes here'
 				mode='javascript'
 				theme='nord_dark'
 				style={{ width: '100vw', height: 'calc(90vh - 50px)' }}
-				fontSize={16}
+				fontSize={15}
 				wrapEnabled={false}
 				value={code}
 				ref={jsref}
-				chowPrintMargin={false}
-				showGutter={true}
 				highlightActiveLine={true}
 				onChange={onChange}
-				setOptions={{
-					enableBasicAutocompletion: true,
-					enableLiveAutocompletion: true,
-					enableSnippets: true,
-					showLineNumbers: true,
-				}}
+				setOptions={options}
 			/>
 			<IconButton
 				color='primary'
