@@ -11,7 +11,7 @@ import {
 	Button,
 } from '@material-ui/core';
 import { PageHeader, Loader, LivePlayUsers, ShowChallenges } from '../layouts';
-import { AuthContext, ChallengeContext } from '../context';
+import { AuthContext, ChallengeContext, SocketContext } from '../context';
 
 import { code_coach } from '../utils';
 import { Redirect } from 'react-router-dom';
@@ -50,9 +50,15 @@ const useStyles = makeStyles((theme) => ({
 const LiveScreen = ({ history }) => {
 	const { getAllUsers, allusers, getUserData, user, loading } =
 		useContext(AuthContext);
-	const classes = useStyles();
 
-	const { getAllChallenges, all_challenges } = useContext(ChallengeContext);
+	const io = useContext(SocketContext);
+	const classes = useStyles();
+	const {
+		filterChallenge,
+		getAllChallenges,
+		getChallengeById,
+		all_challenges,
+	} = useContext(ChallengeContext);
 
 	const [readyPage, setReadyPage] = useState(false);
 	const [player, setPlayer] = useState(null);
@@ -76,6 +82,19 @@ const LiveScreen = ({ history }) => {
 
 		//eslint-disable-next-line
 	}, [user?.token]);
+
+	useEffect(() => {
+		io.on('update', async (id) => {
+			if (user?.token) {
+				await getChallengeById(id, user?.token, false);
+			}
+		});
+		io.on('delete', (id) => {
+			filterChallenge(id);
+		});
+		//eslint-disable-next-line
+	}, []);
+
 	const readyTostart = (data) => {
 		setPlayer(data);
 		setReadyPage(true);
@@ -83,9 +102,8 @@ const LiveScreen = ({ history }) => {
 
 	const startGame = () => {
 		setIndex(Math.floor(Math.random() * code_coach.length));
-		history.push(
-			`/challenges/${index === 0 ? 1 : index}?live=true&receiver=${player.id}`
-		);
+		const sendIndex = index === 0 ? 1 : index;
+		history.push(`/challenges/${1}?live=true&receiver=${player.id}`);
 	};
 	const viewallChallenges = async () => {
 		//get all challenges
@@ -123,7 +141,7 @@ const LiveScreen = ({ history }) => {
 							))}
 						{hasChallenge &&
 							all_challenges?.map((challenge) => (
-								<ShowChallenges user={user} challenge={challenge} />
+								<ShowChallenges io={io} user={user} challenge={challenge} />
 							))}
 					</List>
 				)}

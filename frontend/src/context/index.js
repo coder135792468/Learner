@@ -10,6 +10,7 @@ import ThemeState from './themeContext/ThemeState';
 import ChallengeContext from './challengeContext/ChallengeContext';
 import ChallengeState from './challengeContext/ChallengeState';
 
+import { io, SocketContext } from './socketContext/SocketContext.js';
 export {
 	AuthContext,
 	AuthState,
@@ -19,4 +20,6 @@ export {
 	ThemeState,
 	ChallengeContext,
 	ChallengeState,
+	io,
+	SocketContext,
 };

@@ -13,7 +13,7 @@ import { Helmet } from 'react-helmet';
 import { code_coach } from '../utils';
 import { Redirect } from 'react-router-dom';
 
-import { ChallengeContext, AuthContext } from '../context';
+import { ChallengeContext, AuthContext, SocketContext } from '../context';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -24,15 +24,16 @@ const useStyles = makeStyles((theme) => ({
 
 const CodeCoach = ({ match, location, history }) => {
 	const { addToast } = useToasts();
-
 	const {
 		addChallenge,
 		loading,
 		getChallengeById,
 		challenge,
 		updateChallenge,
+		clearError,
 	} = useContext(ChallengeContext);
 	const { user } = useContext(AuthContext);
+	const io = useContext(SocketContext);
 
 	const index = match.params.id - 1;
 	let params, live, receiver;
@@ -50,11 +51,22 @@ const CodeCoach = ({ match, location, history }) => {
 	const [completed, setCompleted] = useState(false);
 
 	const [openDialog, setOpenDialog] = useState(false);
-
+	const [data, setData] = useState(null);
+	useEffect(() => {
+		setData(data);
+	}, [challenge]);
 	useEffect(() => {
 		setCode(code);
 	}, [code]);
 
+	useEffect(() => {
+		clearError();
+		if (user?.token && live === 'false') {
+			getChallengeById(receiver, user.token);
+		}
+
+		//eslint-disable-next-line
+	}, []);
 	useEffect(() => {
 		let interval;
 		if (parseInt(time % 60) < 10 && live && !openDialog) {
@@ -64,20 +76,16 @@ const CodeCoach = ({ match, location, history }) => {
 		} else {
 			setOpenDialog(true);
 		}
-		if (completed) {
-			setOpenDialog(true);
-		}
+
 		return () => clearInterval(interval);
 		//eslint-disable-next-line
 	}, [time, setCompleted]);
 
 	useEffect(() => {
-		if (user?.token && live === 'false') {
-			getChallengeById(receiver, user.token);
+		if (completed) {
+			setOpenDialog(true);
 		}
-
-		//eslint-disable-next-line
-	}, []);
+	}, [completed, setCompleted]);
 
 	const sendChallenge = async () => {
 		//add a challenge
@@ -93,7 +101,7 @@ const CodeCoach = ({ match, location, history }) => {
 			} else {
 				history.push('/');
 			}
-			addToast('You need to refresh once  challenge Completed', {
+			addToast('Results will found in Community Challenge section', {
 				appearance: 'success',
 			});
 		} else {
@@ -102,11 +110,12 @@ const CodeCoach = ({ match, location, history }) => {
 				receiverTime: completed ? time : 10000000,
 			};
 			await updateChallenge(challengeData, challenge._id, user.token);
-
+			io.emit('update', challenge._id);
 			addToast('Look in Community Challenge section ', {
 				appearance: 'success',
 			});
 		}
+
 		history.push('/');
 	};
 	return (

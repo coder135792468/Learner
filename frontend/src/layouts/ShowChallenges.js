@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ShowChallenges = ({ challenge, user }) => {
+const ShowChallenges = ({ io, challenge, user }) => {
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -75,6 +75,7 @@ const ShowChallenges = ({ challenge, user }) => {
 		};
 		if (user.token) {
 			await updateChallenge(value, _id, user.token);
+			io.emit('update', _id);
 		} else {
 			history.push('/');
 		}
@@ -83,7 +84,8 @@ const ShowChallenges = ({ challenge, user }) => {
 
 	const deleteCompletedChallenges = async () => {
 		//delete challenge
-		deleteChallenge(_id, user.token);
+		io.emit('delete', _id);
+		await deleteChallenge(_id, user.token);
 	};
 	return (
 		<ListItem className={classes.item}>

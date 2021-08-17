@@ -110,11 +110,13 @@ const ChallengeState = ({ children }) => {
 			setLoading(false);
 		}
 	};
-	const getChallengeById = async (id, token) => {
+	const getChallengeById = async (id, token, loading = true) => {
 		clearChallenges();
 		clearError();
-		setLoading(true);
+
+		if (loading) setLoading(true);
 		try {
+			console.log(token);
 			const config = {
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -122,6 +124,12 @@ const ChallengeState = ({ children }) => {
 			};
 			const { data } = await axios.get(`/api/challenges/${id}`, config);
 			dispatch({ type: GET_CHALLENGE, payload: data });
+			dispatch({
+				type: GET_ALL_CHALLENGES,
+				payload: state.all_challenges.map((ele) =>
+					ele._id === data._id ? data : ele
+				),
+			});
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -144,10 +152,7 @@ const ChallengeState = ({ children }) => {
 				},
 			};
 			await axios.delete(`/api/challenges/${id}`, config);
-			dispatch({
-				type: GET_ALL_CHALLENGES,
-				payload: state.all_challenges.filter((ele) => ele._id !== id),
-			});
+			filterChallenge(id);
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -160,7 +165,12 @@ const ChallengeState = ({ children }) => {
 			// setLoading(false);
 		}
 	};
-
+	const filterChallenge = (id) => {
+		dispatch({
+			type: GET_ALL_CHALLENGES,
+			payload: state.all_challenges?.filter((ele) => ele._id !== id),
+		});
+	};
 	const clearError = () => {
 		dispatch({ type: CLEAR_ERROR });
 	};
@@ -183,6 +193,7 @@ const ChallengeState = ({ children }) => {
 				updateChallenge,
 				getChallengeById,
 				deleteChallenge,
+				filterChallenge,
 			}}
 		>
 			{children}

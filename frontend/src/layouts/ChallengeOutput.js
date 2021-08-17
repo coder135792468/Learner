@@ -50,12 +50,11 @@ const ChallengeOutput = ({ code, test_cases, setSolved, setCompleted }) => {
 	});
 	useEffect(() => {
 		setSolved(results.filter((ele) => ele.solved === true).length);
-		setTimeout(() => {
-			if (results.every((ele) => ele.solved === true)) {
-				addToast(randomCompliment(), { appearance: 'success' });
-				setCompleted(true);
-			}
-		}, 500);
+		if (results.every((ele) => ele.solved === true)) {
+			setCompleted(true);
+
+			addToast(randomCompliment(), { appearance: 'success' });
+		}
 
 		//eslint-disable-next-line
 	}, [code]);

@@ -41,6 +41,45 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.type === 'dark' ? '#fff' : '#000',
 	},
 }));
+
+const data = [
+	{
+		name: 'Profile',
+		path: '/profile',
+		private: true,
+		icon: PersonOutlineIcon,
+	},
+	{
+		name: 'Code Playground',
+		path: '/',
+		private: false,
+		icon: CodeIcon,
+	},
+	{
+		name: 'Course',
+		path: '/course',
+		private: false,
+		icon: LibraryBooksIcon,
+	},
+	{
+		name: 'Quiz',
+		path: '/quiz',
+		private: false,
+		icon: LiveHelpIcon,
+	},
+	{
+		name: 'Challenge',
+		path: '/challenges',
+		private: false,
+		icon: SportsKabaddiIcon,
+	},
+	{
+		name: 'Community Challenges',
+		path: '/live',
+		private: true,
+		icon: LiveTvIcon,
+	},
+];
 const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 	const classes = useStyles();
 
@@ -53,56 +92,18 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 	const optionLists = () => (
 		<>
 			<List className={classes.sideBarList}>
-				{user?._id && (
-					<Link to='/profile' className={classes.link}>
-						<ListItem button>
-							<ListItemIcon>
-								<PersonOutlineIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Profile'} />
-						</ListItem>
-					</Link>
-				)}
-				<Link to='/' className={classes.link}>
-					<ListItem button>
-						<ListItemIcon>
-							<CodeIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Code Playground'} />
-					</ListItem>
-				</Link>
-				<Link to='/course' className={classes.link}>
-					<ListItem button>
-						<ListItemIcon>
-							<LibraryBooksIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Course'} />
-					</ListItem>
-				</Link>
-				<Link to='/quiz' className={classes.link}>
-					<ListItem button>
-						<ListItemIcon>
-							<LiveHelpIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Quiz'} />
-					</ListItem>
-				</Link>
-				<Link to='/challenges' className={classes.link}>
-					<ListItem button>
-						<ListItemIcon>
-							<SportsKabaddiIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Challenge'} />
-					</ListItem>
-				</Link>
-				<Link to='/live' className={classes.link}>
-					<ListItem button>
-						<ListItemIcon>
-							<LiveTvIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Community Challenge'} />
-					</ListItem>
-				</Link>
+				{data.map((ele) => (
+					<>
+						{(user?._id || !ele.private) && (
+							<Link to={ele.path} className={classes.link}>
+								<ListItem button>
+									<ListItemIcon>{<ele.icon />}</ListItemIcon>
+									<ListItemText primary={ele.name} />
+								</ListItem>
+							</Link>
+						)}
+					</>
+				))}
 				<ListItem>
 					<ListItemIcon>
 						<Switch
