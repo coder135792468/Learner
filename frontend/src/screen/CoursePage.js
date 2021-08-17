@@ -3,6 +3,7 @@ import { Paper, makeStyles } from '@material-ui/core';
 import { PageHeader } from '../layouts';
 import { CourseData } from '../components';
 import { js_intro_course } from '../utils';
+import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -17,10 +18,15 @@ const CoursePage = ({ match }) => {
 	const [index, setIndex] = useState(1);
 	const classes = useStyles();
 	return (
-		<Paper className={classes.root}>
-			<PageHeader title={name} optional={{ index, total: pages.length }} />
-			<CourseData pages={pages} setIndex={setIndex} />
-		</Paper>
+		<>
+			<Helmet>
+				<title>{name}</title>
+			</Helmet>
+			<Paper className={classes.root}>
+				<PageHeader title={name} optional={{ index, total: pages.length }} />
+				<CourseData pages={pages} setIndex={setIndex} />
+			</Paper>
+		</>
 	);
 };
 

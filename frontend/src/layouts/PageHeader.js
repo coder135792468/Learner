@@ -57,9 +57,9 @@ const PageHeader = ({
 					</strong>
 				)}
 				{live?.live && (
-					<span style={{ marginLeft: '10px' }}>
+					<span style={{ margin: '0 10px', fontSize: '12px' }}>
 						<b>Time: </b>
-						{parseInt((live.time / 60) % 60)}:{parseInt(live.time % 60)}
+						{parseInt(live.time % 60)}/10 mins
 					</span>
 				)}
 				{list && (

@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useRef } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { CodeContext } from '../context';
+import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -33,7 +34,6 @@ const DeployScreen = ({
 		if (!current_code) {
 			getCodeByID(id);
 		}
-		console.log(current_code);
 		if (current_code) {
 			const opt = frame.current.contentWindow.document;
 			opt.open();
@@ -51,7 +51,16 @@ const DeployScreen = ({
 
 		//eslint-disable-next-line
 	}, [current_code]);
-	return <iframe ref={frame} title='Deploy Screen' className={root}></iframe>;
+	return (
+		<>
+			<Helmet>
+				<title>
+					{current_code?.name ? current_code.name : 'Deploy Screen'}
+				</title>
+			</Helmet>
+			<iframe ref={frame} title='Deploy Screen' className={root}></iframe>;
+		</>
+	);
 };
 
 export default DeployScreen;

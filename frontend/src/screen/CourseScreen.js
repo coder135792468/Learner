@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { PageHeader } from '../layouts';
 import js from '../layouts/logo/js.png';
+import { Helmet } from 'react-helmet';
 import { js_intro_course } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,37 +32,42 @@ const useStyles = makeStyles((theme) => ({
 const CourseScreen = ({ history }) => {
 	const classes = useStyles();
 	return (
-		<Paper className={classes.root}>
-			<PageHeader title='Js Course' />
-			<Box>
-				<List>
-					{js_intro_course?.map((ele, index) => (
-						<ListItem
-							onClick={() => history.push(`/course/${index + 1}`)}
-							key={index + 1}
-							button
-							className={classes.item}
-						>
-							<ListItemIcon>
-								<Avatar>
-									<img
-										alt='Cant Load'
-										src={js}
-										style={{ width: '100%', height: '100%' }}
-									/>
-								</Avatar>
-							</ListItemIcon>
-							<ListItemText
-								primary={ele.name}
-								secondary={`${ele.pages.length}  ${
-									ele.pages.length > 1 ? 'Pages' : 'Page'
-								}`}
-							/>
-						</ListItem>
-					))}
-				</List>
-			</Box>
-		</Paper>
+		<>
+			<Helmet>
+				<title>Course</title>
+			</Helmet>
+			<Paper className={classes.root}>
+				<PageHeader title='Js Course' />
+				<Box>
+					<List>
+						{js_intro_course?.map((ele, index) => (
+							<ListItem
+								onClick={() => history.push(`/course/${index + 1}`)}
+								key={index + 1}
+								button
+								className={classes.item}
+							>
+								<ListItemIcon>
+									<Avatar>
+										<img
+											alt='Cant Load'
+											src={js}
+											style={{ width: '100%', height: '100%' }}
+										/>
+									</Avatar>
+								</ListItemIcon>
+								<ListItemText
+									primary={ele.name}
+									secondary={`${ele.pages.length}  ${
+										ele.pages.length > 1 ? 'Pages' : 'Page'
+									}`}
+								/>
+							</ListItem>
+						))}
+					</List>
+				</Box>
+			</Paper>
+		</>
 	);
 };
 

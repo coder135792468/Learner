@@ -15,6 +15,7 @@ import { AuthContext, ChallengeContext } from '../context';
 
 import { code_coach } from '../utils';
 import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -93,75 +94,80 @@ const LiveScreen = ({ history }) => {
 	};
 
 	return user ? (
-		<Paper className={classes.root}>
-			{loading && <Loader />}
-			<PageHeader
-				title={'Community Challenges'}
-				list={
-					!readyPage && {
-						text: !hasChallenge ? 'Challenges' : 'Play',
-						onClick: viewallChallenges,
+		<>
+			<Helmet>
+				<title>Community Challenge</title>
+			</Helmet>
+			<Paper className={classes.root}>
+				{loading && <Loader />}
+				<PageHeader
+					title={'Community Challenges'}
+					list={
+						!readyPage && {
+							text: !hasChallenge ? 'Challenges' : 'Play',
+							onClick: viewallChallenges,
+						}
 					}
-				}
-			/>
-			{!readyPage && (
-				<List>
-					{!hasChallenge &&
-						allusers?.map(({ name, avatar, _id }) => (
-							<LivePlayUsers
-								key={_id}
-								onClick={readyTostart}
-								name={name}
-								avatar={avatar}
-								id={_id}
-							/>
-						))}
-					{hasChallenge &&
-						all_challenges?.map((challenge) => (
-							<ShowChallenges user={user} challenge={challenge} />
-						))}
-				</List>
-			)}
-
-			{readyPage && (
-				<Box ml='auto'>
-					<ListItem className={classes.item}>
-						<ListItemIcon>
-							<Avatar className={classes.avatar}>
-								<img
-									alt={'couldnt load'}
-									className={classes.pic}
-									src={user.avatar}
+				/>
+				{!readyPage && (
+					<List>
+						{!hasChallenge &&
+							allusers?.map(({ name, avatar, _id }) => (
+								<LivePlayUsers
+									key={_id}
+									onClick={readyTostart}
+									name={name}
+									avatar={avatar}
+									id={_id}
 								/>
-							</Avatar>
-						</ListItemIcon>
-						<ListItemText primary={<h4>{player.name}</h4>} />
-					</ListItem>
-					<p align='center'>V/s</p>
-					<ListItem className={classes.item}>
-						<ListItemIcon>
-							<Avatar className={classes.avatar}>
-								<img
-									alt={'couldnt load'}
-									className={classes.pic}
-									src={player.avatar}
-								/>
-							</Avatar>
-						</ListItemIcon>
-						<ListItemText primary={<h4> {user.name}</h4>} />
-					</ListItem>
+							))}
+						{hasChallenge &&
+							all_challenges?.map((challenge) => (
+								<ShowChallenges user={user} challenge={challenge} />
+							))}
+					</List>
+				)}
 
-					<Button
-						onClick={startGame}
-						className={classes.btn}
-						color='primary'
-						variant='contained'
-					>
-						Start
-					</Button>
-				</Box>
-			)}
-		</Paper>
+				{readyPage && (
+					<Box ml='auto'>
+						<ListItem className={classes.item}>
+							<ListItemIcon>
+								<Avatar className={classes.avatar}>
+									<img
+										alt={'couldnt load'}
+										className={classes.pic}
+										src={user.avatar}
+									/>
+								</Avatar>
+							</ListItemIcon>
+							<ListItemText primary={<h4>{player.name}</h4>} />
+						</ListItem>
+						<p align='center'>V/s</p>
+						<ListItem className={classes.item}>
+							<ListItemIcon>
+								<Avatar className={classes.avatar}>
+									<img
+										alt={'couldnt load'}
+										className={classes.pic}
+										src={player.avatar}
+									/>
+								</Avatar>
+							</ListItemIcon>
+							<ListItemText primary={<h4> {user.name}</h4>} />
+						</ListItem>
+
+						<Button
+							onClick={startGame}
+							className={classes.btn}
+							color='primary'
+							variant='contained'
+						>
+							Start
+						</Button>
+					</Box>
+				)}
+			</Paper>
+		</>
 	) : (
 		<Redirect to='/' />
 	);

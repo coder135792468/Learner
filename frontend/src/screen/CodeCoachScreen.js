@@ -10,6 +10,7 @@ import {
 	CardActions,
 	Chip,
 } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
 import { PageHeader } from '../layouts';
 import { code_coach } from '../utils';
 
@@ -37,34 +38,39 @@ const CodeCoachScreen = ({ history }) => {
 	const classes = useStyles();
 
 	return (
-		<Paper className={classes.root}>
-			<PageHeader title={'Code Coach Challenges'} />
-			<Grid container>
-				{code_coach.map((ele, index) => (
-					<Grid container item xs={12} sm={6} md={3} spacing={3}>
-						<Card button className={classes.card}>
-							<CardContent>
-								<Typography variant='h5'>{ele.title}</Typography>
-							</CardContent>
-							<Chip
-								variant='contained'
-								label={`Total testcases: ${ele.testCases.length}`}
-							/>
-							<CardActions>
-								<Button
-									onClick={() => history.push(`/challenges/${index + 1}`)}
-									fullWidth
-									color='secondary'
+		<>
+			<Helmet>
+				<title>Code Coach</title>
+			</Helmet>
+			<Paper className={classes.root}>
+				<PageHeader title={'Code Coach Challenges'} />
+				<Grid container>
+					{code_coach.map((ele, index) => (
+						<Grid container item xs={12} sm={6} md={3} spacing={3}>
+							<Card button className={classes.card}>
+								<CardContent>
+									<Typography variant='h5'>{ele.title}</Typography>
+								</CardContent>
+								<Chip
 									variant='contained'
-								>
-									Solve problem
-								</Button>
-							</CardActions>
-						</Card>
-					</Grid>
-				))}
-			</Grid>
-		</Paper>
+									label={`Total testcases: ${ele.testCases.length}`}
+								/>
+								<CardActions>
+									<Button
+										onClick={() => history.push(`/challenges/${index + 1}`)}
+										fullWidth
+										color='secondary'
+										variant='contained'
+									>
+										Solve problem
+									</Button>
+								</CardActions>
+							</Card>
+						</Grid>
+					))}
+				</Grid>
+			</Paper>
+		</>
 	);
 };
 

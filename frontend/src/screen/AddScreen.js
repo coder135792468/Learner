@@ -14,6 +14,7 @@ import { useToasts } from 'react-toast-notifications';
 import { CodeContext, AuthContext } from '../context';
 import { Redirect } from 'react-router-dom';
 import addPic from './images/addPic.gif';
+import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -110,6 +111,9 @@ const AddScreen = () => {
 	}, []);
 	return id === null && !created ? (
 		<>
+			<Helmet>
+				<title>Add Code</title>
+			</Helmet>
 			<PageHeader title={'Create Code'} />
 			<Paper className={classes.root}>
 				<img

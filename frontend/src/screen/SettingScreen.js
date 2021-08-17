@@ -11,6 +11,7 @@ import {
 	TextField,
 	Divider,
 } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
 import { useToasts } from 'react-toast-notifications';
 import FaceIcon from '@material-ui/icons/Face';
 import { AuthContext } from '../context';
@@ -135,116 +136,137 @@ const SettingScreen = () => {
 	};
 
 	return (
-		<Paper className={classes.main}>
-			{uploading && <Loader />}
-			{error?.length && <ToastMsg msg={error} />}
-			<PageHeader title={'Setting'} />
-			<List>
-				<Typography className={classes.text} variant='h6'>
-					Change your Avatar
-				</Typography>
-				<ListItem className={classes.item}>
-					<Avatar className={classes.image}>
-						{user?.avatar || avatar ? (
-							<img
-								alt='Cant Load'
-								className={classes.avatar}
-								src={user.avatar ? user.avatar : avatar}
-							/>
-						) : (
-							<FaceIcon />
-						)}
-					</Avatar>
-					<input
-						className={classes.file}
-						type='file'
-						onChange={(e) => setFile(e.target.files[0])}
-					/>
-					<Box mx='auto'>
+		<>
+			<Helmet>
+				<title>Settings</title>
+			</Helmet>
+			<Paper className={classes.main}>
+				{uploading && <Loader />}
+				{error?.length && <ToastMsg msg={error} />}
+				<PageHeader title={'Setting'} />
+				<List>
+					<Typography className={classes.text} variant='h6'>
+						Change your Avatar
+					</Typography>
+					<ListItem className={classes.item}>
+						<Avatar className={classes.image}>
+							{user?.avatar || avatar ? (
+								<img
+									alt='Cant Load'
+									className={classes.avatar}
+									src={user.avatar ? user.avatar : avatar}
+								/>
+							) : (
+								<FaceIcon />
+							)}
+						</Avatar>
+						<input
+							className={classes.file}
+							type='file'
+							onChange={(e) => setFile(e.target.files[0])}
+						/>
+						<Box mx='auto'>
+							<Button
+								onClick={fileHandler}
+								variant='contained'
+								component='label'
+								color='primary'
+							>
+								Upload File
+							</Button>
+						</Box>
+
 						<Button
-							onClick={fileHandler}
+							color='secondary'
 							variant='contained'
-							component='label'
-							color='primary'
+							onClick={updateProfile}
+							style={{ margin: '10px 10px 10px auto' }}
 						>
-							Upload File
+							Change
 						</Button>
-					</Box>
+					</ListItem>
+					<Divider />
+					<Typography className={classes.text} variant='h6'>
+						Change your information
+					</Typography>
 
-					<Button
-						color='secondary'
-						variant='contained'
-						onClick={updateProfile}
-						style={{ margin: '10px 10px 10px auto' }}
-					>
-						Change
-					</Button>
-				</ListItem>
-				<Divider />
-				<Typography className={classes.text} variant='h6'>
-					Change your information
-				</Typography>
-
-				<ListItem className={classes.item}>
-					<TextField
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						label='Change Name'
-						style={{ margin: '10px auto' }}
-					/>
-					<Box ml='auto' mr='20px'>
-						<Button onClick={updateProfile} variant='contained' color='primary'>
-							Change
-						</Button>
-					</Box>
-					<TextField
-						value={bio}
-						onChange={(e) => setBio(e.target.value)}
-						label='Change Bio'
-						style={{ margin: '10px auto' }}
-					/>
-					<Box ml='auto' mr='20px'>
-						<Button onClick={updateProfile} variant='contained' color='primary'>
-							Change
-						</Button>
-					</Box>
-					<TextField
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						label='Change Email'
-						style={{ margin: '10px auto' }}
-					/>
-					<Box ml='auto' mr='20px'>
-						<Button onClick={updateProfile} variant='contained' color='primary'>
-							Change
-						</Button>
-					</Box>
-				</ListItem>
-				<Divider />
-				<Typography className={classes.text} variant='p'>
-					Change your password
-				</Typography>
-				<ListItem className={classes.item}>
-					<TextField
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						label='New Password'
-						style={{ margin: '10px auto' }}
-					/>
-					<TextField
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						label='Confirm Password'
-						style={{ margin: '10px auto' }}
-					/>
-					<Box ml='auto' mr='20px'>
-						<Button onClick={updateProfile} variant='contained' color='primary'>
-							Change
-						</Button>
-					</Box>
-				</ListItem>
-			</List>
-		</Paper>
+					<ListItem className={classes.item}>
+						<TextField
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							label='Change Name'
+							style={{ margin: '10px auto' }}
+						/>
+						<Box ml='auto' mr='20px'>
+							<Button
+								onClick={updateProfile}
+								variant='contained'
+								color='primary'
+							>
+								Change
+							</Button>
+						</Box>
+						<TextField
+							value={bio}
+							onChange={(e) => setBio(e.target.value)}
+							label='Change Bio'
+							style={{ margin: '10px auto' }}
+						/>
+						<Box ml='auto' mr='20px'>
+							<Button
+								onClick={updateProfile}
+								variant='contained'
+								color='primary'
+							>
+								Change
+							</Button>
+						</Box>
+						<TextField
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							label='Change Email'
+							style={{ margin: '10px auto' }}
+						/>
+						<Box ml='auto' mr='20px'>
+							<Button
+								onClick={updateProfile}
+								variant='contained'
+								color='primary'
+							>
+								Change
+							</Button>
+						</Box>
+					</ListItem>
+					<Divider />
+					<Typography className={classes.text} variant='p'>
+						Change your password
+					</Typography>
+					<ListItem className={classes.item}>
+						<TextField
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							label='New Password'
+							style={{ margin: '10px auto' }}
+						/>
+						<TextField
+							value={confirmPassword}
+							onChange={(e) => setConfirmPassword(e.target.value)}
+							label='Confirm Password'
+							style={{ margin: '10px auto' }}
+						/>
+						<Box ml='auto' mr='20px'>
+							<Button
+								onClick={updateProfile}
+								variant='contained'
+								color='primary'
+							>
+								Change
+							</Button>
+						</Box>
+					</ListItem>
+				</List>
+			</Paper>
+		</>
 	);
 };
 

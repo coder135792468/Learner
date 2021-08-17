@@ -9,11 +9,12 @@ import {
 	Loader,
 } from '../layouts';
 import { useToasts } from 'react-toast-notifications';
-
+import { Helmet } from 'react-helmet';
 import { code_coach } from '../utils';
 import { Redirect } from 'react-router-dom';
 
 import { ChallengeContext, AuthContext } from '../context';
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: '100vh',
@@ -56,10 +57,10 @@ const CodeCoach = ({ match, location, history }) => {
 
 	useEffect(() => {
 		let interval;
-		if (parseInt((time / 60) % 60) < 20 && live && !openDialog) {
+		if (parseInt(time % 60) < 10 && live && !openDialog) {
 			interval = setInterval(() => {
 				setTime(time + 1);
-			}, 1000);
+			}, 1000 * 60);
 		} else {
 			setOpenDialog(true);
 		}
@@ -109,66 +110,74 @@ const CodeCoach = ({ match, location, history }) => {
 		history.push('/');
 	};
 	return (
-		<Paper className={classes.root}>
-			{challenge?.end && <Redirect to='/' />}
-			{challenge?.live === 'true' && !challenge?.accepted && (
-				<Redirect to='/' />
-			)}
-			{live && !user?._id && <Redirect to='/' />}
-			{loading && <Loader />}
-			{params && (
-				<DialogBox
-					open={openDialog}
-					setOpen={setOpenDialog}
-					onClick={sendChallenge}
-					text={'Are you ready to Send this challenge?'}
+		<>
+			<Helmet>
+				<title>Challenge</title>
+			</Helmet>
+			<Paper className={classes.root}>
+				{challenge?.end && <Redirect to='/' />}
+				{challenge?.live === 'true' && !challenge?.accepted && (
+					<Redirect to='/' />
+				)}
+				{live && !user?._id && <Redirect to='/' />}
+				{loading && <Loader />}
+				{params && (
+					<DialogBox
+						open={openDialog}
+						setOpen={setOpenDialog}
+						onClick={sendChallenge}
+						text={'Are you ready to Send this challenge?'}
+					/>
+				)}
+
+				<PageHeader
+					title={code_coach[index].title}
+					optional={{
+						total: code_coach[index].testCases.length,
+						index: solved,
+					}}
+					push='/'
+					live={{ live, time }}
 				/>
-			)}
+				<AppBar position='sticky' elevation={0}>
+					<Tabs
+						value={value}
+						onChange={(e, nv) => setValue(nv)}
+						aria-label='simple tabs example'
+					>
+						<Tab label='Challenge' />
+						<Tab label='Code' />
+						<Tab label='Output' />
+					</Tabs>
+				</AppBar>
 
-			<PageHeader
-				title={code_coach[index].title}
-				optional={{ total: code_coach[index].testCases.length, index: solved }}
-				push='/'
-				live={{ live, time }}
-			/>
-			<AppBar position='sticky' elevation={0}>
-				<Tabs
-					value={value}
-					onChange={(e, nv) => setValue(nv)}
-					aria-label='simple tabs example'
-				>
-					<Tab label='Challenge' />
-					<Tab label='Code' />
-					<Tab label='Output' />
-				</Tabs>
-			</AppBar>
-
-			<div hidden={value !== 0}>
-				{value === 0 && (
-					<Challenge setValue={setValue} challenge={code_coach[index]} />
-				)}
-			</div>
-			<div hidden={value !== 1}>
-				{value === 1 && (
-					<ChallengeEditor
-						live={live}
-						setCode={setCode}
-						setValue={setValue}
-						code={code}
-					/>
-				)}
-			</div>
-			<div hidden={value !== 2}>
-				{value === 2 && (
-					<ChallengeOutput
-						code={code}
-						setCompleted={setCompleted}
-						setSolved={setSolved}
-						test_cases={code_coach[index].testCases}
-					/>
-				)}
-			</div>
-		</Paper>
+				<div hidden={value !== 0}>
+					{value === 0 && (
+						<Challenge setValue={setValue} challenge={code_coach[index]} />
+					)}
+				</div>
+				<div hidden={value !== 1}>
+					{value === 1 && (
+						<ChallengeEditor
+							live={live}
+							setCode={setCode}
+							setValue={setValue}
+							code={code}
+						/>
+					)}
+				</div>
+				<div hidden={value !== 2}>
+					{value === 2 && (
+						<ChallengeOutput
+							code={code}
+							setCompleted={setCompleted}
+							setSolved={setSolved}
+							test_cases={code_coach[index].testCases}
+						/>
+					)}
+				</div>
+			</Paper>
+		</>
 	);
 };
 

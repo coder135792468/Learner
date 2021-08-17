@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 import CodeScreen from './CodeScreen';
 import { SideHeader } from '../components';
 import { Loader } from '../layouts';
+import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
 	main: {
@@ -107,106 +108,111 @@ const HomeScreen = ({ history, match }) => {
 	};
 
 	return (
-		<Paper className={classes.main}>
-			<SideHeader setOpenMenu={setOpenMenu} openMenu={openMenu} user={user} />
-			{loading && <Loader />}
-			<AppBar position='sticky'>
-				<Toolbar>
-					<IconButton
-						edge='start'
-						className={classes.menuButton}
-						color='inherit'
-						aria-label='menu'
-						onClick={() => setOpenMenu(true)}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Typography variant='p' className={classes.title}>
-						Code
-					</Typography>
-					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-							<SearchIcon />
+		<>
+			<Helmet>
+				<title>Home</title>
+			</Helmet>
+			<Paper className={classes.main}>
+				<SideHeader setOpenMenu={setOpenMenu} openMenu={openMenu} user={user} />
+				{loading && <Loader />}
+				<AppBar position='sticky'>
+					<Toolbar>
+						<IconButton
+							edge='start'
+							className={classes.menuButton}
+							color='inherit'
+							aria-label='menu'
+							onClick={() => setOpenMenu(true)}
+						>
+							<MenuIcon />
+						</IconButton>
+						<Typography variant='p' className={classes.title}>
+							Code
+						</Typography>
+						<div className={classes.search}>
+							<div className={classes.searchIcon}>
+								<SearchIcon />
+							</div>
+							<InputBase
+								placeholder='Search…'
+								value={text}
+								onChange={search}
+								classes={{
+									root: classes.inputRoot,
+									input: classes.inputInput,
+								}}
+								inputProps={{ 'aria-label': 'search' }}
+							/>
 						</div>
-						<InputBase
-							placeholder='Search…'
-							value={text}
-							onChange={search}
-							classes={{
-								root: classes.inputRoot,
-								input: classes.inputInput,
-							}}
-							inputProps={{ 'aria-label': 'search' }}
-						/>
-					</div>
-					{user?.name ? (
-						<>
-							<IconButton
-								aria-label='account of current user'
-								aria-controls='menu-appbar'
-								aria-haspopup='true'
-								onClick={(e) => setAnchorEl(e.currentTarget)}
-								color='inherit'
-							>
-								{user?.avatar ? (
-									<img
-										className={classes.avatar}
-										src={user.avatar}
-										alt={user.name}
-									/>
-								) : (
-									<AccountCircle />
-								)}
-							</IconButton>
-							<Menu
-								id='menu-appbar'
-								anchorEl={anchorEl}
-								anchorOrigin={{
-									vertical: 'top',
-									horizontal: 'right',
-								}}
-								keepMounted
-								transformOrigin={{
-									vertical: 'top',
-									horizontal: 'right',
-								}}
-								open={open}
-								onClose={() => setAnchorEl(null)}
-							>
-								<Link to='/profile' className={classes.link}>
-									<MenuItem>Profile</MenuItem>
-								</Link>
-								<Link to='setting' className={classes.link}>
-									<MenuItem>Profile Settings</MenuItem>
-								</Link>
-							</Menu>
-						</>
-					) : (
-						<Link to='/login' style={{ textDecoration: 'none' }}>
-							<Button variant='contained' color='secondary'>
-								Login
-							</Button>
-						</Link>
-					)}
-				</Toolbar>
-			</AppBar>
-			<CodeScreen
-				pageNumber={match.params.pageNumber ? match.params.pageNumber : 1}
-			/>
-			{user?.name && (
-				<IconButton
-					onClick={() => history.push('add')}
-					style={{
-						position: 'fixed',
-						bottom: '30px',
-						right: '30px',
-						background: '#4488ff',
-					}}
-				>
-					<AddIcon />
-				</IconButton>
-			)}
-		</Paper>
+						{user?.name ? (
+							<>
+								<IconButton
+									aria-label='account of current user'
+									aria-controls='menu-appbar'
+									aria-haspopup='true'
+									onClick={(e) => setAnchorEl(e.currentTarget)}
+									color='inherit'
+								>
+									{user?.avatar ? (
+										<img
+											className={classes.avatar}
+											src={user.avatar}
+											alt={user.name}
+										/>
+									) : (
+										<AccountCircle />
+									)}
+								</IconButton>
+								<Menu
+									id='menu-appbar'
+									anchorEl={anchorEl}
+									anchorOrigin={{
+										vertical: 'top',
+										horizontal: 'right',
+									}}
+									keepMounted
+									transformOrigin={{
+										vertical: 'top',
+										horizontal: 'right',
+									}}
+									open={open}
+									onClose={() => setAnchorEl(null)}
+								>
+									<Link to='/profile' className={classes.link}>
+										<MenuItem>Profile</MenuItem>
+									</Link>
+									<Link to='setting' className={classes.link}>
+										<MenuItem>Profile Settings</MenuItem>
+									</Link>
+								</Menu>
+							</>
+						) : (
+							<Link to='/login' style={{ textDecoration: 'none' }}>
+								<Button variant='contained' color='secondary'>
+									Login
+								</Button>
+							</Link>
+						)}
+					</Toolbar>
+				</AppBar>
+				<CodeScreen
+					pageNumber={match.params.pageNumber ? match.params.pageNumber : 1}
+				/>
+				{user?.name && (
+					<IconButton
+						onClick={() => history.push('add')}
+						style={{
+							position: 'fixed',
+							bottom: '30px',
+							right: '30px',
+							background: '#4488ff',
+						}}
+					>
+						<AddIcon />
+					</IconButton>
+				)}
+			</Paper>
+		</>
 	);
 };
 

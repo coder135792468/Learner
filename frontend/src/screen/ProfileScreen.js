@@ -7,7 +7,7 @@ import {
 	Typography,
 	Button,
 } from '@material-ui/core';
-
+import { Helmet } from 'react-helmet';
 import { PageHeader, Code, Loader, PaginationButton } from '../layouts';
 import { AuthContext, CodeContext } from '../context';
 import { Redirect } from 'react-router-dom';
@@ -53,43 +53,48 @@ const ProfileScreen = ({ history, match }) => {
 		//eslint-disable-next-line
 	}, [pageNumber]);
 	return user?._id ? (
-		<Paper className={classes.root}>
-			{loading && <Loader />}
-			<PageHeader title={'Profile'} push='/' />
-			<Box>
-				<Avatar className={classes.avatar}>
-					{user?.avatar && (
-						<img alt='Cant load' className={classes.img} src={user.avatar} />
+		<>
+			<Helmet>
+				<title>Profile</title>
+			</Helmet>
+			<Paper className={classes.root}>
+				{loading && <Loader />}
+				<PageHeader title={'Profile'} push='/' />
+				<Box>
+					<Avatar className={classes.avatar}>
+						{user?.avatar && (
+							<img alt='Cant load' className={classes.img} src={user.avatar} />
+						)}
+					</Avatar>
+					<Typography className={classes.name} variant='h5'>
+						{user?.name.toUpperCase()}
+					</Typography>
+				</Box>
+				<Box style={{ zIndex: '3' }}>
+					{myCodes?.map((code) => (
+						<Code key={code._id} code={code} />
+					))}
+					{!user?._id && <h1 align='center'>You are not logged In</h1>}
+					{!user?._id && (
+						<Button
+							onClick={() => history.push('login')}
+							style={{ margin: '20%', width: '60%' }}
+							variant='contained'
+							color='secondary'
+						>
+							Login
+						</Button>
 					)}
-				</Avatar>
-				<Typography className={classes.name} variant='h5'>
-					{user?.name.toUpperCase()}
-				</Typography>
-			</Box>
-			<Box style={{ zIndex: '3' }}>
-				{myCodes?.map((code) => (
-					<Code key={code._id} code={code} />
-				))}
-				{!user?._id && <h1 align='center'>You are not logged In</h1>}
-				{!user?._id && (
-					<Button
-						onClick={() => history.push('login')}
-						style={{ margin: '20%', width: '60%' }}
-						variant='contained'
-						color='secondary'
-					>
-						Login
-					</Button>
+				</Box>
+				{totalCodePages > 1 && (
+					<PaginationButton
+						page={pageNumber}
+						pageCount={totalCodePages}
+						profile={true}
+					/>
 				)}
-			</Box>
-			{totalCodePages > 1 && (
-				<PaginationButton
-					page={pageNumber}
-					pageCount={totalCodePages}
-					profile={true}
-				/>
-			)}
-		</Paper>
+			</Paper>
+		</>
 	) : (
 		<Redirect to='/' />
 	);

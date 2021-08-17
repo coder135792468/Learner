@@ -12,6 +12,7 @@ import {
 	FormControlLabel,
 	Button,
 } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
 import { quiz_data, randomCompliment } from '../utils';
 import { PageHeader } from '../layouts';
 const useStyles = makeStyles((theme) => ({
@@ -71,45 +72,50 @@ const QuizPlayScreen = ({ match, history }) => {
 		}
 	};
 	return (
-		<Paper className={classes.root}>
-			<PageHeader
-				title={name}
-				optional={{ index: index + 1, total: totalQuiz }}
-			/>
-			<Paper className={classes.main}>
-				<Typography className={classes.title} variant='h6'>
-					{index + 1}. {quizzes[index].question_data.question}
-				</Typography>
-				<Box px={4} py={4} mx={'auto'}>
-					<FormControl component='fieldset'>
-						<RadioGroup
-							aria-label='gender'
-							name='gender1'
-							value={value}
-							onChange={({ target: { value } }) => setValue(value)}
-						>
-							{quizzes[index].question_data.options.map((ele) => (
-								<FormControlLabel
-									value={ele.data}
-									control={<Radio />}
-									label={ele.data}
-									className={classes.options}
-								/>
-							))}
-						</RadioGroup>
-					</FormControl>
-				</Box>
-				<Button
-					className={classes.btn}
-					fullWidth
-					color='secondary'
-					variant='contained'
-					onClick={submitAnswer}
-				>
-					Submit
-				</Button>
+		<>
+			<Helmet>
+				<title>Quiz Playground</title>
+			</Helmet>
+			<Paper className={classes.root}>
+				<PageHeader
+					title={name}
+					optional={{ index: index + 1, total: totalQuiz }}
+				/>
+				<Paper className={classes.main}>
+					<Typography className={classes.title} variant='h6'>
+						{index + 1}. {quizzes[index].question_data.question}
+					</Typography>
+					<Box px={4} py={4} mx={'auto'}>
+						<FormControl component='fieldset'>
+							<RadioGroup
+								aria-label='gender'
+								name='gender1'
+								value={value}
+								onChange={({ target: { value } }) => setValue(value)}
+							>
+								{quizzes[index].question_data.options.map((ele) => (
+									<FormControlLabel
+										value={ele.data}
+										control={<Radio />}
+										label={ele.data}
+										className={classes.options}
+									/>
+								))}
+							</RadioGroup>
+						</FormControl>
+					</Box>
+					<Button
+						className={classes.btn}
+						fullWidth
+						color='secondary'
+						variant='contained'
+						onClick={submitAnswer}
+					>
+						Submit
+					</Button>
+				</Paper>
 			</Paper>
-		</Paper>
+		</>
 	);
 };
 

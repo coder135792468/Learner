@@ -13,6 +13,7 @@ import { Link, Redirect } from 'react-router-dom';
 import AuthContext from '../context/authContext/AuthContext';
 import { ToastMsg } from '../layouts';
 import loginPic from './images/loginPic.gif';
+import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -58,52 +59,57 @@ const Login = ({ history }) => {
 		loginUser(email, password);
 	};
 	return !login ? (
-		<Paper className={classes.paper}>
-			{error !== null && <ToastMsg msg={error} />}
-			<Typography className={classes.heading} variant='h4'>
-				Login
-			</Typography>
-			<img className={classes.avatar} alt='Login' src={loginPic} />
-			<FormControl>
-				<TextField
-					label='Enter Email'
-					value={email}
-					type='email'
-					onChange={({ target: { value } }) => setEmail(value)}
-					required
-				/>
-				<TextField
-					label='Enter Password'
-					value={password}
-					type='password'
-					onChange={({ target: { value } }) => setPassword(value)}
-					required
-				/>
+		<>
+			<Helmet>
+				<title>Login</title>
+			</Helmet>
+			<Paper className={classes.paper}>
+				{error !== null && <ToastMsg msg={error} />}
+				<Typography className={classes.heading} variant='h4'>
+					Login
+				</Typography>
+				<img className={classes.avatar} alt='Login' src={loginPic} />
+				<FormControl>
+					<TextField
+						label='Enter Email'
+						value={email}
+						type='email'
+						onChange={({ target: { value } }) => setEmail(value)}
+						required
+					/>
+					<TextField
+						label='Enter Password'
+						value={password}
+						type='password'
+						onChange={({ target: { value } }) => setPassword(value)}
+						required
+					/>
 
-				<FormHelperText style={{ color: 'tomato' }} id='my-helper-text'>
-					{warning}
-				</FormHelperText>
-				<Box my={2} ml={'auto'}>
-					<Button onClick={submitHandler} color='primary' variant='contained'>
-						Login
-					</Button>
-				</Box>
-			</FormControl>
-			<Typography vairant='p'>
-				Not have an Account ?{' '}
-				<Link to='/register' style={{ color: '#4488ff', fontWeight: 'bold' }}>
-					Register
-				</Link>
-			</Typography>
-			<Button
-				color='secondary'
-				variant='contained'
-				onClick={() => history.push('/')}
-				style={{ marginTop: '10px' }}
-			>
-				Back to Home
-			</Button>
-		</Paper>
+					<FormHelperText style={{ color: 'tomato' }} id='my-helper-text'>
+						{warning}
+					</FormHelperText>
+					<Box my={2} ml={'auto'}>
+						<Button onClick={submitHandler} color='primary' variant='contained'>
+							Login
+						</Button>
+					</Box>
+				</FormControl>
+				<Typography vairant='p'>
+					Not have an Account ?{' '}
+					<Link to='/register' style={{ color: '#4488ff', fontWeight: 'bold' }}>
+						Register
+					</Link>
+				</Typography>
+				<Button
+					color='secondary'
+					variant='contained'
+					onClick={() => history.push('/')}
+					style={{ marginTop: '10px' }}
+				>
+					Back to Home
+				</Button>
+			</Paper>
+		</>
 	) : (
 		<Redirect to='/' />
 	);
