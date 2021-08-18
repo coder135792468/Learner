@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import { PageHeader } from '../layouts';
-import { code_coach } from '../utils';
+import { code_coach, constants } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -43,7 +43,7 @@ const CodeCoachScreen = ({ history }) => {
 				<title>Code Coach</title>
 			</Helmet>
 			<Paper className={classes.root}>
-				<PageHeader title={'Code Coach Challenges'} />
+				<PageHeader title={constants.code_coach.title} />
 				<Grid container>
 					{code_coach.map((ele, index) => (
 						<Grid container item xs={12} sm={6} md={3} spacing={3}>
@@ -62,7 +62,7 @@ const CodeCoachScreen = ({ history }) => {
 										color='secondary'
 										variant='contained'
 									>
-										Solve problem
+										{constants.code_coach.solve_btn}
 									</Button>
 								</CardActions>
 							</Card>

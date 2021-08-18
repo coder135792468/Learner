@@ -12,7 +12,7 @@ import {
 import { PageHeader } from '../layouts';
 import js from '../layouts/logo/js.png';
 import { Helmet } from 'react-helmet';
-import { js_intro_course } from '../utils';
+import { js_intro_course, constants } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -37,7 +37,7 @@ const CourseScreen = ({ history }) => {
 				<title>Course</title>
 			</Helmet>
 			<Paper className={classes.root}>
-				<PageHeader title='Js Course' />
+				<PageHeader title={constants.course.title} />
 				<Box>
 					<List>
 						{js_intro_course?.map((ele, index) => (

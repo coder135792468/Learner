@@ -10,7 +10,7 @@ import {
 } from '../layouts';
 import { useToasts } from 'react-toast-notifications';
 import { Helmet } from 'react-helmet';
-import { code_coach } from '../utils';
+import { code_coach, constants } from '../utils';
 import { Redirect } from 'react-router-dom';
 
 import { ChallengeContext, AuthContext, SocketContext } from '../context';
@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 const CodeCoach = ({ match, location, history }) => {
 	const { addToast } = useToasts();
+
+	/////////////////////////////////////////////////////////////////
 	const {
 		addChallenge,
 		loading,
@@ -35,6 +37,8 @@ const CodeCoach = ({ match, location, history }) => {
 	const { user } = useContext(AuthContext);
 	const io = useContext(SocketContext);
 
+	///////////////////////////////////////////////////////////
+
 	const index = match.params.id - 1;
 	let params, live, receiver;
 	if (location.search) {
@@ -43,15 +47,17 @@ const CodeCoach = ({ match, location, history }) => {
 		receiver = params[1];
 	}
 
+	///////////////////////////////////////////////////////////////
 	const classes = useStyles();
 	const [value, setValue] = useState(0);
 	const [code, setCode] = useState(code_coach[index].code);
 	const [solved, setSolved] = useState(0);
 	const [time, setTime] = useState(0);
 	const [completed, setCompleted] = useState(false);
-
 	const [openDialog, setOpenDialog] = useState(false);
+	/////////////////////////////////////////////////////////////////
 
+	/////////////////////////////////////////////////////////////////
 	useEffect(() => {
 		setCode(code);
 	}, [code]);
@@ -83,6 +89,7 @@ const CodeCoach = ({ match, location, history }) => {
 			setOpenDialog(true);
 		}
 	}, [completed, setCompleted]);
+	//////////////////////////////////////////////////////////////
 
 	const sendChallenge = async () => {
 		//add a challenge
@@ -99,7 +106,7 @@ const CodeCoach = ({ match, location, history }) => {
 			} else {
 				history.push('/');
 			}
-			addToast('Results will found in Community Challenge section', {
+			addToast(constants.code_coach.add_msg, {
 				appearance: 'success',
 			});
 		} else {
@@ -109,13 +116,14 @@ const CodeCoach = ({ match, location, history }) => {
 			};
 			await updateChallenge(challengeData, challenge._id, user.token);
 			io.emit('update', challenge._id);
-			addToast('Look in Community Challenge section ', {
+			addToast(constants.code_coach.final_msg, {
 				appearance: 'success',
 			});
 		}
 
 		history.push('/');
 	};
+
 	return (
 		<>
 			<Helmet>
@@ -133,7 +141,7 @@ const CodeCoach = ({ match, location, history }) => {
 						open={openDialog}
 						setOpen={setOpenDialog}
 						onClick={sendChallenge}
-						text={'Are you ready to Send this challenge?'}
+						text={constants.dialog_box.header}
 					/>
 				)}
 
@@ -150,7 +158,7 @@ const CodeCoach = ({ match, location, history }) => {
 					<Tabs
 						value={value}
 						onChange={(e, nv) => setValue(nv)}
-						aria-label='simple tabs example'
+						aria-label='HTML CSS & JS sections'
 					>
 						<Tab label='Challenge' />
 						<Tab label='Code' />

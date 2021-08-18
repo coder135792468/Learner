@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { PageHeader, Code, Loader, PaginationButton } from '../layouts';
 import { AuthContext, CodeContext } from '../context';
 import { Redirect } from 'react-router-dom';
+import { constants } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -74,7 +75,7 @@ const ProfileScreen = ({ history, match }) => {
 					{myCodes?.map((code) => (
 						<Code key={code._id} code={code} />
 					))}
-					{!user?._id && <h1 align='center'>You are not logged In</h1>}
+					{!user?._id && <h1 align='center'>{constants.profile.not_logged}</h1>}
 					{!user?._id && (
 						<Button
 							onClick={() => history.push('login')}

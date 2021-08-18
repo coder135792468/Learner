@@ -17,6 +17,7 @@ import FaceIcon from '@material-ui/icons/Face';
 import { AuthContext } from '../context';
 import axios from 'axios';
 import { ToastMsg, PageHeader, Loader } from '../layouts';
+import { constants } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
 	main: {
@@ -99,7 +100,7 @@ const SettingScreen = () => {
 			if (password.trim() === confirmPassword.trim()) {
 				data.password = password;
 			} else {
-				setError('Password does not match');
+				setError(constants.setting.password_notMatch);
 			}
 		}
 		updateUser(data);
@@ -123,13 +124,13 @@ const SettingScreen = () => {
 			setUploading(false);
 			setFile('');
 			updateProfile();
-			addToast('Now Click on Change Button to Change Picture', {
+			addToast(constants.setting.pic_change, {
 				appearance: 'info',
 			});
 		} catch (error) {
 			console.log(error);
 			setUploading(false);
-			addToast('Some Error Occured!!. Try Again Please with diferent image', {
+			addToast(constants.setting.error, {
 				appearance: 'error',
 			});
 		}
@@ -143,10 +144,11 @@ const SettingScreen = () => {
 			<Paper className={classes.main}>
 				{uploading && <Loader />}
 				{error?.length && <ToastMsg msg={error} />}
+
 				<PageHeader title={'Setting'} />
 				<List>
 					<Typography className={classes.text} variant='h6'>
-						Change your Avatar
+						{constants.setting.avatar_change_title}
 					</Typography>
 					<ListItem className={classes.item}>
 						<Avatar className={classes.image}>
@@ -187,7 +189,7 @@ const SettingScreen = () => {
 					</ListItem>
 					<Divider />
 					<Typography className={classes.text} variant='h6'>
-						Change your information
+						{constants.setting.info_change_title}
 					</Typography>
 
 					<ListItem className={classes.item}>
@@ -239,7 +241,7 @@ const SettingScreen = () => {
 					</ListItem>
 					<Divider />
 					<Typography className={classes.text} variant='p'>
-						Change your password
+						{constants.setting.password_change_title}
 					</Typography>
 					<ListItem className={classes.item}>
 						<TextField

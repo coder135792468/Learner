@@ -8,6 +8,8 @@ import {
 	DialogContentText,
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import { constants } from '../utils';
+
 const DialogBox = ({ open, setOpen, onClick, text }) => {
 	const history = useHistory();
 	return (
@@ -18,7 +20,9 @@ const DialogBox = ({ open, setOpen, onClick, text }) => {
 				history.push('/');
 			}}
 		>
-			<DialogTitle style={{ cursor: 'pointer' }}>Send Challenge</DialogTitle>
+			<DialogTitle style={{ cursor: 'pointer' }}>
+				{constants.dialog_box.title}
+			</DialogTitle>
 			<DialogContent>
 				<DialogContentText>{text}</DialogContentText>
 			</DialogContent>
@@ -30,7 +34,7 @@ const DialogBox = ({ open, setOpen, onClick, text }) => {
 					}}
 					color='primary'
 				>
-					Cancel
+					{constants.dialog_box.cancel}
 				</Button>
 				<Button
 					onClick={() => {
@@ -40,7 +44,7 @@ const DialogBox = ({ open, setOpen, onClick, text }) => {
 					color='primary'
 					variant='contained'
 				>
-					Submit
+					{constants.dialog_box.submit_btn}
 				</Button>
 			</DialogActions>
 		</Dialog>

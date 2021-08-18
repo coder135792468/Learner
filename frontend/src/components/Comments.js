@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import CommentIcon from '@material-ui/icons/Comment';
 import SendIcon from '@material-ui/icons/Send';
+import { constants } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
 	comment_con: {
@@ -115,7 +116,7 @@ const Comments = ({ _id, comment: comments, commented, me, addComment }) => {
 						</Box>
 					) : (
 						<Box className={classes.footer}>
-							<h2>Login to Comment</h2>
+							<h2>{constants.profile.login_comment}</h2>
 						</Box>
 					)}
 				</Paper>

@@ -21,6 +21,7 @@ import CodeScreen from './CodeScreen';
 import { SideHeader } from '../components';
 import { Loader } from '../layouts';
 import { Helmet } from 'react-helmet';
+import { constants } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
 	main: {
@@ -127,14 +128,14 @@ const HomeScreen = ({ history, match }) => {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant='p' className={classes.title}>
-							Code
+							{constants.home.title}
 						</Typography>
 						<div className={classes.search}>
 							<div className={classes.searchIcon}>
 								<SearchIcon />
 							</div>
 							<InputBase
-								placeholder='Search…'
+								placeholder={constants.home.search_placeholder}
 								value={text}
 								onChange={search}
 								classes={{
@@ -147,7 +148,7 @@ const HomeScreen = ({ history, match }) => {
 						{user?.name ? (
 							<>
 								<IconButton
-									aria-label='account of current user'
+									aria-label='Account of current user'
 									aria-controls='menu-appbar'
 									aria-haspopup='true'
 									onClick={(e) => setAnchorEl(e.currentTarget)}
@@ -179,17 +180,17 @@ const HomeScreen = ({ history, match }) => {
 									onClose={() => setAnchorEl(null)}
 								>
 									<Link to='/profile' className={classes.link}>
-										<MenuItem>Profile</MenuItem>
+										<MenuItem>{constants.home.profile}</MenuItem>
 									</Link>
 									<Link to='setting' className={classes.link}>
-										<MenuItem>Profile Settings</MenuItem>
+										<MenuItem>{constants.home.profile_settings}</MenuItem>
 									</Link>
 								</Menu>
 							</>
 						) : (
 							<Link to='/login' style={{ textDecoration: 'none' }}>
 								<Button variant='contained' color='secondary'>
-									Login
+									{constants.home.login}
 								</Button>
 							</Link>
 						)}

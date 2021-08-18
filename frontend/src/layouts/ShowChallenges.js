@@ -8,7 +8,7 @@ import {
 	Button,
 	Divider,
 } from '@material-ui/core';
-import { userByID } from '../utils';
+import { userByID, constants } from '../utils';
 import { useHistory } from 'react-router-dom';
 import { ChallengeContext } from '../context';
 import { Loader } from '.';
@@ -127,7 +127,7 @@ const ShowChallenges = ({ io, challenge, user }) => {
 					variant='contained'
 					onClick={acceptChallenge}
 				>
-					Accept challenge
+					{constants.show_challenge.accept_btn}
 				</Button>
 			)}
 			{user._id === sender && end && (
@@ -138,11 +138,11 @@ const ShowChallenges = ({ io, challenge, user }) => {
 					variant='contained'
 					onClick={deleteCompletedChallenges}
 				>
-					Delete challenge
+					{constants.show_challenge.delete_btn}
 				</Button>
 			)}
 			{end && senderTime === receiverTime ? (
-				<h4>Match is Draw</h4>
+				<h4>{constants.show_challenge.draw}</h4>
 			) : (
 				accepted &&
 				end && (
@@ -180,7 +180,7 @@ const ShowChallenges = ({ io, challenge, user }) => {
 					</>
 				)
 			)}
-			{accepted && !end && <h4>Chalenge has been accepted</h4>}
+			{accepted && !end && <h4> {constants.show_challenge.accepted}</h4>}
 		</ListItem>
 	);
 };

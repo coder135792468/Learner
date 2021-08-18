@@ -1,5 +1,7 @@
 import React from 'react';
 import { Paper, makeStyles, Typography, Box, Button } from '@material-ui/core';
+import { constants } from '../utils';
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: 'calc(100vh - 120px)',
@@ -68,7 +70,7 @@ const Challenge = ({ challenge, setValue }) => {
 					color='secondary'
 					variant='contained'
 				>
-					Start Solving
+					{constants.code_coach.start_solving}
 				</Button>
 			</Box>
 		</Paper>

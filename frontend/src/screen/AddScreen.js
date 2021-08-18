@@ -15,6 +15,7 @@ import { CodeContext, AuthContext } from '../context';
 import { Redirect } from 'react-router-dom';
 import addPic from './images/addPic.gif';
 import { Helmet } from 'react-helmet';
+import { constants } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -71,10 +72,10 @@ const AddScreen = () => {
 
 	const createCode = async () => {
 		if (name.trim().length === 0) {
-			return addToast('Name Cant Be Empty', { appearance: 'info' });
+			return addToast(constants.add.empty_name, { appearance: 'info' });
 		}
 		if (lang.trim().length === 0) {
-			return addToast('Please Select Language', { appearance: 'info' });
+			return addToast(constants.add.lang_empty, { appearance: 'info' });
 		}
 		//create a cod
 		const data = {
@@ -114,7 +115,7 @@ const AddScreen = () => {
 			<Helmet>
 				<title>Add Code</title>
 			</Helmet>
-			<PageHeader title={'Create Code'} />
+			<PageHeader title={constants.add.title} />
 			<Paper className={classes.root}>
 				<img
 					alt='Add Code'
@@ -130,7 +131,7 @@ const AddScreen = () => {
 				/>
 				{loading && <Loader />}
 				<FormControl className={classes.text}>
-					<InputLabel id='language'>Select Language</InputLabel>
+					<InputLabel id='language'>{constants.add.lang_select}</InputLabel>
 					<Select
 						labelId='language'
 						id='demo-simple-select'
@@ -149,7 +150,7 @@ const AddScreen = () => {
 					variant='contained'
 					onClick={createCode}
 				>
-					Create
+					{constants.add.create_btn}
 				</Button>
 			</Paper>
 		</>

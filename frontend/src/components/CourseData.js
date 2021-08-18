@@ -116,7 +116,6 @@ const CourseData = ({ pages, setIndex }) => {
 								<SyntaxHighlighter
 									className={classes.code}
 									showLineNumbers={true}
-									wrapLongLines={true}
 									language='javascript'
 									style={docco}
 								>
