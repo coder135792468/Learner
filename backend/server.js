@@ -9,7 +9,6 @@ import connectDB from './utils/db.js';
 import userRouter from './routes/userRoute.js';
 import codeRouter from './routes/codeRoute.js';
 import challengeRoute from './routes/challengeRoute.js';
-import UploadRoute from './routes/UploadRoute.js';
 import socketManager from './routes/socketManager.js';
 // import cors from 'cors';
 import { notFound, errorHandler } from './middlerwares/errors.js';
@@ -35,12 +34,10 @@ app.use(express.urlencoded({ extended: false }));
 io.on('connection', socketManager);
 
 app.use('/api/challenges/', challengeRoute);
-app.use('/api/upload', UploadRoute);
 app.use('/api/user/', userRouter);
 app.use('/api/code/', codeRouter);
 
 const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '/frontend/build')));
