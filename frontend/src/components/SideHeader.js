@@ -143,6 +143,20 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 						</ListItemIcon>
 						<ListItemText primary='Logout' />
 					</ListItem>
+					<ListItem>
+						<p align='center'>
+							<span>
+								&copy;{' '}
+								<a
+									style={{ textDecoration: 'none' }}
+									target='_blank'
+									href='https://github.com/coder135792468'
+								>
+									Coder
+								</a>
+							</span>
+						</p>
+					</ListItem>
 				</List>
 			)}
 		</>
