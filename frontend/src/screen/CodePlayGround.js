@@ -82,11 +82,11 @@ const CodePlayGround = ({ match, history }) => {
 				js: data.js,
 				name,
 			};
-			updateCode(user.token, sendData, current_code._id);
+			await updateCode(user.token, sendData, current_code._id);
 		} else if (text === 'rename') {
 			setOpen(true);
 		} else if (text === 'delete') {
-			deleteCode(user.token, current_code._id);
+			await deleteCode(user.token, current_code._id);
 			history.push('/');
 		}
 	};

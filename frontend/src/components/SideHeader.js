@@ -18,6 +18,7 @@ import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import LiveTvIcon from '@material-ui/icons/LiveTv';
+import InfoIcon from '@material-ui/icons/Info';
 
 import { ThemeContext } from '../context';
 
@@ -119,6 +120,14 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 			<Divider />
 			{user?._id && (
 				<List style={{ padding: '10px 20px' }}>
+					<Link to='/about' className={classes.link}>
+						<ListItem button>
+							<ListItemIcon>
+								<InfoIcon />
+							</ListItemIcon>
+							<ListItemText primary={'Feedback'} />
+						</ListItem>
+					</Link>
 					<Link to='/setting' className={classes.link}>
 						<ListItem button>
 							<ListItemIcon>

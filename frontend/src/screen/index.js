@@ -11,6 +11,7 @@ import ProfileScreen from './ProfileScreen';
 import CodeCoachScreen from './CodeCoachScreen';
 import DeployScreen from './DeployScreen';
 import LiveScreen from './LiveScreen';
+import AboutScreen from './AboutScreen';
 
 export {
 	HomeScreen,
@@ -26,4 +27,5 @@ export {
 	CodeCoachScreen,
 	DeployScreen,
 	LiveScreen,
+	AboutScreen,
 };

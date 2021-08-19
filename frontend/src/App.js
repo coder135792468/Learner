@@ -13,6 +13,7 @@ import {
 	CodeCoachScreen,
 	DeployScreen,
 	LiveScreen,
+	AboutScreen,
 } from './screen';
 import { Login, Register } from './auth';
 import { CodeCoach } from './components';
@@ -65,6 +66,7 @@ const App = () => {
 							<Route exact path='/deploy/:id' component={DeployScreen} />
 							<Route exact path='/code/:id' component={CodePlayGround} />
 							<Route exact path='/page/:pageNumber' component={HomeScreen} />
+							<Route exact path='/about' component={AboutScreen} />
 							<Route exact path='/' component={HomeScreen} />
 						</Switch>
 					</Router>

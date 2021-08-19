@@ -9,6 +9,7 @@ import connectDB from './utils/db.js';
 import userRouter from './routes/userRoute.js';
 import codeRouter from './routes/codeRoute.js';
 import challengeRoute from './routes/challengeRoute.js';
+import feedBackRoute from './routes/feedBackRoute.js';
 import socketManager from './routes/socketManager.js';
 // import cors from 'cors';
 import { notFound, errorHandler } from './middlerwares/errors.js';
@@ -36,6 +37,7 @@ io.on('connection', socketManager);
 app.use('/api/challenges/', challengeRoute);
 app.use('/api/user/', userRouter);
 app.use('/api/code/', codeRouter);
+app.use('/api/feedback/', feedBackRoute);
 
 const __dirname = path.resolve();
 

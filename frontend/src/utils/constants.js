@@ -51,6 +51,7 @@ const dialog_box = {
 	title: 'Send Challenge',
 	header: 'Are you ready to Send this challenge?',
 };
+
 const constants = {
 	auth,
 	setting,
