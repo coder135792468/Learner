@@ -2,7 +2,14 @@ import { useReducer } from 'react';
 import AuthContext from './AuthContext';
 import AuthReducer from './AuthReducer';
 import axios from 'axios';
-import { LOGIN, ERROR, CLEAR_ERROR, GET_ALL_USER, SET_LOADING } from './types';
+import {
+	LOGIN,
+	ERROR,
+	CLEAR_USERS,
+	CLEAR_ERROR,
+	GET_ALL_USER,
+	SET_LOADING,
+} from './types';
 
 const AuthState = ({ children }) => {
 	const initialState = {
@@ -11,7 +18,8 @@ const AuthState = ({ children }) => {
 		user: null,
 		error: null,
 		users: null,
-		allusers: null,
+		allusers: [],
+		total_user_pages: null,
 	};
 
 	const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -110,23 +118,29 @@ const AuthState = ({ children }) => {
 		}
 	};
 
-	const getAllUsers = async () => {
+	const getAllUsers = async (pageNumber = '', firstload = false) => {
 		setLoading(true);
 
 		try {
 			if (!state?.user.token) {
 				return;
 			}
+			if (firstload) {
+				dispatch({ type: CLEAR_USERS, payload: [] });
+			}
 			const config = {
 				headers: {
 					Authorization: 'Bearer ' + state?.user.token,
 				},
 			};
-			const { data } = await axios.get('/api/user/allUsers', config);
-
+			const { data } = await axios.get(
+				`/api/user/allUsers?pageNumber=${pageNumber}`,
+				config
+			);
+			console.log(state.allusers.find((user) => user._id === data._id));
 			dispatch({
 				type: GET_ALL_USER,
-				payload: data.filter((ele) => ele._id !== state.user._id),
+				payload: data,
 			});
 		} catch (error) {
 			dispatch({
@@ -156,6 +170,7 @@ const AuthState = ({ children }) => {
 				users: state.users,
 				error: state.error,
 				allusers: state.allusers,
+				total_user_pages: state.total_user_pages,
 				loginUser,
 				registerUser,
 				getUserData,

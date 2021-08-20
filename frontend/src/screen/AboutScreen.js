@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'column',
+		position: 'absolute',
+		top: '0px',
+		left: '0px',
+		zIndex: '-1',
 	},
 	text: {
 		width: '80%',
@@ -65,11 +69,13 @@ const AboutScreen = () => {
 
 	return (
 		<>
-			<PageHeader title='About' />
+			<PageHeader title='FeedBack' />
 			<Paper className={classes.root}>
 				{!feedbackGiven ? (
 					<Typography className={classes.text}>
-						<h4 align='center'>Give Feedback</h4>
+						<h1 style={{ fontWeight: '300' }} align='center'>
+							Give Feedback
+						</h1>
 						<TextField
 							label='Enter your email'
 							type='email'

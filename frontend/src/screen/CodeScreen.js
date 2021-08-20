@@ -14,6 +14,13 @@ const useStyles = makeStyles((theme) => ({
 			display: 'none',
 		},
 	},
+	grid: {
+		display: 'grid',
+
+		[theme.breakpoints.up('md')]: {
+			gridTemplateColumns: '1fr 1fr',
+		},
+	},
 }));
 
 const CodeScreen = ({ pageNumber }) => {
@@ -44,9 +51,11 @@ const CodeScreen = ({ pageNumber }) => {
 	return (
 		<Paper className={classes.root}>
 			{msg.length > 4 && <ToastMsg msg={msg} />}
-			{getData()?.map((code) => (
-				<Code code={code} key={code._id} />
-			))}
+			<div className={classes.grid}>
+				{getData()?.map((code) => (
+					<Code code={code} key={code._id} />
+				))}
+			</div>
 			{totalPages > 1 && (
 				<PaginationButton page={pageNumber} pageCount={totalPages} />
 			)}

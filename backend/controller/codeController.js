@@ -192,15 +192,6 @@ const addComment = asyncHandler(async (req, res) => {
 				user: req.user._id,
 				avatar: req.user.avatar,
 			};
-			if (
-				code.comments.some(
-					(comment) => comment.user.toString() === req.user._id.toString()
-				)
-			) {
-				return res.status(400).json({
-					message: 'You have already given your feedback',
-				});
-			}
 
 			code.comments.unshift(newComment);
 			const commentedCode = await code.save();

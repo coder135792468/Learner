@@ -48,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: alpha(theme.palette.common.white, 0.25),
 		},
 		maxWidth: '130px',
+		[theme.breakpoints.up('md')]: {
+			width: '300px',
+			maxWidth: '300px',
+		},
 	},
 	searchIcon: {
 		padding: '0 3px',

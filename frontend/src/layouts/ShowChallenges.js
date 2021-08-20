@@ -75,7 +75,16 @@ const ShowChallenges = ({ io, challenge, user }) => {
 		};
 		if (user.token) {
 			await updateChallenge(value, _id, user.token);
-			io.emit('update', _id);
+			io.emit('update', {
+				index,
+				_id,
+				end,
+				accepted: true,
+				sender,
+				receiver,
+				senderTime,
+				receiverTime,
+			});
 		} else {
 			history.push('/');
 		}
@@ -180,7 +189,8 @@ const ShowChallenges = ({ io, challenge, user }) => {
 					</>
 				)
 			)}
-			{accepted && !end && <h4> {constants.show_challenge.accepted}</h4>}
+
+			{accepted && !end && <h4> {constants.show_challenge.accept}</h4>}
 		</ListItem>
 	);
 };

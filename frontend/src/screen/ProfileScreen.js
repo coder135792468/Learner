@@ -36,6 +36,13 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		height: '100%',
 	},
+	grid: {
+		display: 'grid',
+
+		[theme.breakpoints.up('md')]: {
+			gridTemplateColumns: '1fr 1fr',
+		},
+	},
 }));
 
 const ProfileScreen = ({ history, match }) => {
@@ -67,14 +74,26 @@ const ProfileScreen = ({ history, match }) => {
 							<img alt='Cant load' className={classes.img} src={user.avatar} />
 						)}
 					</Avatar>
-					<Typography className={classes.name} variant='h5'>
-						{user?.name.toUpperCase()}
+					<Typography className={classes.name}>
+						<p>
+							{user?.name.toUpperCase()}
+							<br /> <span>{user?.email}</span>
+							<hr />
+						</p>
 					</Typography>
+					<h2 style={{ marginLeft: '30px', fontWeight: '400' }}>My Codes :</h2>
 				</Box>
 				<Box style={{ zIndex: '3' }}>
-					{myCodes?.map((code) => (
-						<Code key={code._id} code={code} />
-					))}
+					<div className={classes.grid}>
+						{myCodes?.map((code) => (
+							<Code key={code._id} code={code} />
+						))}
+						{!myCodes?.length && (
+							<h1 align='center' style={{ fontWeight: '300', width: '100vw' }}>
+								You have no codes
+							</h1>
+						)}
+					</div>
 					{!user?._id && <h1 align='center'>{constants.profile.not_logged}</h1>}
 					{!user?._id && (
 						<Button

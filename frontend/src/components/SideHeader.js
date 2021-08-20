@@ -146,10 +146,11 @@ const SideHeader = ({ openMenu, setOpenMenu, closeDrawer, user }) => {
 					<ListItem>
 						<p align='center'>
 							<span>
-								&copy;{' '}
+								&copy; Made By{' '}
 								<a
-									style={{ textDecoration: 'none' }}
+									className={classes.link}
 									target='_blank'
+									rel='noreferrer'
 									href='https://github.com/coder135792468'
 								>
 									Coder

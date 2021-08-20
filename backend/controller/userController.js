@@ -77,8 +77,23 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route GET /api/user/
 //@acess public
 const getAllUsers = asyncHandler(async (req, res) => {
-	const users = await User.find({}).select('-password -email');
-	res.json(users);
+	try {
+		const pageSize = 4;
+		const page = Number(req.query.pageNumber) || 1;
+
+		const count = await User.countDocuments({
+			_id: { $not: { $eq: req.user._id } },
+		});
+		const users = await User.find({ _id: { $not: { $eq: req.user._id } } })
+			.limit(pageSize)
+			.skip(pageSize * (page - 1));
+
+		res.json({ users, page, pages: Math.ceil(count / pageSize) });
+	} catch (error) {
+		console.log(error);
+		res.status(500);
+		throw new Error('Server Error');
+	}
 });
 
 //@desc Get a user

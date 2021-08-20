@@ -9,10 +9,10 @@ import {
 	Box,
 	Avatar,
 	Button,
+	CircularProgress,
 } from '@material-ui/core';
 import { PageHeader, Loader, LivePlayUsers, ShowChallenges } from '../layouts';
 import { AuthContext, ChallengeContext, SocketContext } from '../context';
-
 import { code_coach } from '../utils';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -48,8 +48,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 const LiveScreen = ({ history }) => {
-	const { getAllUsers, allusers, getUserData, user, loading } =
-		useContext(AuthContext);
+	const {
+		getAllUsers,
+		allusers,
+		getUserData,
+		user,
+		loading,
+		total_user_pages,
+	} = useContext(AuthContext);
 
 	const io = useContext(SocketContext);
 	const classes = useStyles();
@@ -68,15 +74,18 @@ const LiveScreen = ({ history }) => {
 	);
 
 	const [hasChallenge, setHasChallenge] = useState(false);
+	const [btn_disabled, setbtn_disabled] = useState(false);
+	const [page, setPage] = useState(2);
 
 	useEffect(() => {
-		if (!allusers?.length) {
-			getUserData();
-			if (user?.token) {
-				getAllUsers();
-				if (!all_challenges?.length) {
-					getAllChallenges(user.token);
-				}
+		getUserData();
+		//eslint-disable-next-line
+	}, []);
+	useEffect(() => {
+		if (user?.token) {
+			getAllUsers(1, true);
+			if (!all_challenges?.length) {
+				getAllChallenges(user.token);
 			}
 		}
 
@@ -89,11 +98,17 @@ const LiveScreen = ({ history }) => {
 				getAllChallenges(user?.token, false);
 			}
 		});
-		io.on('update', async (id) => {
+		io.on('update', async (data) => {
 			if (user?.token) {
-				await getChallengeById(id, user?.token, false);
+				await getChallengeById(data, user?.token, false);
 			}
 		});
+		io.on('endgame', async (data) => {
+			if (user?.token) {
+				await getChallengeById(data, user?.token, true, false);
+			}
+		});
+
 		io.on('delete', (id) => {
 			filterChallenge(id);
 		});
@@ -116,6 +131,14 @@ const LiveScreen = ({ history }) => {
 		setHasChallenge(!hasChallenge);
 	};
 
+	const loadMoreUsers = async () => {
+		if (user?.token) {
+			setbtn_disabled(true);
+			await getAllUsers(page);
+			setPage(page + 1);
+			setbtn_disabled(false);
+		}
+	};
 	return user ? (
 		<>
 			<Helmet>
@@ -148,6 +171,20 @@ const LiveScreen = ({ history }) => {
 							all_challenges?.map((challenge) => (
 								<ShowChallenges io={io} user={user} challenge={challenge} />
 							))}
+						{!hasChallenge && total_user_pages > 1 && page <= total_user_pages && (
+							<Button
+								color='success'
+								variant='contained'
+								disabled={btn_disabled}
+								onClick={loadMoreUsers}
+								style={{ float: 'right', marginRight: '10vw' }}
+							>
+								{btn_disabled && (
+									<CircularProgress color='secondary' size={20} thickness={4} />
+								)}
+								<span>Load More</span>
+							</Button>
+						)}
 					</List>
 				)}
 

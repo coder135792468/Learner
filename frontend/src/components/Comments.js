@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
-		backgroundColor: theme.palette.type === 'dark' ? '#444' : '#efefef',
+		backgroundColor: theme.palette.type === 'dark' ? '#444' : '#dfdfdf',
 		padding: '5px 0',
 		'& *': {
 			margin: 'auto',
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	comment_box: {
 		height: 'calc(100% - 50px)',
-		backgroundColor: theme.palette.type === 'dark' ? '#666' : '#fff',
+		backgroundColor: theme.palette.type === 'dark' ? '#666' : '#efefef',
 		overflow: 'auto',
 	},
 	comment_item: {

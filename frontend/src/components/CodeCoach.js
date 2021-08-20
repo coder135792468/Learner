@@ -114,8 +114,9 @@ const CodeCoach = ({ match, location, history }) => {
 				end: true,
 				receiverTime: completed ? time : 10000000,
 			};
+			io.emit('endgame', challenge._id);
+
 			await updateChallenge(challengeData, challenge._id, user.token);
-			io.emit('update', challenge._id);
 			addToast(constants.code_coach.final_msg, {
 				appearance: 'success',
 			});

@@ -48,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
 	text: {
 		margin: '10px',
 	},
+	input: {
+		width: '50vw',
+		maxWidth: '500px',
+	},
 }));
 
 const endpoints = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_CLIENT_ID}`;
@@ -162,11 +166,21 @@ const SettingScreen = () => {
 								<FaceIcon />
 							)}
 						</Avatar>
-						<input
-							className={classes.file}
-							type='file'
-							onChange={(e) => setFile(e.target.files[0])}
-						/>
+						<Button
+							color='secondary'
+							variant='contained'
+							fullWidth
+							component='label'
+							style={{ maxWidth: '400px', margin: '10px' }}
+						>
+							<input
+								className={classes.file}
+								type='file'
+								onChange={(e) => setFile(e.target.files[0])}
+								hidden
+							/>
+							{file?.name ? file.name : 'Choose your file'}
+						</Button>
 						<Box mx='auto'>
 							<Button
 								onClick={fileHandler}
@@ -197,6 +211,7 @@ const SettingScreen = () => {
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							label='Change Name'
+							className={classes.input}
 							style={{ margin: '10px auto' }}
 						/>
 						<Box ml='auto' mr='20px'>
@@ -212,6 +227,7 @@ const SettingScreen = () => {
 							value={bio}
 							onChange={(e) => setBio(e.target.value)}
 							label='Change Bio'
+							className={classes.input}
 							style={{ margin: '10px auto' }}
 						/>
 						<Box ml='auto' mr='20px'>
@@ -227,6 +243,7 @@ const SettingScreen = () => {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							label='Change Email'
+							className={classes.input}
 							style={{ margin: '10px auto' }}
 						/>
 						<Box ml='auto' mr='20px'>
@@ -248,12 +265,14 @@ const SettingScreen = () => {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							label='New Password'
+							className={classes.input}
 							style={{ margin: '10px auto' }}
 						/>
 						<TextField
 							value={confirmPassword}
 							onChange={(e) => setConfirmPassword(e.target.value)}
 							label='Confirm Password'
+							className={classes.input}
 							style={{ margin: '10px auto' }}
 						/>
 						<Box ml='auto' mr='20px'>

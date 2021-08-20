@@ -8,6 +8,7 @@ import {
 	Avatar,
 	ListItemText,
 	Button,
+	Chip,
 } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -23,9 +24,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 	codeItem: {
 		background: theme.palette.type === 'dark' ? '#333' : '#efefef',
-		margin: '20px 30px',
+		margin: '20px auto',
 		borderRadius: 20,
 		padding: 20,
+		maxWidth: '400px',
+		width: '80%',
 		boxShadow: '0 0 20px 0px rgba(20,20,0,.1)',
 	},
 	avatar: {
@@ -37,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Code = ({ code }) => {
 	const history = useHistory();
-	const { _id, user, likes, comments, name } = code;
+	const { _id, user, likes, comments, name, lang } = code;
 	const [userData, setData] = useState('');
 
 	const { likeCode, addComment } = useContext(CodeContext);
@@ -115,6 +118,8 @@ const Code = ({ code }) => {
 					/>
 				</ListItem>
 				<ListItem style={{ justifyContent: 'center' }}>
+					<Chip label={lang} color='secondary' />
+
 					<Button onClick={likeUserCode} style={{ margin: '0 20px' }}>
 						<span>{like}</span>
 						<FavoriteIcon style={{ color: liked && 'tomato' }} />

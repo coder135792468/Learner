@@ -4,7 +4,6 @@ import {
 	makeStyles,
 	Box,
 	ListItem,
-	List,
 	ListItemText,
 	ListItemIcon,
 	Avatar,
@@ -25,7 +24,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	item: {
-		padding: '20px 10px',
+		padding: '20px 30px',
+		margin: '10px auto',
+		maxWidth: '600px',
+		borderRadius: '4px',
+		width: '80%',
+		backgroundColor: theme.palette.type === 'dark' ? '#555' : '#dfdfdf',
+	},
+	grid: {
+		display: 'grid',
+
+		[theme.breakpoints.up('md')]: {
+			gridTemplateColumns: '1fr 1fr',
+		},
 	},
 }));
 
@@ -39,7 +50,7 @@ const CourseScreen = ({ history }) => {
 			<Paper className={classes.root}>
 				<PageHeader title={constants.course.title} />
 				<Box>
-					<List>
+					<div className={classes.grid}>
 						{js_intro_course?.map((ele, index) => (
 							<ListItem
 								onClick={() => history.push(`/course/${index + 1}`)}
@@ -57,14 +68,14 @@ const CourseScreen = ({ history }) => {
 									</Avatar>
 								</ListItemIcon>
 								<ListItemText
-									primary={ele.name}
+									primary={`${index + 1}. ${ele.name}`}
 									secondary={`${ele.pages.length}  ${
 										ele.pages.length > 1 ? 'Pages' : 'Page'
 									}`}
 								/>
 							</ListItem>
 						))}
-					</List>
+					</div>
 				</Box>
 			</Paper>
 		</>

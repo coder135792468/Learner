@@ -23,9 +23,9 @@ const ChallengeState = ({ children }) => {
 
 	const [state, dispatch] = useReducer(ChallengeReducer, initialState);
 
-	const getAllChallenges = async (token) => {
+	const getAllChallenges = async (token, loading = true) => {
 		clearError();
-		setLoading(true);
+		if (loading) setLoading(true);
 
 		try {
 			const config = {
@@ -110,26 +110,34 @@ const ChallengeState = ({ children }) => {
 			setLoading(false);
 		}
 	};
-	const getChallengeById = async (id, token, loading = true) => {
+	const getChallengeById = async (id, token, loading = true, load = true) => {
 		clearChallenges();
 		clearError();
 
-		if (loading) setLoading(true);
+		if (load) setLoading(true);
 		try {
-			console.log(token);
 			const config = {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			};
-			const { data } = await axios.get(`/api/challenges/${id}`, config);
-			dispatch({ type: GET_CHALLENGE, payload: data });
-			dispatch({
-				type: GET_ALL_CHALLENGES,
-				payload: state.all_challenges.map((ele) =>
-					ele._id === data._id ? data : ele
-				),
-			});
+			if (loading) {
+				const { data } = await axios.get(`/api/challenges/${id}`, config);
+				dispatch({ type: GET_CHALLENGE, payload: data });
+				dispatch({
+					type: GET_ALL_CHALLENGES,
+					payload: state.all_challenges.map((ele) =>
+						ele._id === data._id ? data : ele
+					),
+				});
+			} else {
+				dispatch({
+					type: GET_ALL_CHALLENGES,
+					payload: state.all_challenges.map((ele) =>
+						ele._id === id._id ? id : ele
+					),
+				});
+			}
 		} catch (error) {
 			dispatch({
 				type: ERROR,
