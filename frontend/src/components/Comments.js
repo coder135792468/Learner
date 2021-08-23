@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
 	makeStyles,
 	Button,
@@ -11,10 +11,13 @@ import {
 	ListItemIcon,
 	ListItemText,
 	Avatar,
+	IconButton,
 } from '@material-ui/core';
 import CommentIcon from '@material-ui/icons/Comment';
 import SendIcon from '@material-ui/icons/Send';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { constants } from '../utils';
+import { CodeContext } from '../context';
 
 const useStyles = makeStyles((theme) => ({
 	comment_con: {
@@ -51,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Comments = ({ _id, comment: comments, commented, me, addComment }) => {
 	const classes = useStyles();
+	const { deleteComment } = useContext(CodeContext);
+
 	const [state, setState] = useState(false);
 	const [text, setText] = useState('');
 
@@ -73,9 +78,12 @@ const Comments = ({ _id, comment: comments, commented, me, addComment }) => {
 		}
 	};
 
-	useEffect(() => {
-		setComments(comments);
-	}, [comments]);
+	const deleteUserComment = async (id) => {
+		//deleteUserComment
+		await deleteComment(_id, me?.token, id);
+		setComments(comment.filter((ele) => ele._id !== id));
+	};
+
 	return (
 		<>
 			<Button onClick={() => setState(true)}>
@@ -92,13 +100,22 @@ const Comments = ({ _id, comment: comments, commented, me, addComment }) => {
 					<Box className={classes.comment_box}>
 						<List>
 							{comment?.map((ele) => (
-								<ListItem className={classes.comment_item}>
+								<ListItem key={ele._id} className={classes.comment_item}>
 									<ListItemIcon>
 										<Avatar style={{ background: '#efefef' }}>
 											{ele?.avatar && <img alt='Cant Load' src={ele.avatar} />}
 										</Avatar>
 									</ListItemIcon>
 									<ListItemText primary={ele?.name} secondary={ele?.text} />
+									{me?._id === ele.user && (
+										<IconButton
+											onClick={() => deleteUserComment(ele._id)}
+											color='secondary'
+											variant='contained'
+										>
+											<DeleteIcon />
+										</IconButton>
+									)}
 								</ListItem>
 							))}
 						</List>

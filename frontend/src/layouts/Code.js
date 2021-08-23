@@ -61,6 +61,12 @@ const Code = ({ code }) => {
 		const { data } = await axios.get(`/api/user/${user}`);
 		setData(data);
 	};
+
+	useEffect(() => {
+		setComment(comments);
+		//eslint-disable-next-line
+	}, [code]);
+
 	useEffect(() => {
 		getUserById(user);
 		getUserData();

@@ -186,6 +186,8 @@ const CodeState = ({ children }) => {
 	//add comment
 
 	const addComment = async (code, token, text) => {
+		clearError();
+		dispatch({ type: CLEAR_CODE_BY_ID });
 		try {
 			const config = {
 				headers: {
@@ -194,7 +196,12 @@ const CodeState = ({ children }) => {
 				},
 			};
 			// await axios.put(`/api/code/${code}/like`, config);
-			await axios.put(`/api/code/${code}/comment`, { text }, config);
+			const { data } = await axios.put(
+				`/api/code/${code}/comment`,
+				{ text },
+				config
+			);
+			dispatch({ type: GET_CODE_BY_ID, payload: data });
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -203,6 +210,31 @@ const CodeState = ({ children }) => {
 						? error.response.data.message
 						: error.message,
 			});
+		}
+	};
+
+	//delete Commnet
+	const deleteComment = async (code, token, ID) => {
+		setLoading(true);
+		try {
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+			};
+			// await axios.put(`/api/code/${code}/like`, config);
+			await axios.delete(`/api/code/${code}/comment/${ID}`, config);
+		} catch (error) {
+			dispatch({
+				type: ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -275,6 +307,7 @@ const CodeState = ({ children }) => {
 				clearSearch,
 				likeCode,
 				addComment,
+				deleteComment,
 				deleteCode,
 				getMyCode,
 			}}
