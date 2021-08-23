@@ -26,6 +26,7 @@ const AuthState = ({ children }) => {
 
 	//Login a user
 	const loginUser = async (email, password) => {
+		setLoading(true);
 		clearError();
 		try {
 			const config = {
@@ -51,11 +52,14 @@ const AuthState = ({ children }) => {
 						? error.response.data.message
 						: error.message,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	//register User
 	const registerUser = async (name, email, password) => {
+		setLoading(true);
 		clearError();
 		try {
 			const config = {
@@ -81,6 +85,8 @@ const AuthState = ({ children }) => {
 						? error.response.data.message
 						: error.message,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 

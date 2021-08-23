@@ -30,14 +30,6 @@ const registerUser = asyncHandler(async (req, res) => {
 		try {
 			const user = await User.create({ name, email, password });
 			if (user) {
-				const LINK = process.env.VERIFY_LINK + user._id;
-				const linkbtn = '<a href=' + LINK + '>Verify Email</a>';
-				await sendMail(
-					'codermighty@gmail.com',
-					user.email,
-					'Account Verification',
-					linkbtn
-				);
 				return res.status(201).json({
 					_id: user._id,
 					name: user.name,
@@ -182,7 +174,8 @@ const verifyAccount = asyncHandler(async (req, res) => {
 
 const sendverifyAccount = asyncHandler(async (req, res) => {
 	try {
-		const LINK = process.env.VERIFY_LINK + req.user._id;
+		const LINK =
+			'https://learner-v1.herokuapp.com/api/user/verify/' + req.user._id;
 		const linkbtn = '<a href=' + LINK + '>Verify Email</a>';
 		await sendMail(
 			'codermighty@gmail.com',
