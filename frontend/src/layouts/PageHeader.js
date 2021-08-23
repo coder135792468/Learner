@@ -6,6 +6,7 @@ import {
 	MenuItem,
 	Menu,
 	Button,
+	Chip,
 } from '@material-ui/core';
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router-dom';
@@ -25,6 +26,7 @@ const PageHeader = ({
 	optional,
 	live,
 	list,
+	verify,
 }) => {
 	const { addToast } = useToasts();
 	const history = useHistory();
@@ -71,6 +73,13 @@ const PageHeader = ({
 					>
 						{list.text}
 					</Button>
+				)}
+				{(verify === true || verify === false) && (
+					<Chip
+						color='secondary'
+						style={{ marginLeft: 'auto' }}
+						label={verify ? 'Verified' : 'Not Verified'}
+					/>
 				)}
 				{btn_data?.play && (
 					<>

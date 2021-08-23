@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 const ProfileScreen = ({ history, match }) => {
 	const pageNumber = match.params.pageNumber ? match.params.pageNumber : 1;
 	const authContext = useContext(AuthContext);
-	const { user } = authContext;
+	const { user, sendVerifyEmail } = authContext;
 
 	const codeContext = useContext(CodeContext);
 	const { getMyCode, myCodes, loading, totalCodePages } = codeContext;
@@ -67,7 +67,11 @@ const ProfileScreen = ({ history, match }) => {
 			</Helmet>
 			<Paper className={classes.root}>
 				{loading && <Loader />}
-				<PageHeader title={'Profile'} push='/' />
+				<PageHeader
+					title={'Profile'}
+					push='/'
+					verify={user?.verified ? user?.verified : false}
+				/>
 				<Box>
 					<Avatar className={classes.avatar}>
 						{user?.avatar && (
@@ -78,6 +82,16 @@ const ProfileScreen = ({ history, match }) => {
 						<p>
 							{user?.name.toUpperCase()}
 							<br /> <span>{user?.email}</span>
+							<br />
+							{!user?.verified && (
+								<Button
+									onClick={sendVerifyEmail}
+									color='primary'
+									variant='contained'
+								>
+									Verify
+								</Button>
+							)}
 							<hr />
 						</p>
 					</Typography>

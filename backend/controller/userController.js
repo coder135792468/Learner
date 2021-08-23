@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/User.js';
 import generateToken from '../utils/generateToken.js';
-
+import { sendMail } from '../utils/sendMail.js';
 //@desc Register a user with
 //@route POST /api/user/
 //@acess public
@@ -30,6 +30,14 @@ const registerUser = asyncHandler(async (req, res) => {
 		try {
 			const user = await User.create({ name, email, password });
 			if (user) {
+				const LINK = process.env.VERIFY_LINK + user._id;
+				const linkbtn = '<a href=' + LINK + '>Verify Email</a>';
+				await sendMail(
+					'codermighty@gmail.com',
+					user.email,
+					'Account Verification',
+					linkbtn
+				);
 				return res.status(201).json({
 					_id: user._id,
 					name: user.name,
@@ -64,6 +72,7 @@ const loginUser = asyncHandler(async (req, res) => {
 			email: user.email,
 			bio: user.bio,
 			avatar: user.avatar,
+			verified: user.verified || false,
 			token: generateToken(user._id),
 		});
 	} else {
@@ -147,4 +156,53 @@ const updateUser = asyncHandler(async (req, res) => {
 		throw new Error('Server Error');
 	}
 });
-export { registerUser, loginUser, getAllUsers, getUserById, updateUser };
+
+//@desc Verify account of user
+//@Route /api/user/verify/:id
+//@acess public
+const verifyAccount = asyncHandler(async (req, res) => {
+	try {
+		const user = await User.findById(req.params.id);
+		if (user) {
+			user.verified = true;
+			await user.save();
+			return res.json({
+				message: 'User verified sucessfully',
+				info: 'Now login again to see your account verified',
+			});
+		} else {
+			return res.status(404).json({ message: 'User not found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500);
+		throw new Error('Server Error');
+	}
+});
+
+const sendverifyAccount = asyncHandler(async (req, res) => {
+	try {
+		const LINK = process.env.VERIFY_LINK + req.user._id;
+		const linkbtn = '<a href=' + LINK + '>Verify Email</a>';
+		await sendMail(
+			'codermighty@gmail.com',
+			req.user.email,
+			'Account Verification',
+			linkbtn
+		);
+		res.json({ message: 'Email send successfully' });
+	} catch (error) {
+		console.log(error);
+		res.status(500);
+		throw new Error('Server Error');
+	}
+});
+export {
+	registerUser,
+	loginUser,
+	getAllUsers,
+	getUserById,
+	updateUser,
+	verifyAccount,
+	sendverifyAccount,
+};
