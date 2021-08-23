@@ -183,7 +183,7 @@ const sendverifyAccount = asyncHandler(async (req, res) => {
 			'Account Verification',
 			linkbtn
 		);
-		res.json({ message: 'Email send successfully' });
+		return res.json({ message: 'Email send successfully' });
 	} catch (error) {
 		console.log(error);
 		res.status(500);
