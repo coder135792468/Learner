@@ -1,6 +1,6 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-
+import nodemailer from 'nodemailer';
 const router = express.Router();
 
 router.route('/').post(
