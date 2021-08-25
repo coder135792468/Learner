@@ -161,30 +161,6 @@ const AuthState = ({ children }) => {
 		}
 	};
 
-	const sendVerifyEmail = async () => {
-		setLoading(true);
-		clearError();
-		try {
-			const config = {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${state.user.token}`,
-				},
-			};
-			await fetch(`/api/user/verify`, config);
-		} catch (error) {
-			dispatch({
-				type: ERROR,
-				payload:
-					error.response && error.response.data.message
-						? error.response.data.message
-						: error.message,
-			});
-		} finally {
-			setLoading(false);
-		}
-	};
 	const setLoading = (isLoading) => {
 		dispatch({ type: SET_LOADING, payload: isLoading });
 	};
@@ -208,7 +184,6 @@ const AuthState = ({ children }) => {
 				clearError,
 				updateUser,
 				getAllUsers,
-				sendVerifyEmail,
 			}}
 		>
 			{children}
